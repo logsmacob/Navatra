@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://biptkm4ujpe6i"]
 
 [ext_resource type="Texture2D" uid="uid://cwpdpecr61tj2" path="res://assets/sprites/dice/1-6 Pip Style 1 (SpriteSheet).png" id="1_clpct"]
+[ext_resource type="Script" path="res://features/dice/die/die_controller.gd" id="2_b7hop"]
+[ext_resource type="Script" path="res://features/dice/die/die_view.gd" id="3_jpvqg"]
 
 [node name="Die" type="Control" unique_id=644122590]
+script = ExtResource("2_b7hop")
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 3
 anchors_preset = 0
@@ -10,6 +13,7 @@ offset_right = 18.0
 offset_bottom = 18.0
 
 [node name="FaceSprite" type="Sprite2D" parent="." unique_id=788261950]
+script = ExtResource("3_jpvqg")
 texture_filter = 1
 position = Vector2(40, 40)
 scale = Vector2(5, 5)

@@ -7,7 +7,7 @@ func bind(die_model: DieModel) -> void:
 	model = die_model
 
 func _ready() -> void:
-	$Button.pressed.connect(_on_pressed)
+	$HoldButton.pressed.connect(_on_pressed)
 
 func _on_pressed() -> void:
 	# NOTE: Direct die roll for now. In future this should route through
