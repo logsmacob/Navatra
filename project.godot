@@ -17,7 +17,6 @@ config/icon="res://assets/sprites/icon.svg"
 [autoload]
 
 EventBus="*uid://daxbdt73sgi6o"
-RandomService="*uid://c0fgr7t8bd3b7"
 
 [physics]
 
