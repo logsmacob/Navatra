@@ -27,6 +27,14 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_os8ub"]
 
+[sub_resource type="Animation" id="Animation_b27w3"]
+resource_name = "roll"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_os8ub"]
+_data = {
+&"roll": SubResource("Animation_b27w3")
+}
+
 [node name="Die" type="Control" unique_id=644122590]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 3
@@ -35,9 +43,11 @@ offset_right = 18.0
 offset_bottom = 18.0
 script = ExtResource("1_clpct")
 
-[node name="DieAnimator" type="Node" parent="." unique_id=537555383 node_paths=PackedStringArray("panel")]
+[node name="DieAnimator" type="Node" parent="." unique_id=537555383 node_paths=PackedStringArray("panel", "animator", "die")]
 script = ExtResource("2_b27w3")
 panel = NodePath("../Panel")
+animator = NodePath("../AnimationPlayer")
+die = NodePath("..")
 
 [node name="Panel" type="Panel" parent="." unique_id=1223442461]
 layout_mode = 1
@@ -78,5 +88,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_b27w3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_os8ub")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1098811615]
+libraries/ = SubResource("AnimationLibrary_os8ub")
 
 [connection signal="die_selected" from="." to="DieAnimator" method="_on_die_die_selected"]
+[connection signal="animation_finished" from="AnimationPlayer" to="DieAnimator" method="_on_animation_player_animation_finished"]

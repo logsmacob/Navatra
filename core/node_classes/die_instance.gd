@@ -52,7 +52,7 @@ func set_face_values(new_face_values: Array[int]) -> void:
 		return
 
 	for i in range(new_face_values.size()):
-		data.faces[i].face_value = new_face_values[i]
+		data.faces[i].value = new_face_values[i]
 
 
 ## Internal helper that creates blank [FaceData] entries.

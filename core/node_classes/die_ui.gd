@@ -50,7 +50,7 @@ func roll_if_not_selected() -> FaceData:
 	if roll_face == null:
 		return null
 
-	_face_label.text = str(roll_face.face_value)
+	_face_label.text = str(roll_face.value)
 	die_rolled.emit(roll_face)
 	return roll_face
 
