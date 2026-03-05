@@ -1,6 +1,4 @@
 extends Node
-class_name GameState
-
 ## Centralized, runtime-only game state.
 ##
 ## Why this exists:
@@ -70,7 +68,7 @@ func _calculate_quota(target_round: int) -> int:
 	return int(round(BASE_QUOTA * pow(QUOTA_GROWTH, target_round - 1)))
 
 func _calculate_hands(target_round: int) -> int:
-	return BASE_HANDS_PER_ROUND + int((target_round - 1) / HANDS_SCALING_INTERVAL)
+	return BASE_HANDS_PER_ROUND + int((target_round - 1) / float(HANDS_SCALING_INTERVAL))
 
 func _emit_round_state() -> void:
 	round_state_changed.emit(get_round_state())

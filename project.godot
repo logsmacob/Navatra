@@ -17,7 +17,7 @@ config/icon="res://assets/sprites/icon.svg"
 [autoload]
 
 EventBus="*uid://daxbdt73sgi6o"
-GameState="*res://autoload/game_state.gd"
+GameState="*uid://dfqimhsbn8a45"
 
 [physics]
 
