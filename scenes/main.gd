@@ -1,6 +1,12 @@
 extends Control
 
 @onready var hand: Control = $MarginContainer/Hand
+@onready var quota_label: Label = $VBoxContainer/Quota
+@onready var current_hand_points_label: Label = $VBoxContainer/CurrentHandPoints
+@onready var hand_type_label: Label = $VBoxContainer/HandType
+@onready var hand_type_value_label: Label = $VBoxContainer/HandTypeValue
+@onready var hands_left_leabel: Label = $VBoxContainer/HandaLeft
+@onready var rolls_left_label: Label = $VBoxContainer/RollsLeft
 
 var score_manager: ScoreManager
 
@@ -13,6 +19,8 @@ func _ready() -> void:
 	GameState.round_completed.connect(_on_round_completed)
 	GameState.run_failed.connect(_on_run_failed)
 	GameState.round_state_changed.connect(_on_round_state_changed)
+	
+	
 
 func _on_played_hand_ready(hand_data: DiceHand) -> void:
 	score_manager.preview_hand(hand_data.to_array())
@@ -49,3 +57,7 @@ func _on_run_failed(round_index: int) -> void:
 
 func _on_round_state_changed(state: Dictionary) -> void:
 	print("State: ", state)
+
+func ui_update():
+	#update  all the label vars
+	pass

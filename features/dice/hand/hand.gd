@@ -36,6 +36,7 @@ func _on_hand_animator_play_animation_finished() -> void:
 	for die in dice:
 		die.is_selected = false
 	played_hand_ready.emit(_build_dice_hand())
+	
 
 func _build_dice_hand() -> DiceHand:
 	var values: Array[int] = []
@@ -46,3 +47,6 @@ func _build_dice_hand() -> DiceHand:
 
 func _on_played_hand_finish() -> void:
 	played_hand_finished.emit()
+
+func _on_hand_animator_hand_reset_ready() -> void:
+	EventBus.roll_all_dice_requested.emit()

@@ -47,3 +47,36 @@ theme_override_constants/margin_bottom = 25
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=925482497]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RoundIndex" type="Label" parent="VBoxContainer" unique_id=357803518]
+layout_mode = 2
+text = "Round"
+
+[node name="Quota" type="Label" parent="VBoxContainer" unique_id=67325336]
+layout_mode = 2
+text = "Quota"
+
+[node name="CurrentHandPoints" type="Label" parent="VBoxContainer" unique_id=1804711187]
+layout_mode = 2
+text = "Current Hand Points"
+
+[node name="HandType" type="Label" parent="VBoxContainer" unique_id=320033909]
+layout_mode = 2
+text = "Hand Type"
+
+[node name="HandTypeValue" type="Label" parent="VBoxContainer" unique_id=1331690295]
+layout_mode = 2
+text = "Hand Type Value"
+
+[node name="HandaLeft" type="Label" parent="VBoxContainer" unique_id=1050422882]
+layout_mode = 2
+text = "Hands Left"
+
+[node name="RollsLeft" type="Label" parent="VBoxContainer" unique_id=164711947]
+layout_mode = 2
+text = "Rolls Left"

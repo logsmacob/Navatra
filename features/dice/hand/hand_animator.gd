@@ -3,6 +3,7 @@ extends Node
 @onready var hand = $".."
 
 signal play_animation_finished
+signal hand_reset_ready
 
 func _on_hand_setup_complete() -> void:
 	for die : DieUI in hand.dice:
@@ -18,7 +19,8 @@ func _on_die_selected(die_ui: DieUI):
 
 func _on_play_pressed() -> void:
 	var tweens: Array[Tween] = []
-
+	
+	#I want to only animate the dice that are apart of the hand type
 	for die: DieUI in hand.dice:
 		var tween = create_tween()
 		tween.tween_property(die, "position:y", -200, 0.2)
@@ -31,6 +33,11 @@ func _on_play_pressed() -> void:
 
 
 func _on_hand_played_hand_finished() -> void:
+	var tweens: Array[Tween] = []
 	for die : DieUI in hand.dice:
 		var tween = create_tween()
 		tween.tween_property(die, "position:y", 0, 0.2)
+		tweens.append(tween)
+	for tween in tweens:
+		await tween.finished
+	hand_reset_ready.emit()
