@@ -1,6 +1,7 @@
 extends Control
 
 @onready var hand: Control = $MarginContainer/Hand
+@onready var round_index_label: Label = $VBoxContainer/RoundIndex
 @onready var quota_label: Label = $VBoxContainer/Quota
 @onready var current_hand_points_label: Label = $VBoxContainer/CurrentHandPoints
 @onready var hand_type_label: Label = $VBoxContainer/HandType
@@ -19,8 +20,7 @@ func _ready() -> void:
 	GameState.round_completed.connect(_on_round_completed)
 	GameState.run_failed.connect(_on_run_failed)
 	GameState.round_state_changed.connect(_on_round_state_changed)
-	EventBus.score_calculated.connect(_on_score_calculated)
-
+	EventBus.roll_all_dice_requested.connect(_on_roll_all_dice_requested)
 	ui_update()
 	
 
@@ -61,7 +61,7 @@ func _on_round_state_changed(state: Dictionary) -> void:
 	print("State: ", state)
 	ui_update(state)
 
-func _on_score_calculated(_details: HandDetails, _type_total: int, _breakdown: Dictionary) -> void:
+func _on_roll_all_dice_requested():
 	ui_update()
 
 func ui_update(state: Dictionary = {}) -> void:
@@ -71,7 +71,8 @@ func ui_update(state: Dictionary = {}) -> void:
 	var breakdown := score_manager.get_last_breakdown()
 	var hand_name := str(breakdown.get("hand_name", "-"))
 	var type_total := int(breakdown.get("type_total", 0))
-
+	
+	round_index_label.text = "Round %d" % state.get("round_index", 0)
 	quota_label.text = "Quota: %d" % int(state.get("quota_remaining", 0))
 	current_hand_points_label.text = "Current Hand Points: %d" % type_total
 	hand_type_label.text = "Hand Type: %s" % hand_name

@@ -14,7 +14,7 @@ signal run_failed(round_index: int)
 
 const BASE_QUOTA: int = 100
 const QUOTA_GROWTH: float = 1.45
-const BASE_HANDS_PER_ROUND: int = 4
+const BASE_HANDS_PER_ROUND: int = 3
 const HANDS_SCALING_INTERVAL: int = 3
 const BASE_REROLLS_PER_ROUND: int = 3
 
