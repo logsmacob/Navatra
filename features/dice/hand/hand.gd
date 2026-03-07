@@ -3,6 +3,11 @@ extends Control
 @onready var hand_container = $HBoxContainer/Panel/HandContainer
 @export var die_ui_scene: PackedScene
 @export var dice_per_hand: int = 5
+@export var play_button: Button
+@export var roll_button: Button
+
+
+var is_hand_ready: bool = false
 
 signal setup_complete
 signal played_hand_ready(hand: DiceHand)
@@ -14,6 +19,8 @@ func _ready() -> void:
 	_build_hand(dice_per_hand)
 	if not EventBus.roll_all_dice_requested.is_connected(_roll_unselected_dice):
 		EventBus.roll_all_dice_requested.connect(_roll_unselected_dice)
+	roll_button.pressed.connect(_on_roll_pressed)
+	
 	setup_complete.emit()
 
 func _build_hand(dice_count: int) -> void:
@@ -29,8 +36,9 @@ func _roll_unselected_dice() -> void:
 		die.roll_if_not_selected()
 
 func _on_roll_pressed() -> void:
-	if GameState.consume_reroll():
+	if GameState.consume_reroll() and GameState.get_round_state().get("rerolls_remaining", 0) >= 0 and is_hand_ready:
 		EventBus.roll_all_dice_requested.emit()
+		
 
 func _on_hand_animator_play_animation_finished() -> void:
 	for die in dice:

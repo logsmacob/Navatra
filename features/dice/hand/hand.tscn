@@ -18,7 +18,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="Hand" type="PanelContainer" unique_id=649644491]
+[node name="Hand" type="PanelContainer" unique_id=649644491 node_paths=PackedStringArray("play_button", "roll_button")]
 offset_right = 304.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
@@ -26,6 +26,8 @@ size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7n5xe")
 script = ExtResource("1_2i24d")
 die_ui_scene = ExtResource("2_pxmyb")
+play_button = NodePath("HBoxContainer/ButtonContainer/play")
+roll_button = NodePath("HBoxContainer/ButtonContainer/roll")
 
 [node name="HandAnimator" type="Node" parent="." unique_id=308743313]
 script = ExtResource("3_7n5xe")
@@ -67,4 +69,3 @@ text = "Roll"
 [connection signal="hand_reset_ready" from="HandAnimator" to="." method="_on_hand_animator_hand_reset_ready"]
 [connection signal="play_animation_finished" from="HandAnimator" to="." method="_on_hand_animator_play_animation_finished"]
 [connection signal="pressed" from="HBoxContainer/ButtonContainer/play" to="HandAnimator" method="_on_play_pressed"]
-[connection signal="pressed" from="HBoxContainer/ButtonContainer/roll" to="." method="_on_roll_pressed"]
