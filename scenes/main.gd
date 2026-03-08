@@ -8,23 +8,27 @@ extends Control
 @onready var hand_type_value_label: Label = $VBoxContainer/HandTypeValue
 @onready var hands_left_leabel: Label = $VBoxContainer/HandaLeft
 @onready var rolls_left_label: Label = $VBoxContainer/RollsLeft
+@onready var reward_shop: Control = $RewardShop
 
 var score_manager: ScoreManager
+var reward_service: RewardService
 
 func _ready() -> void:
 	score_manager = ScoreManager.new()
 	add_child(score_manager)
+	reward_service = RewardService.new()
 
 	hand.played_hand_ready.connect(_on_played_hand_ready)
 	GameState.round_started.connect(_on_round_started)
 	GameState.round_completed.connect(_on_round_completed)
+	GameState.reward_phase_started.connect(_on_reward_phase_started)
 	GameState.run_failed.connect(_on_run_failed)
 	GameState.round_state_changed.connect(_on_round_state_changed)
 	EventBus.roll_all_dice_requested.connect(_on_roll_all_dice_requested)
+	reward_shop.reward_selected.connect(_on_reward_selected)
 
 	_refresh_hand_preview()
 	ui_update()
-	
 
 func _on_played_hand_ready(hand_data: DiceHand) -> void:
 	score_manager.preview_hand(hand_data.to_array())
@@ -51,13 +55,23 @@ func _get_played_hand_name() -> String:
 
 func _on_round_started(round_index: int, quota: int, hands: int, rerolls: int) -> void:
 	print("Round %d started | quota=%d hands=%d rerolls=%d" % [round_index, quota, hands, rerolls])
+	reward_shop.visible = false
 
 func _on_round_completed(round_index: int) -> void:
 	print("Round %d complete" % round_index)
+
+func _on_reward_phase_started() -> void:
+	var rewards := reward_service.generate_rewards(3)
+	reward_shop.show_rewards(rewards)
+
+func _on_reward_selected(reward: RewardDefinition) -> void:
+	reward_service.apply_reward(reward, GameState)
+	reward_shop.visible = false
 	GameState.start_next_round()
 
 func _on_run_failed(round_index: int) -> void:
 	print("Run failed on round %d" % round_index)
+	reward_shop.visible = false
 	GameState.start_new_run()
 
 func _on_round_state_changed(state: Dictionary) -> void:
@@ -67,7 +81,6 @@ func _on_round_state_changed(state: Dictionary) -> void:
 func _on_roll_all_dice_requested() -> void:
 	_refresh_hand_preview()
 	ui_update()
-
 
 func _refresh_hand_preview() -> void:
 	if hand == null or score_manager == null:
@@ -90,7 +103,7 @@ func ui_update(state: Dictionary = {}) -> void:
 	var hand_name := str(breakdown.get("hand_name", "-"))
 	var type_total := int(breakdown.get("type_total", 0))
 	var final_score := int(breakdown.get("final_score", 0))
-	
+
 	round_index_label.text = "Round %d" % state.get("round_index", 0)
 	quota_label.text = "Quota: %d" % int(state.get("quota_remaining", 0))
 	current_hand_points_label.text = "Current Hand Points: %d" % final_score

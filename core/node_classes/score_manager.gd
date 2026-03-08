@@ -53,8 +53,8 @@ func commit_played_hand() -> int:
 	if not play_pending:
 		return 0
 
-	current_score += last_roll_score
-	var applied_round_score := last_roll_score
+	var applied_round_score := int(round(last_roll_score * GameState.round_score_multiplier))
+	current_score += applied_round_score
 
 	EventBus.round_score_applied.emit(applied_round_score)
 	EventBus.score_committed.emit(current_score)

@@ -10,6 +10,7 @@ signal run_started(round_index: int)
 signal round_started(round_index: int, quota: int, hands: int, rerolls: int)
 signal round_state_changed(state: Dictionary)
 signal round_completed(round_index: int)
+signal reward_phase_started
 signal run_failed(round_index: int)
 
 const BASE_QUOTA: int = 300
@@ -22,6 +23,7 @@ var round_index: int = 1
 var quota_remaining: int = 0
 var hands_remaining: int = 0
 var rerolls_remaining: int = 0
+var round_score_multiplier: float = 1.0
 
 func _ready() -> void:
 	start_new_run()
@@ -39,6 +41,7 @@ func start_round(target_round: int) -> void:
 	quota_remaining = _calculate_quota(target_round)
 	hands_remaining = _calculate_hands(target_round)
 	rerolls_remaining = BASE_REROLLS_PER_ROUND
+	round_score_multiplier = 1.0
 	round_started.emit(target_round, quota_remaining, hands_remaining, rerolls_remaining)
 	_emit_round_state()
 
@@ -79,11 +82,13 @@ func get_round_state() -> Dictionary:
 		"quota_remaining": quota_remaining,
 		"hands_remaining": hands_remaining,
 		"rerolls_remaining": rerolls_remaining,
+		"round_score_multiplier": round_score_multiplier,
 	}
 
 func _evaluate_round_outcome() -> void:
 	if is_round_complete():
 		round_completed.emit(round_index)
+		reward_phase_started.emit()
 		return
 
 	if hands_remaining <= 0:
