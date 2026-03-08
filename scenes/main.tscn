@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://xsuucb46yeha" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://jf2sov4k6y2t" path="res://features/dice/hand/hand.tscn" id="2_0wfyh"]
 [ext_resource type="Shader" uid="uid://64giuyue21qd" path="res://assets/shaders/hex_background.gdshader" id="2_sugp2"]
+[ext_resource type="PackedScene" path="res://features/shop/reward_shop.tscn" id="4_qh0eg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
 shader = ExtResource("2_sugp2")
@@ -80,3 +81,7 @@ text = "Hands Left"
 [node name="RollsLeft" type="Label" parent="VBoxContainer" unique_id=164711947]
 layout_mode = 2
 text = "Rolls Left"
+
+[node name="RewardShop" parent="." instance=ExtResource("4_qh0eg")]
+layout_mode = 0
+
