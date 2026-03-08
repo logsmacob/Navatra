@@ -26,44 +26,45 @@ func apply_reward(reward: RewardDefinition, game_state: Node) -> void:
 
 	match reward.type:
 		RewardDefinition.RewardType.ADD_HAND:
-			game_state.hands_remaining += int(reward.value)
+			if game_state.has_method("add_next_round_hands_bonus"):
+				game_state.call("add_next_round_hands_bonus", int(reward.value))
 		RewardDefinition.RewardType.ADD_REROLL:
-			game_state.rerolls_remaining += int(reward.value)
+			if game_state.has_method("add_next_round_rerolls_bonus"):
+				game_state.call("add_next_round_rerolls_bonus", int(reward.value))
 		RewardDefinition.RewardType.ADD_SCORE:
-			game_state.apply_score_to_quota(int(reward.value))
+			if game_state.has_method("add_next_round_quota_reduction"):
+				game_state.call("add_next_round_quota_reduction", int(reward.value))
 		RewardDefinition.RewardType.SCORE_MULT:
-			game_state.round_score_multiplier += reward.value
-
-	if game_state.has_method("_emit_round_state"):
-		game_state.call("_emit_round_state")
+			if game_state.has_method("add_next_round_score_multiplier_bonus"):
+				game_state.call("add_next_round_score_multiplier_bonus", reward.value)
 
 func _build_default_reward_pool() -> void:
 	_reward_pool.clear()
 	_reward_pool.append(_create_reward(
 		"add_hand",
 		"Tactical Reserve",
-		"+1 hand this round.",
+		"+1 hand next round.",
 		RewardDefinition.RewardType.ADD_HAND,
 		1.0
 	))
 	_reward_pool.append(_create_reward(
 		"add_reroll",
 		"Lucky Shift",
-		"+1 reroll this round.",
+		"+1 reroll next round.",
 		RewardDefinition.RewardType.ADD_REROLL,
 		1.0
 	))
 	_reward_pool.append(_create_reward(
 		"add_score",
 		"Quota Relief",
-		"Reduce current quota by 50 immediately.",
+		"Reduce next round quota by 50.",
 		RewardDefinition.RewardType.ADD_SCORE,
 		50.0
 	))
 	_reward_pool.append(_create_reward(
 		"score_mult",
 		"Momentum",
-		"+10% score multiplier for this round.",
+		"+10% score multiplier next round.",
 		RewardDefinition.RewardType.SCORE_MULT,
 		0.1
 	))
