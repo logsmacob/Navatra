@@ -24,12 +24,17 @@ var quota_remaining: int = 0
 var hands_remaining: int = 0
 var rerolls_remaining: int = 0
 var round_score_multiplier: float = 1.0
+var _next_round_hands_bonus: int = 0
+var _next_round_rerolls_bonus: int = 0
+var _next_round_quota_reduction: int = 0
+var _next_round_score_multiplier_bonus: float = 0.0
 
 func _ready() -> void:
 	start_new_run()
 
 func start_new_run() -> void:
 	round_index = 1
+	_clear_pending_reward_bonuses()
 	run_started.emit(round_index)
 	start_round(round_index)
 
@@ -38,12 +43,25 @@ func start_next_round() -> void:
 	start_round(round_index)
 
 func start_round(target_round: int) -> void:
-	quota_remaining = _calculate_quota(target_round)
-	hands_remaining = _calculate_hands(target_round)
-	rerolls_remaining = BASE_REROLLS_PER_ROUND
-	round_score_multiplier = 1.0
+	quota_remaining = max(_calculate_quota(target_round) - _next_round_quota_reduction, 0)
+	hands_remaining = _calculate_hands(target_round) + _next_round_hands_bonus
+	rerolls_remaining = BASE_REROLLS_PER_ROUND + _next_round_rerolls_bonus
+	round_score_multiplier = 1.0 + _next_round_score_multiplier_bonus
+	_clear_pending_reward_bonuses()
 	round_started.emit(target_round, quota_remaining, hands_remaining, rerolls_remaining)
 	_emit_round_state()
+
+func add_next_round_hands_bonus(amount: int) -> void:
+	_next_round_hands_bonus += max(amount, 0)
+
+func add_next_round_rerolls_bonus(amount: int) -> void:
+	_next_round_rerolls_bonus += max(amount, 0)
+
+func add_next_round_quota_reduction(amount: int) -> void:
+	_next_round_quota_reduction += max(amount, 0)
+
+func add_next_round_score_multiplier_bonus(amount: float) -> void:
+	_next_round_score_multiplier_bonus += max(amount, 0.0)
 
 func consume_reroll() -> bool:
 	if rerolls_remaining <= 0:
@@ -93,3 +111,9 @@ func _evaluate_round_outcome() -> void:
 
 	if hands_remaining <= 0:
 		run_failed.emit(round_index)
+
+func _clear_pending_reward_bonuses() -> void:
+	_next_round_hands_bonus = 0
+	_next_round_rerolls_bonus = 0
+	_next_round_quota_reduction = 0
+	_next_round_score_multiplier_bonus = 0.0
