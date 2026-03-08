@@ -82,6 +82,4 @@ text = "Hands Left"
 layout_mode = 2
 text = "Rolls Left"
 
-[node name="RewardShop" parent="." instance=ExtResource("4_qh0eg")]
-layout_mode = 0
-
+[node name="RewardShop" parent="." unique_id=1538264382 instance=ExtResource("4_qh0eg")]
