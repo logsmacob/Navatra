@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://7f2vbrrbfiba"]
 
 [ext_resource type="Script" uid="uid://b15ejutmd7ef5" path="res://features/shop/reward_shop.gd" id="1_h8c6r"]
+[ext_resource type="Shader" uid="uid://batbn873bu8tu" path="res://features/shop/blur.gdshader" id="2_kc0r1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qb506"]
+shader = ExtResource("2_kc0r1")
+shader_parameter/radius = 20.0
 
 [node name="RewardShop" type="Control" unique_id=980821348]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +17,7 @@ grow_vertical = 2
 script = ExtResource("1_h8c6r")
 
 [node name="Panel" type="Panel" parent="." unique_id=568504620]
-visible = false
+material = SubResource("ShaderMaterial_qb506")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

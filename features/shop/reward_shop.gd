@@ -15,7 +15,7 @@ func show_rewards(rewards: Array) -> void:
 
 		var button := Button.new()
 		button.text = "%s\n%s" % [reward.title, reward.description]
-		button.custom_minimum_size = Vector2(0, 72)
+		button.custom_minimum_size = Vector2(0, 120)
 		button.pressed.connect(_on_reward_pressed.bind(reward))
 		rewards_container.add_child(button)
 

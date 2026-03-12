@@ -1,7 +1,7 @@
 extends Control
 
 @onready var hand: Node = $MarginContainer/Hand
-@onready var score_bar: VBoxContainer = $VBoxContainer
+@onready var score_bar: VBoxContainer = $ScoreBar
 @onready var reward_shop: Control = $RewardShop
 
 var reward_service: RewardService
@@ -30,7 +30,7 @@ func _on_played_hand_ready(hand_data: DiceHand) -> void:
 		hand._on_played_hand_finish()
 		return
 
-	var play_result := score_bar.play_previewed_hand()
+	var play_result = score_bar.play_previewed_hand()
 	print("Played hand: %s | points=%d" % [play_result.get("hand_name", "Unknown"), int(play_result.get("applied_score", 0))])
 	GameState.apply_score_to_quota(int(play_result.get("applied_score", 0)))
 	GameState.consume_hand()
