@@ -2,12 +2,16 @@
 
 [ext_resource type="Script" uid="uid://b15ejutmd7ef5" path="res://features/hand_type_upgrades/hand_type_upgrades.gd" id="1_8k6x7"]
 [ext_resource type="Shader" uid="uid://batbn873bu8tu" path="res://features/hand_type_upgrades/blur.gdshader" id="2_r1jep"]
+[ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="3_dq6nr"]
+[ext_resource type="StyleBox" uid="uid://bgk6mwns3t3qv" path="res://assets/UI/style_boxes/die_face_black_normal.tres" id="4_iq1i7"]
+[ext_resource type="StyleBox" uid="uid://dmbq6yypnrj4o" path="res://assets/UI/style_boxes/die_face_black_pressed.tres" id="5_76v63"]
+[ext_resource type="StyleBox" uid="uid://bfoqkt08gqufc" path="res://assets/UI/style_boxes/die_face_black_hover.tres" id="6_qhpsc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qb506"]
 shader = ExtResource("2_r1jep")
-shader_parameter/radius = 20.0
+shader_parameter/radius = 100.0
 
-[node name="HandTypeUpgrades" type="Control" unique_id=980821348]
+[node name="HandTypeUpgrades" type="Control" unique_id=980821348 node_paths=PackedStringArray("buttons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8k6x7")
+buttons = [NodePath("VBoxContainer/UpgradeList/Button"), NodePath("VBoxContainer/UpgradeList/Button2"), NodePath("VBoxContainer/UpgradeList/Button3"), NodePath("VBoxContainer/UpgradeList/Button4")]
 
 [node name="Panel" type="Panel" parent="." unique_id=568504620]
 material = SubResource("ShaderMaterial_qb506")
@@ -36,10 +41,48 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 
-[node name="UpgradeList" type="VBoxContainer" parent="VBoxContainer"]
+[node name="UpgradeList" type="VBoxContainer" parent="VBoxContainer" unique_id=1056658818]
+custom_minimum_size = Vector2(500, 250)
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="RerollButton" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/UpgradeList" unique_id=1819416347]
 layout_mode = 2
+theme = ExtResource("3_dq6nr")
+theme_override_font_sizes/font_size = 32
+text = "test
+Test"
+
+[node name="Button2" type="Button" parent="VBoxContainer/UpgradeList" unique_id=73937634]
+layout_mode = 2
+theme = ExtResource("3_dq6nr")
+theme_override_font_sizes/font_size = 32
+text = "test
+Test"
+
+[node name="Button3" type="Button" parent="VBoxContainer/UpgradeList" unique_id=1942929040]
+layout_mode = 2
+theme = ExtResource("3_dq6nr")
+theme_override_font_sizes/font_size = 32
+text = "test
+Test"
+
+[node name="Button4" type="Button" parent="VBoxContainer/UpgradeList" unique_id=943821200]
+layout_mode = 2
+theme = ExtResource("3_dq6nr")
+theme_override_font_sizes/font_size = 32
+text = "test
+Test"
+
+[node name="RerollButton" type="Button" parent="VBoxContainer" unique_id=2056195922]
+layout_mode = 2
+theme = ExtResource("3_dq6nr")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("4_iq1i7")
+theme_override_styles/pressed = ExtResource("5_76v63")
+theme_override_styles/hover = ExtResource("6_qhpsc")
 text = "Reroll"

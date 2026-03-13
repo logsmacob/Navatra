@@ -7,7 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://bblhd1k16yxvt" path="res://assets/UI/style_boxes/die_face_pressed.tres" id="5_cjawd"]
 
 [resource]
-/colors/back = Color(1, 0, 0, 1)
+/colors/back = Color(1, 1, 1, 1)
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
