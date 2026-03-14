@@ -2,40 +2,80 @@
 
 [ext_resource type="Script" uid="uid://faikfnryerbf" path="res://features/score_bar/score_bar.gd" id="1_vywcl"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_vywcl"]
+font_size = 32
+
 [node name="VBoxContainer" type="VBoxContainer" unique_id=1425863518]
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(2, 2)
 script = ExtResource("1_vywcl")
 
 [node name="RoundIndex" type="Label" parent="." unique_id=850154121]
 layout_mode = 2
 text = "Round"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="Line4" type="Label" parent="." unique_id=1052091629]
+layout_mode = 2
+text = "------------------------------------------"
+label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="Quota" type="Label" parent="." unique_id=598673048]
 layout_mode = 2
 text = "Quota"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="Line" type="Label" parent="." unique_id=1710501390]
+layout_mode = 2
+text = "------------------------------------------"
+label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="CurrentHandPoints" type="Label" parent="." unique_id=240174566]
 layout_mode = 2
 text = "Current Hand Points"
+label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="CurrentHandPointsMath" type="Label" parent="." unique_id=2033114964]
 layout_mode = 2
 text = "Current Hand Points"
+label_settings = SubResource("LabelSettings_vywcl")
 
-[node name="HandType" type="Label" parent="." unique_id=301125834]
+[node name="Line2" type="Label" parent="." unique_id=1056382705]
 layout_mode = 2
-text = "Hand Type"
+text = "------------------------------------------"
+label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="HandTypeValue" type="Label" parent="." unique_id=1845529967]
 layout_mode = 2
 text = "Hand Type Value"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="HandTypeValueMath" type="Label" parent="." unique_id=100196331]
+layout_mode = 2
+text = "Hand Type Value"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="Line3" type="Label" parent="." unique_id=800911940]
+layout_mode = 2
+text = "------------------------------------------"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="HandType" type="Label" parent="." unique_id=301125834]
+layout_mode = 2
+text = "Hand Type"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="Line5" type="Label" parent="." unique_id=1285858229]
+layout_mode = 2
+text = "------------------------------------------"
+label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="HandaLeft" type="Label" parent="." unique_id=12555538]
 layout_mode = 2
 text = "Hands Left"
+label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="RollsLeft" type="Label" parent="." unique_id=1256913341]
 layout_mode = 2
 text = "Rolls Left"
+label_settings = SubResource("LabelSettings_vywcl")

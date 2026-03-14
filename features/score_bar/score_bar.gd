@@ -5,6 +5,7 @@ extends VBoxContainer
 @onready var current_hand_points_label: Label = $CurrentHandPoints
 @onready var hand_type_label: Label = $HandType
 @onready var hand_type_value_label: Label = $HandTypeValue
+@onready var hand_type_value_label_math: Label = $HandTypeValueMath
 @onready var hands_left_leabel: Label = $HandaLeft
 @onready var rolls_left_label: Label = $RollsLeft
 @onready var current_hand_points_label_math: Label = $CurrentHandPointsMath
@@ -66,6 +67,11 @@ func update_state(state: Dictionary = {}) -> void:
 		int(breakdown.get("group_total", 0)),
 		int(breakdown.get("mult", 0)),
 		final_score,
+	]
+	hand_type_value_label_math.text = "%d x %d = %d" % [
+		int(breakdown.get("base", 0)),
+		int(breakdown.get("mult", 0)),
+		type_total,
 	]
 	hand_type_label.text = "Hand Type: %s" % hand_name
 	hand_type_value_label.text = "Hand Type Value: %d" % type_total

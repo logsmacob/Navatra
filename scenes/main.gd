@@ -1,7 +1,7 @@
 extends Control
 
 @onready var hand: Node = $MarginContainer/Hand
-@onready var score_bar: VBoxContainer = $ScoreBar
+@onready var score_bar: VBoxContainer = $MarginContainer/ScoreBar
 @onready var hand_type_upgrades: Control = $HandTypeUpgrades
 
 var hand_type_upgrade_service: HandTypeUpgradeService
