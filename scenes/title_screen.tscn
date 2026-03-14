@@ -1,18 +1,19 @@
 [gd_scene format=3 uid="uid://bea22x3ksr3ov"]
 
 [ext_resource type="Script" uid="uid://dynomwkv5gwgk" path="res://scenes/title_screen.gd" id="1_mgrm8"]
-[ext_resource type="Shader" uid="uid://c8ll2ltq82btw" path="res://assets/shaders/swirl.gdshader" id="2_mgrm8"]
+[ext_resource type="Shader" uid="uid://64giuyue21qd" path="res://assets/shaders/hex_background.gdshader" id="1_sa3yf"]
 [ext_resource type="Texture2D" uid="uid://b15xaclrmafje" path="res://assets/sprites/Navatra Icon.png" id="2_s4lrb"]
 [ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="3_s4lrb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgrm8"]
-shader = ExtResource("2_mgrm8")
-shader_parameter/color_a = Color(0.016, 0.031, 0.161, 1)
-shader_parameter/color_b = Color(0.101960786, 0.16470589, 0.3529412, 1)
+shader = ExtResource("1_sa3yf")
+shader_parameter/color_a = Color(0.046400003, 0.0748, 0.16, 1)
+shader_parameter/color_b = Color(0.102, 0.165, 0.353, 1)
 shader_parameter/edge_color = Color(0, 0, 0, 1)
 shader_parameter/hexes_across = 60.0000026125
-shader_parameter/swirl_speed = 1.0000000475
-shader_parameter/swirl_scale = 0.10000000149012
+shader_parameter/speed = 0.90400003968012
+shader_parameter/ripple_frequency = 0.5
+shader_parameter/randomness = 0.0
 shader_parameter/edge_thickness = 0.10000000475
 shader_parameter/edge_softness = 0.10000000149012
 
@@ -33,7 +34,7 @@ play = NodePath("MarginContainer/VBoxContainer/Play")
 discord = NodePath("MarginContainer/VBoxContainer/Discord")
 quit = NodePath("MarginContainer/VBoxContainer/Quit")
 
-[node name="HexBackground" type="ColorRect" parent="." unique_id=247558148]
+[node name="HexBackground2" type="ColorRect" parent="." unique_id=120036044]
 material = SubResource("ShaderMaterial_mgrm8")
 layout_mode = 1
 anchors_preset = 15

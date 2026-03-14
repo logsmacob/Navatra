@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://crwh35rpcjt2y"]
+
+[ext_resource type="Script" uid="uid://b6uq5mc6daglp" path="res://scenes/shop.gd" id="1_1l46r"]
+[ext_resource type="Shader" uid="uid://64giuyue21qd" path="res://assets/shaders/hex_background.gdshader" id="2_2fc2m"]
+[ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="4_ajxib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgrm8"]
+shader = ExtResource("2_2fc2m")
+shader_parameter/color_a = Color(0.02537658, 0.0937989, 0.092985265, 1)
+shader_parameter/color_b = Color(0.07870258, 0.20646518, 0.18137455, 1)
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/hexes_across = 60.0000026125
+shader_parameter/speed = 0.90400003968012
+shader_parameter/ripple_frequency = 0.5
+shader_parameter/randomness = 0.0
+shader_parameter/edge_thickness = 0.10000000475
+shader_parameter/edge_softness = 0.10000000149012
+
+[node name="Title Screen" type="Control" unique_id=888533972 node_paths=PackedStringArray("shop")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1l46r")
+shop = NodePath("Button")
+
+[node name="HexBackground2" type="ColorRect" parent="." unique_id=120036044]
+material = SubResource("ShaderMaterial_mgrm8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="." unique_id=1086088980]
+custom_minimum_size = Vector2(750, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_ajxib")
+theme_override_font_sizes/font_size = 64
+text = "Shop Comming Soon"

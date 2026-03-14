@@ -62,13 +62,13 @@ func update_state(state: Dictionary = {}) -> void:
 	round_index_label.text = "Round %d" % state.get("round_index", 0)
 	quota_label.text = "Quota: %d" % int(state.get("quota_remaining", 0))
 	current_hand_points_label.text = "Current Hand Points: %d" % final_score
-	current_hand_points_label_math.text = "(%d + %d) x %d = %d" % [
+	current_hand_points_label_math.text = "(Base %d + Dice %d) x Mult %d = %d" % [
 		int(breakdown.get("base", 0)),
 		int(breakdown.get("group_total", 0)),
 		int(breakdown.get("mult", 0)),
 		final_score,
 	]
-	hand_type_value_label_math.text = "%d x %d = %d" % [
+	hand_type_value_label_math.text = "Base %d x Mult %d = %d" % [
 		int(breakdown.get("base", 0)),
 		int(breakdown.get("mult", 0)),
 		type_total,

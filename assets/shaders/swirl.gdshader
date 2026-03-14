@@ -1,107 +1,90 @@
 shader_type canvas_item;
 
-uniform vec4 color_a : source_color = vec4(0.016, 0.031, 0.161, 1.0);
-uniform vec4 color_b : source_color = vec4(0.102, 0.165, 0.353, 1.0);
+uniform vec4 color_a : source_color = vec4(0.1, 0.3, 0.8, 1.0);
+uniform vec4 color_b : source_color = vec4(0.9, 0.2, 0.5, 1.0);
 uniform vec4 edge_color : source_color = vec4(0.5, 0.3, 0.9, 1.0);
 
 uniform float hexes_across : hint_range(5.0, 80.0) = 60.0;
 
-uniform float swirl_speed : hint_range(0.1, 5.0) = 1.0;
-uniform float swirl_scale : hint_range(0.1, 5.0) = 0.1;
+uniform float swirl_speed : hint_range(0.1,5.0) = 1.2;
+uniform float swirl_strength : hint_range(0.0,10.0) = 4.0;
+uniform float swirl_scale : hint_range(0.1,10.0) = 1.0;
 
-uniform float edge_thickness : hint_range(0.0, 0.2) = 0.1;
-uniform float edge_softness : hint_range(0.0, 0.1) = 0.1;
+uniform float edge_thickness : hint_range(0.0, 0.2) = 0.05;
+uniform float edge_softness : hint_range(0.0, 0.1) = 0.01;
 
-
-// -------- HEX GRID MATH --------
+// --- HEX FUNCTIONS ---
+vec3 pixel_to_hex(vec2 pos, float hex_size) {
+    float q = (sqrt(3.0)/3.0 * pos.x - 1.0/3.0 * pos.y) / hex_size;
+    float r = (2.0/3.0 * pos.y) / hex_size;
+    float x = q;
+    float z = r;
+    float y = -x - z;
+    return vec3(x, y, z);
+}
 
 vec3 cube_round(vec3 cube) {
-    vec3 r = round(cube);
-    vec3 diff = abs(r - cube);
+    float rx = round(cube.x);
+    float ry = round(cube.y);
+    float rz = round(cube.z);
 
-    if (diff.x > diff.y && diff.x > diff.z)
-        r.x = -r.y - r.z;
-    else if (diff.y > diff.z)
-        r.y = -r.x - r.z;
-    else
-        r.z = -r.x - r.y;
+    float x_diff = abs(rx - cube.x);
+    float y_diff = abs(ry - cube.y);
+    float z_diff = abs(rz - cube.z);
 
-    return r;
+    if (x_diff > y_diff && x_diff > z_diff) {
+        rx = -ry - rz;
+    } else if (y_diff > z_diff) {
+        ry = -rx - rz;
+    } else {
+        rz = -rx - ry;
+    }
+
+    return vec3(rx, ry, rz);
 }
 
-vec3 pixel_to_hex(vec2 p, float size) {
-    float q = (sqrt(3.0)/3.0 * p.x - 1.0/3.0 * p.y) / size;
-    float r = (2.0/3.0 * p.y) / size;
-    return vec3(q, r, -q - r);
-}
-
-vec2 hex_to_pixel(vec3 h, float size) {
-    float x = size * (sqrt(3.0) * h.x + sqrt(3.0)/2.0 * h.y);
-    float y = size * (3.0/2.0 * h.y);
+vec2 hex_to_pixel(vec3 cube, float hex_size) {
+    float x = hex_size * sqrt(3.0) * (cube.x + cube.z/2.0);
+    float y = hex_size * 3.0/2.0 * cube.z;
     return vec2(x, y);
 }
 
+// Hexagon distance from center (flat-top)
 float hex_distance(vec2 p) {
     p = abs(p);
-    return max(dot(p, normalize(vec2(1.0, 1.7320508))), p.x);
+    return max(p.x * 0.57735 + p.y * 0.5, p.y); // 0.57735 = tan(30°)
 }
 
-
-// -------- FRAGMENT --------
-
 void fragment() {
+    vec2 uv = FRAGCOORD.xy / vec2(SCREEN_PIXEL_SIZE); // normalized to pixels
+    float hex_size = SCREEN_PIXEL_SIZE.x / hexes_across;
+    vec2 pos = uv * SCREEN_PIXEL_SIZE;
 
-    vec2 viewport = 1.0 / SCREEN_PIXEL_SIZE;
-    vec2 center_screen = viewport * 0.5;
-
-    float hex_size = viewport.x / hexes_across;
-
-    vec2 pos = FRAGCOORD.xy;
-
+    // --- HEX GRID ---
     vec3 hex = pixel_to_hex(pos, hex_size);
     vec3 rounded = cube_round(hex);
-
     vec2 center = hex_to_pixel(rounded, hex_size);
     vec2 local = pos - center;
 
+    // --- Keep aspect ratio ---
+    local.x *= SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+
     float dist = hex_distance(local / hex_size);
 
-    // distance from screen center
-    float radial = length(center - center_screen);
-
-    // -------- BALATRO STYLE COLOR FLOW --------
-
-    vec2 flow_pos = center * 0.02;
-
-    float flow =
-        sin(flow_pos.x * swirl_scale + TIME * swirl_speed) +
-        sin(flow_pos.y * swirl_scale * 1.3 - TIME * swirl_speed * 1.2) +
-        cos(radial * 0.015 - TIME * swirl_speed * 1.4);
-
-    float t = flow * 0.5 + 0.5;
-
+    // --- COLOR WAVE ---
+    float wave = sin((pos.x + pos.y) * 0.02 + TIME);
+    float t = (wave + 1.0) * 0.5;
     vec4 col = mix(color_a, color_b, t);
 
-
-    // -------- HEX EDGE --------
-
+    // --- HEX EDGES ---
     float outer = smoothstep(1.0, 1.0 - edge_softness, dist);
-    float inner = smoothstep(1.0 - edge_thickness, 1.0 - edge_thickness - edge_softness, dist);
-
-    float edge = outer - inner;
-
-    col = mix(col, edge_color, edge);
-
-
-    // -------- VIGNETTE --------
-
-    float vignette = smoothstep(
-        1.3,
-        0.2,
-        length(pos - center_screen) / viewport.x
+    float inner = smoothstep(
+        1.0 - edge_thickness,
+        1.0 - edge_thickness - edge_softness,
+        dist
     );
-
-    col *= vignette * 0.25 + 0.75;
+    float edge = outer - inner;
+    col = mix(col, edge_color, edge);
 
     COLOR = col;
 }
