@@ -14,7 +14,16 @@ func roll_hand():
 	for die: DieUI in hand.dice:
 		die.roll_if_not_selected(duration)
 		duration += .25
-	await get_tree().create_timer(duration).timeout
+	if not is_inside_tree():
+		is_roll_finished = true
+		return
+
+	var scene_tree := get_tree()
+	if scene_tree == null:
+		is_roll_finished = true
+		return
+
+	await scene_tree.create_timer(duration).timeout
 	is_roll_finished = true
 
 func play_hand(target_dice: Array[DieUI]) -> void:
