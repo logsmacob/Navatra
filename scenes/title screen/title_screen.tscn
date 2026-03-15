@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bea22x3ksr3ov"]
 
-[ext_resource type="Script" uid="uid://dynomwkv5gwgk" path="res://scenes/title_screen.gd" id="1_mgrm8"]
+[ext_resource type="Script" uid="uid://dynomwkv5gwgk" path="res://scenes/title screen/title_screen.gd" id="1_mgrm8"]
 [ext_resource type="Shader" uid="uid://64giuyue21qd" path="res://assets/shaders/hex_background.gdshader" id="1_sa3yf"]
 [ext_resource type="Texture2D" uid="uid://b15xaclrmafje" path="res://assets/sprites/Navatra Icon.png" id="2_s4lrb"]
 [ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="3_s4lrb"]
