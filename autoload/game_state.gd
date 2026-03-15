@@ -214,7 +214,7 @@ func _calculate_round_reward(overflow_points: int) -> int:
 	var overflow_currency := int(floor(float(overflow_points) / 85.0))
 	var hands_bonus := hands_remaining * 2
 	var rerolls_bonus := rerolls_remaining * 2
-	var progression_bonus := 2 + int((round_index - 1) / 3)
+	var progression_bonus := 2 + int(float(round_index - 1) / 3)
 	return maxi(overflow_currency + hands_bonus + rerolls_bonus + progression_bonus, 1)
 
 func _get_pending_bonus_state() -> Dictionary:

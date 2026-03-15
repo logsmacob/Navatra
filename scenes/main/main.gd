@@ -7,8 +7,8 @@ extends Control
 var hand_type_upgrade_service: HandTypeUpgradeService
 
 @onready var win_screen: Control = $WinScreen
-@onready var win_stats_label: Label = $WinScreen/VBoxContainer/Stats
-@onready var win_back_button: Button = $WinScreen/VBoxContainer/BackToTitle
+@onready var win_stats_label: Label = $WinScreen/CenterContainer/VBoxContainer/Stats
+@onready var win_back_button: Button = $WinScreen/CenterContainer/VBoxContainer/BackToTitle
 
 func _ready() -> void:
 	hand_type_upgrade_service = HandTypeUpgradeService.new()
