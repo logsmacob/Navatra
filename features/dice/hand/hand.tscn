@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://dqvho5iajwwdb" path="res://features/dice/hand/hand_animator.gd" id="3_7n5xe"]
 [ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="3_oslr0"]
 [ext_resource type="Script" uid="uid://bfnmm4nlmtgcs" path="res://features/dice/hand/hand_scoring_selector.gd" id="4_selector"]
+[ext_resource type="Script" path="res://features/dice/hand/hand_dice_pool.gd" id="5_dice_pool"]
+[ext_resource type="Script" path="res://features/dice/hand/hand_currency_bonus_service.gd" id="6_currency_bonus"]
 [ext_resource type="StyleBox" uid="uid://bgk6mwns3t3qv" path="res://assets/UI/style_boxes/die_face_black_normal.tres" id="6_s8u3v"]
 [ext_resource type="StyleBox" uid="uid://dmbq6yypnrj4o" path="res://assets/UI/style_boxes/die_face_black_pressed.tres" id="7_ttxp3"]
 [ext_resource type="StyleBox" uid="uid://bfoqkt08gqufc" path="res://assets/UI/style_boxes/die_face_black_hover.tres" id="8_pyojo"]
@@ -36,6 +38,12 @@ script = ExtResource("3_7n5xe")
 
 [node name="HandScoringSelector" type="Node" parent="." unique_id=309901144]
 script = ExtResource("4_selector")
+
+[node name="HandDicePool" type="Node" parent="." unique_id=1728495108]
+script = ExtResource("5_dice_pool")
+
+[node name="HandCurrencyBonusService" type="Node" parent="." unique_id=194727312]
+script = ExtResource("6_currency_bonus")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=2047717781]
 layout_mode = 2
