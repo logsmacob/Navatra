@@ -44,7 +44,12 @@ func _on_played_hand_ready(hand_data: DiceHand) -> void:
 
 	var play_result = score_bar.play_previewed_hand()
 	var applied_score := int(play_result.get("applied_score", 0))
-	print("Played hand: %s | points=%d" % [play_result.get("hand_name", "Unknown"), applied_score])
+	var material_currency_bonus := 0
+	if hand.has_method("get_scoring_material_currency_bonus"):
+		material_currency_bonus = int(hand.call("get_scoring_material_currency_bonus"))
+	if material_currency_bonus > 0:
+		GameState.add_currency(material_currency_bonus)
+	print("Played hand: %s | points=%d | material_bonus=%d" % [play_result.get("hand_name", "Unknown"), applied_score, material_currency_bonus])
 	GameState.process_played_hand(applied_score)
 
 	await scene_tree.create_timer(1).timeout
