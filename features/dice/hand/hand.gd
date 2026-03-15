@@ -74,6 +74,16 @@ func _on_play_pressed() -> void:
 func get_current_hand() -> DiceHand:
 	return hand_scoring_selector.build_dice_hand(dice)
 
+func get_scoring_material_currency_bonus() -> int:
+	var scoring_dice := hand_scoring_selector.get_scoring_dice(dice)
+	var total_bonus := 0
+	for die_ui: DieUI in scoring_dice:
+		if die_ui == null or die_ui.die == null or die_ui.die.data == null:
+			continue
+		var material := str(die_ui.die.data.material)
+		total_bonus += int(GameState.MATERIAL_CURRENCY_BONUS.get(material, 0))
+	return total_bonus
+
 func _on_played_hand_finish() -> void:
 	played_hand_finished.emit()
 
