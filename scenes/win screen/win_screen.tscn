@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://lknq3g3ef435"]
+
+[ext_resource type="Shader" uid="uid://batbn873bu8tu" path="res://features/hand_type_upgrades/blur.gdshader" id="1_4iash"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_win_blur"]
+shader = ExtResource("1_4iash")
+shader_parameter/radius = 28.0
+
+[node name="WinScreen" type="Control" unique_id=519928411]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Blur" type="ColorRect" parent="." unique_id=1866868027]
+material = SubResource("ShaderMaterial_win_blur")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.15)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=530185909]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1211932309]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1876890028]
+layout_mode = 2
+theme_override_font_sizes/font_size = 58
+text = "You Win"
+horizontal_alignment = 1
+
+[node name="Stats" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1241701931]
+custom_minimum_size = Vector2(580, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+
+[node name="BackToTitle" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1126810077]
+layout_mode = 2
+text = "Back to Title Screen"
