@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cm12csulyq6hw"]
 
 [ext_resource type="Script" uid="uid://xsuucb46yeha" path="res://scenes/main/main.gd" id="1_0wfyh"]
-[ext_resource type="Script" path="res://scenes/main/controllers/main_gameplay_controller.gd" id="1_sx4yn"]
-[ext_resource type="Script" path="res://scenes/main/controllers/main_round_flow_controller.gd" id="1_te5ag"]
-[ext_resource type="Script" path="res://scenes/main/controllers/main_run_end_controller.gd" id="1_5mfj2"]
+[ext_resource type="Script" uid="uid://d14rmmfjbk4i7" path="res://scenes/main/controllers/main_run_end_controller.gd" id="1_5mfj2"]
+[ext_resource type="Script" uid="uid://df4jgteqluqbl" path="res://scenes/main/controllers/main_gameplay_controller.gd" id="1_sx4yn"]
+[ext_resource type="Script" uid="uid://di3u17urk1qky" path="res://scenes/main/controllers/main_round_flow_controller.gd" id="1_te5ag"]
 [ext_resource type="PackedScene" uid="uid://jf2sov4k6y2t" path="res://features/dice/hand/hand.tscn" id="2_0wfyh"]
 [ext_resource type="Shader" uid="uid://64giuyue21qd" path="res://assets/shaders/hex_background.gdshader" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://7f2vbrrbfiba" path="res://features/hand_type_upgrades/hand_type_upgrades.tscn" id="4_qh0eg"]
@@ -35,6 +35,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0wfyh")
+
+[node name="Controllers" type="Node" parent="." unique_id=879143222]
+
+[node name="GameplayController" type="Node" parent="Controllers" unique_id=1547382341]
+script = ExtResource("1_sx4yn")
+
+[node name="RoundFlowController" type="Node" parent="Controllers" unique_id=439305603]
+script = ExtResource("1_te5ag")
+
+[node name="RunEndController" type="Node" parent="Controllers" unique_id=988661745]
+script = ExtResource("1_5mfj2")
 
 [node name="HexBackground" type="ColorRect" parent="." unique_id=218216515]
 material = SubResource("ShaderMaterial_jyhfs")
@@ -70,17 +81,6 @@ size_flags_vertical = 0
 [node name="HandTypeUpgrades" parent="." unique_id=1538264382 instance=ExtResource("4_qh0eg")]
 visible = false
 layout_mode = 1
-
-[node name="Controllers" type="Node" parent="."]
-
-[node name="GameplayController" type="Node" parent="Controllers"]
-script = ExtResource("1_sx4yn")
-
-[node name="RoundFlowController" type="Node" parent="Controllers"]
-script = ExtResource("1_te5ag")
-
-[node name="RunEndController" type="Node" parent="Controllers"]
-script = ExtResource("1_5mfj2")
 
 [node name="WinScreen" type="Control" parent="." unique_id=194001001]
 visible = false
@@ -130,6 +130,5 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Back to Title Screen"
 
-[node name="LoseScreen" parent="." instance=ExtResource("6_wxrqo")]
-visible = false
+[node name="LoseScreen" parent="." unique_id=969841653 instance=ExtResource("6_wxrqo")]
 layout_mode = 1
