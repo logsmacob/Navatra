@@ -1,19 +1,20 @@
 [gd_scene format=3 uid="uid://lknq3g3ef435"]
 
 [ext_resource type="Shader" uid="uid://batbn873bu8tu" path="res://features/hand_type_upgrades/blur.gdshader" id="1_4iash"]
+[ext_resource type="Script" uid="uid://cb7b4t1baaulk" path="res://scenes/win screen/win_screen.gd" id="1_swn37"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_win_blur"]
 shader = ExtResource("1_4iash")
 shader_parameter/radius = 28.0
 
 [node name="WinScreen" type="Control" unique_id=519928411]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_swn37")
 
 [node name="Blur" type="ColorRect" parent="." unique_id=1866868027]
 material = SubResource("ShaderMaterial_win_blur")
