@@ -13,8 +13,8 @@ func roll_hand():
 	var duration :float = .5
 	for die: DieUI in hand.dice:
 		die.roll_if_not_selected(duration)
-		duration += .25
-	await get_tree().create_timer(duration).timeout
+		duration += .5
+	await get_tree().create_timer(duration + .5).timeout
 	is_roll_finished = true
 
 func play_hand(target_dice: Array[DieUI]) -> void:
