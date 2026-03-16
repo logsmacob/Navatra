@@ -1,43 +1,49 @@
 # Architecture Layers (Godot 4 / GDScript)
 
-This project uses layered scripts to keep data flow explicit and keep systems decoupled.
+Navatra is structured around layered responsibilities to keep gameplay logic deterministic and UI code lightweight.
 
 ## Layer map
 
-- **Data models** (`core/models`, `core/resources`)
-  - `DiceHand` stores hand values without any UI dependency.
-  - `FaceData`, `DieData`, and `HandDetails` represent pure data.
-- **Runtime instances** (`core/node_classes`, feature runtime scripts)
-  - `DieInstance` models a rollable die instance.
-  - `ScoreManager` coordinates score preview/commit for one run instance.
-  - `ScoreSystem` performs deterministic score math.
-- **UI / presentation** (`features/**`, `scenes/**`)
-  - `DieUI` is a view/controller for one die.
-  - `Hand` scene emits `played_hand_ready(hand: DiceHand)` so game flow receives data models instead of UI nodes.
-  - `Main` orchestrates round flow and delegates logic to runtime classes.
-- **Global services** (`autoload/**`)
-  - `GameState` owns singleton orchestration and delegates domain logic to services.
-  - `EventBus` exposes app-wide signals only.
+- **Data models & resources** (`core/models`, `core/resources`)
+  - `DiceHand`: hand values independent of presentation.
+  - `FaceData`, `DieData`, `HandDetailsData`: serializable gameplay data.
 - **Domain services** (`core/services`)
-  - `RoundProgressionService` computes per-round quota/hand/reroll setup.
-  - `PlayerHandService` owns mutable player die definitions.
-  - `HandScoreRulesService` provides hand score tables + upgrade-aware values.
+  - `HandEvaluatorService`: detects hand types and scoring groups.
+  - `HandScoreRulesService`: hand type base/mult values (upgrade-aware).
+  - `RoundProgressionService`: quota/hands/reroll defaults and growth.
+  - `PlayerHandService`: mutable player die configuration.
+- **Runtime coordinators** (`autoload/managers`, `core/node_classes`)
+  - `GameStateRunManager`: run lifecycle, round state, currency.
+  - `GameStatePlayerManager`: persistent player-upgrade/hand state.
+  - `ScoreManager` + `ScoreSystem`: preview/commit score math.
+- **Presentation & interaction** (`features/**`, `scenes/**`)
+  - `DieUI`, `Hand`, and feature scenes manage input/animation/view state.
+  - `scenes/main/controllers/*` scripts orchestrate moment-to-moment gameplay flow.
+- **Global singleton layer** (`autoload/**`)
+  - `GameState`: top-level gameplay state coordinator and signal emitter.
+  - `EventBus`: global event hub for decoupled notifications.
 
 ## Ownership rules
 
-1. UI owns visuals and input state.
-2. Runtime services own gameplay logic and mutable session state.
-3. Data models carry values between layers.
-4. Autoloads are reserved for true singleton services.
+1. UI owns visuals, input state, and animations.
+2. Services/managers own rules and mutable game session state.
+3. Models/resources carry structured data between layers.
+4. Autoloads stay thin and delegate rule logic to services/managers.
 
 ## Communication strategy
 
-- Prefer **signals** for cross-feature notifications (`EventBus`, scene signals).
-- Use clear service APIs for direct dependencies (`ScoreManager.preview_hand`).
-- Do not pass UI nodes into scoring/evaluation systems.
+- Use direct method calls for clear dependencies (`ScoreManager.preview_hand`, manager APIs).
+- Use scene signals for local interactions.
+- Use `EventBus` for app-wide broadcasts.
+- Avoid passing UI nodes into core scoring/evaluation services.
 
-## Extension examples
+## Extension checklist
 
-- Add new scoring rules in `ScoreSystem` + `HandEvaluatorService` without changing UI scenes.
-- Add a new screen by subscribing to `GameState.round_state_changed` and `EventBus.score_calculated`.
-- Support alternate dice types by instancing different `DieData` in `DieInstance`.
+When adding a gameplay mechanic:
+
+1. Add/update data in models/resources if needed.
+2. Implement rules in a core service.
+3. Integrate with `GameStateRunManager` / `GameStatePlayerManager`.
+4. Expose orchestration in `GameState`.
+5. Wire scene/feature scripts and signals.
+6. Update docs to reflect new flow.
