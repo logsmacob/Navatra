@@ -43,7 +43,7 @@ func _roll_weighted_offers(target_count: int, avoid_duplicates: bool = true) -> 
 	return rolled_offers
 
 func _get_available_items_for_round() -> Array[ItemData]:
-	var current_round: int = max(GameState.round, 1)
+	var current_round: int = max(GameState.round_index, 1)
 	var available_items: Array[ItemData] = []
 	for item: ItemData in item_pool:
 		if item == null:

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6uq5mc6daglp" path="res://scenes/shop/shop.gd" id="1"]
 [ext_resource type="Resource" path="res://data/shop/items/sparking_ring.tres" id="2"]
+[ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/item_data.gd" id="2_dww4p"]
 [ext_resource type="Resource" path="res://data/shop/items/ace_scope.tres" id="3"]
 [ext_resource type="Resource" path="res://data/shop/items/pair_gloves.tres" id="4"]
 [ext_resource type="Resource" path="res://data/shop/items/house_banner.tres" id="5"]
@@ -25,7 +26,7 @@ inventory_label = NodePath("Margin/VBox/Inventory")
 offers_container = NodePath("Margin/VBox/Offers")
 reroll_button = NodePath("Margin/VBox/RerollButton")
 continue_button = NodePath("Margin/VBox/ContinueButton")
-item_pool = [ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11")]
+item_pool = Array[ExtResource("2_dww4p")]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11")])
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=910155671]
 layout_mode = 1
