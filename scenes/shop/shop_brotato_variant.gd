@@ -36,7 +36,9 @@ func _ready() -> void:
 
 func _roll_offers() -> void:
 	_offers.clear()
-	var pool_copy: Array[Dictionary] = ITEM_POOL.duplicate(true)
+	var pool_copy: Array[Dictionary] = []
+	for item: Dictionary in ITEM_POOL:
+		pool_copy.append(item.duplicate(true))
 	pool_copy.shuffle()
 	for i in range(min(OFFER_COUNT, pool_copy.size())):
 		_offers.append(pool_copy[i])
