@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://crwh35rpcjt2y"]
 
-[ext_resource type="Script" path="res://scenes/shop/shop.gd" id="1"]
+[ext_resource type="Script" uid="uid://b6uq5mc6daglp" path="res://scenes/shop/shop.gd" id="1"]
 
-[node name="Shop" type="Control"]
+[node name="Shop" type="Control" unique_id=1773375267 node_paths=PackedStringArray("currency_label", "inventory_label", "offers_container", "reroll_button", "continue_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ offers_container = NodePath("Margin/VBox/Offers")
 reroll_button = NodePath("Margin/VBox/RerollButton")
 continue_button = NodePath("Margin/VBox/ContinueButton")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=910155671]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,32 +25,34 @@ offset_left = 24.0
 offset_top = 24.0
 offset_right = -24.0
 offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=2113463493]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="Margin/VBox"]
+[node name="Title" type="Label" parent="Margin/VBox" unique_id=714244133]
 layout_mode = 2
 text = "Shop"
 
-[node name="Currency" type="Label" parent="Margin/VBox"]
+[node name="Currency" type="Label" parent="Margin/VBox" unique_id=1186876079]
 layout_mode = 2
 text = "Currency: 0"
 
-[node name="Inventory" type="Label" parent="Margin/VBox"]
+[node name="Inventory" type="Label" parent="Margin/VBox" unique_id=1031834765]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 autowrap_mode = 3
 
-[node name="Offers" type="VBoxContainer" parent="Margin/VBox"]
+[node name="Offers" type="VBoxContainer" parent="Margin/VBox" unique_id=1738856769]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="RerollButton" type="Button" parent="Margin/VBox"]
+[node name="RerollButton" type="Button" parent="Margin/VBox" unique_id=1126190461]
 layout_mode = 2
 text = "Reroll offers"
 
-[node name="ContinueButton" type="Button" parent="Margin/VBox"]
+[node name="ContinueButton" type="Button" parent="Margin/VBox" unique_id=1112151495]
 layout_mode = 2
 text = "Continue"

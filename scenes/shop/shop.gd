@@ -26,7 +26,6 @@ const ITEM_POOL := [
 var _offers: Array[Dictionary] = []
 
 func _ready() -> void:
-	_bind_nodes()
 	_roll_offers()
 	_refresh_view()
 
@@ -35,18 +34,6 @@ func _ready() -> void:
 	if continue_button:
 		continue_button.pressed.connect(_on_continue_pressed)
 	GameState.currency_changed.connect(_on_currency_changed)
-
-func _bind_nodes() -> void:
-	if currency_label == null:
-		currency_label = get_node_or_null("Margin/VBox/Currency")
-	if inventory_label == null:
-		inventory_label = get_node_or_null("Margin/VBox/Inventory")
-	if offers_container == null:
-		offers_container = get_node_or_null("Margin/VBox/Offers")
-	if reroll_button == null:
-		reroll_button = get_node_or_null("Margin/VBox/RerollButton")
-	if continue_button == null:
-		continue_button = get_node_or_null("Margin/VBox/ContinueButton")
 
 func _roll_offers() -> void:
 	_offers.clear()
