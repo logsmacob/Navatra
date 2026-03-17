@@ -51,6 +51,10 @@ var hand_type_upgrades: Dictionary:
 	get:
 		return _player_manager.hand_type_upgrades
 
+var shop_item_counts: Dictionary:
+	get:
+		return _player_manager.shop_item_counts
+
 var _player_manager: GameStatePlayerManager = GameStatePlayerManager.new()
 var _run_manager: GameStateRunManager = GameStateRunManager.new()
 
@@ -60,6 +64,7 @@ func _ready() -> void:
 func start_new_run() -> void:
 	_run_manager.reset_run()
 	_player_manager.clear_hand_type_upgrades()
+	_player_manager.clear_shop_items()
 	initialize_player_hand(BASE_DICE_PER_HAND, BASE_DIE_FACE_COUNT)
 	currency_changed.emit(currency)
 	run_started.emit(round_index)
@@ -130,6 +135,15 @@ func add_hand_type_upgrade(hand_type: int, base_bonus: int, mult_bonus: int) -> 
 
 func get_hand_type_upgrade(hand_type: int) -> Dictionary:
 	return _player_manager.get_hand_type_upgrade(hand_type)
+
+func add_shop_item(item_id: String, tag: String) -> void:
+	_player_manager.add_shop_item(item_id, tag)
+
+func get_shop_item_counts() -> Dictionary:
+	return _player_manager.get_shop_item_counts()
+
+func get_shop_tag_count(tag: String) -> int:
+	return _player_manager.get_shop_tag_count(tag)
 
 func consume_reroll() -> bool:
 	if not _run_manager.consume_reroll():
