@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://crwh35rpcjt2y"]
 
 [ext_resource type="Script" uid="uid://b6uq5mc6daglp" path="res://scenes/shop/shop.gd" id="1"]
-[ext_resource type="Resource" path="res://data/shop/items/sparking_ring.tres" id="2"]
+[ext_resource type="Resource" uid="uid://c8dhlkinhc1ws" path="res://data/shop/items/sparking_ring.tres" id="2"]
 [ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/item_data.gd" id="2_dww4p"]
-[ext_resource type="Resource" path="res://data/shop/items/ace_scope.tres" id="3"]
-[ext_resource type="Resource" path="res://data/shop/items/pair_gloves.tres" id="4"]
-[ext_resource type="Resource" path="res://data/shop/items/house_banner.tres" id="5"]
-[ext_resource type="Resource" path="res://data/shop/items/street_bet.tres" id="6"]
-[ext_resource type="Resource" path="res://data/shop/items/triple_badge.tres" id="7"]
-[ext_resource type="Resource" path="res://data/shop/items/flush_charm.tres" id="8"]
-[ext_resource type="Resource" path="res://data/shop/items/high_roller.tres" id="9"]
-[ext_resource type="Resource" path="res://data/shop/items/full_house_manual.tres" id="10"]
-[ext_resource type="Resource" path="res://data/shop/items/oddity_ink.tres" id="11"]
+[ext_resource type="Resource" uid="uid://cwopo13hrvo7r" path="res://data/shop/items/ace_scope.tres" id="3"]
+[ext_resource type="Resource" uid="uid://dunp4xnt3hwp3" path="res://data/shop/items/pair_gloves.tres" id="4"]
+[ext_resource type="Resource" uid="uid://c66j1g8pyceyl" path="res://data/shop/items/house_banner.tres" id="5"]
+[ext_resource type="Resource" uid="uid://72qf2tv7c236" path="res://data/shop/items/street_bet.tres" id="6"]
+[ext_resource type="Resource" uid="uid://yqqpjomstu7f" path="res://data/shop/items/triple_badge.tres" id="7"]
+[ext_resource type="Resource" uid="uid://dmfaqb4d1phdg" path="res://data/shop/items/flush_charm.tres" id="8"]
+[ext_resource type="Resource" uid="uid://bx7q6etxbs6dj" path="res://data/shop/items/high_roller.tres" id="9"]
+[ext_resource type="Resource" uid="uid://8xy0ak5qwjn1" path="res://data/shop/items/full_house_manual.tres" id="10"]
+[ext_resource type="Resource" uid="uid://jwbvraptmwkg" path="res://data/shop/items/oddity_ink.tres" id="11"]
 
 [node name="Shop" type="Control" unique_id=1773375267 node_paths=PackedStringArray("currency_label", "inventory_label", "offers_container", "reroll_button", "continue_button")]
 layout_mode = 3
@@ -27,6 +27,7 @@ offers_container = NodePath("Margin/VBox/Offers")
 reroll_button = NodePath("Margin/VBox/RerollButton")
 continue_button = NodePath("Margin/VBox/ContinueButton")
 item_pool = Array[ExtResource("2_dww4p")]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11")])
+offer_count = null
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=910155671]
 layout_mode = 1

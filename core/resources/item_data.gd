@@ -13,7 +13,7 @@ enum ItemRarity {
 @export var item_name: String = ""
 @export var cost: int = 0
 
-@export var hand_type: HandEvaluatorService.HandType = HandEvaluatorService.HandType.HIGH_CARD
+@export var hand_type: HandEvaluatorService.HandType = HandEvaluatorService.HandType.HIGH_DIE
 
 @export var base: int = 0
 @export var mult: int = 0

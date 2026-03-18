@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://8xy0ak5qwjn1"]
 
-[ext_resource type="Script" path="res://core/resources/item_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/item_data.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
@@ -9,8 +9,6 @@ item_name = "Full House Manual"
 cost = 8
 hand_type = 4
 base = 2
-mult = 0
 weight = 4.0
 rarity = 2
 min_round = 3
-max_round = 999
