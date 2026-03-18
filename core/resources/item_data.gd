@@ -26,6 +26,13 @@ enum ItemRarity {
 func get_display_name() -> String:
 	return item_name if not item_name.is_empty() else id
 
+func get_display_discription() -> String:
+	return "increces %s by base %d and mult %d" %[
+		HandEvaluatorService.HandType.keys()[hand_type],
+		base,
+		mult
+	]
+
 func is_available_for_round(round_number: int) -> bool:
 	return round_number >= min_round and round_number <= max_round
 

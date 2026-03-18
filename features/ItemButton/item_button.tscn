@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://mejnjhlwumme"]
+
+[ext_resource type="Script" uid="uid://blwildeexofvg" path="res://features/ItemButton/item_button.gd" id="1_1351u"]
+[ext_resource type="Texture2D" uid="uid://b15xaclrmafje" path="res://assets/sprites/Navatra Icon.png" id="1_jgorn"]
+
+[node name="ItemButton" type="Button" unique_id=311372442]
+custom_minimum_size = Vector2(250, 500)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_1351u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=509413603]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer" unique_id=328125826]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Header" unique_id=1414527585]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+texture = ExtResource("1_jgorn")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Type" type="Label" parent="VBoxContainer/Header" unique_id=1832813450]
+layout_mode = 2
+text = "lakdhs f.hasld"
+
+[node name="Discription" type="Label" parent="VBoxContainer" unique_id=2064937368]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "dimthgdgnfh,,b,mbn,mbn,mbn,mnb"
+autowrap_mode = 3
+
+[node name="Price" type="Label" parent="VBoxContainer" unique_id=2105910968]
+layout_mode = 2
+text = "58$"
+horizontal_alignment = 2
+vertical_alignment = 2

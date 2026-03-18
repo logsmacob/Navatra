@@ -3,9 +3,10 @@ extends Control
 
 @export var currency_label: Label
 @export var inventory_label: Label
-@export var offers_container: VBoxContainer
+@export var offers_container: HBoxContainer
 @export var reroll_button: Button
 @export var continue_button: Button
+@export var item_button: PackedScene
 
 @export var item_pool: Array[ItemData] = []
 @export_range(1, 12, 1) var offer_count: int = 6
@@ -38,23 +39,16 @@ func _rebuild_offer_buttons() -> void:
 
 	for i in range(_offers.size()):
 		var offer: ItemData = _offers[i]
-		var button := Button.new()
-		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		button.text = _format_offer_text(offer)
+		var button := item_button.instantiate()
+		button.set_title(offer.get_display_name())
+		button.set_discription(offer.get_display_discription())
+		button.set_price(offer.cost)
 		button.pressed.connect(_on_offer_button_pressed.bind(i))
 		offers_container.add_child(button)
 
 func _on_offer_button_pressed(index: int) -> void:
 	_try_buy_offer(index)
 
-func _format_offer_text(offer: ItemData) -> String:
-	return "%s [%s] | Cost %d | +%d base +%d mult" % [
-		offer.get_display_name(),
-		ItemData.ItemRarity.keys()[offer.rarity].capitalize(),
-		offer.cost,
-		offer.base,
-		offer.mult,
-	]
 
 func _try_buy_offer(index: int) -> void:
 	if index < 0 or index >= _offers.size():
