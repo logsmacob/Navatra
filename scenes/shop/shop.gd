@@ -13,6 +13,8 @@ extends Control
 const REROLL_COST: int = 3
 
 var _offers: Array[ItemData] = []
+var _offer_service: ShopOfferService = ShopOfferService.new()
+var _purchase_service: ShopPurchaseService = ShopPurchaseService.new()
 
 func _ready() -> void:
 	_roll_offers()
@@ -25,48 +27,8 @@ func _ready() -> void:
 	GameState.currency_changed.connect(_on_currency_changed)
 
 func _roll_offers() -> void:
-	_offers = _roll_weighted_offers(offer_count, true)
+	_offers = _offer_service.roll_weighted_offers(item_pool, max(GameState.round_index, 1), offer_count, true)
 	_rebuild_offer_buttons()
-
-func _roll_weighted_offers(target_count: int, avoid_duplicates: bool = true) -> Array[ItemData]:
-	var rolled_offers: Array[ItemData] = []
-	var candidate_pool: Array[ItemData] = _get_available_items_for_round()
-
-	while rolled_offers.size() < target_count and not candidate_pool.is_empty():
-		var picked_item := _pick_weighted_item(candidate_pool)
-		if picked_item == null:
-			break
-		rolled_offers.append(picked_item)
-		if avoid_duplicates:
-			candidate_pool.erase(picked_item)
-
-	return rolled_offers
-
-func _get_available_items_for_round() -> Array[ItemData]:
-	var current_round: int = max(GameState.round_index, 1)
-	var available_items: Array[ItemData] = []
-	for item: ItemData in item_pool:
-		if item == null:
-			continue
-		if item.is_available_for_round(current_round):
-			available_items.append(item)
-	return available_items
-
-func _pick_weighted_item(pool: Array[ItemData]) -> ItemData:
-	var total_weight: float = 0.0
-	for item: ItemData in pool:
-		total_weight += max(item.weight, 0.0)
-	if total_weight <= 0.0:
-		return null
-
-	var roll: float = randf_range(0.0, total_weight)
-	var running_weight: float = 0.0
-	for item: ItemData in pool:
-		running_weight += max(item.weight, 0.0)
-		if roll <= running_weight:
-			return item
-
-	return pool.back() if not pool.is_empty() else null
 
 func _rebuild_offer_buttons() -> void:
 	if offers_container == null:
@@ -99,11 +61,9 @@ func _try_buy_offer(index: int) -> void:
 		return
 
 	var offer: ItemData = _offers[index]
-	if not GameState.spend_currency(offer.cost):
+	if not _purchase_service.apply_purchase(GameState, offer):
 		return
 
-	GameState.add_hand_type_upgrade(offer.hand_type, offer.base, offer.mult)
-	GameState.add_shop_item(offer.id)
 	_offers.remove_at(index)
 	_rebuild_offer_buttons()
 	_refresh_view()

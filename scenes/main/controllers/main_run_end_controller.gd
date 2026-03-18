@@ -3,18 +3,18 @@ extends Node
 ## Main run end controller script: coordinates this part of the game's behavior.
 class_name MainRunEndController
 
-var _hand: Node
-var _score_bar: VBoxContainer
-var _hand_type_upgrades: Control
+var _hand: Hand
+var _score_bar: ScoreBar
+var _hand_type_upgrades: HandTypeUpgradesView
 var _win_screen: Control
 var _win_stats_label: Label
 var _lose_screen: Control
 var _lose_stats_label: Label
 
 func setup(
-	hand: Node,
-	score_bar: VBoxContainer,
-	hand_type_upgrades: Control,
+	hand: Hand,
+	score_bar: ScoreBar,
+	hand_type_upgrades: HandTypeUpgradesView,
 	win_screen: Control,
 	win_stats_label: Label,
 	lose_screen: Control,

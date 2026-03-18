@@ -5,7 +5,7 @@ class_name ScoreSystem
 
 var _rules: HandScoreRulesService = HandScoreRulesService.new()
 
-func calculate_score(details: HandDetails) -> int:
+func calculate_score(details: HandDetails, scoring_context: HandScoringContext = null) -> int:
 	if details == null:
 		push_error("Invalid hand details passed to ScoreSystem")
 		return 0
@@ -14,17 +14,17 @@ func calculate_score(details: HandDetails) -> int:
 		push_error("Hand type not defined in scoring rules")
 		return 0
 
-	var scoring_values := _rules.get_scoring_values(details.type)
+	var scoring_values := _rules.get_scoring_values(details.type, scoring_context)
 	var base: int = int(scoring_values.get("base", 0))
 	var mult: int = int(scoring_values.get("mult", 0))
 	var group_total := _sum_groups(details.groups)
 	return (base + group_total) * mult
 
-func get_score_breakdown(details: HandDetails) -> Dictionary:
+func get_score_breakdown(details: HandDetails, scoring_context: HandScoringContext = null) -> Dictionary:
 	if details == null:
 		return {}
 
-	var scoring_values := _rules.get_scoring_values(details.type)
+	var scoring_values := _rules.get_scoring_values(details.type, scoring_context)
 	var base: int = int(scoring_values.get("base", 0))
 	var mult: int = int(scoring_values.get("mult", 0))
 	var group_total: int = _sum_groups(details.groups)
@@ -33,16 +33,16 @@ func get_score_breakdown(details: HandDetails) -> Dictionary:
 		"base": base,
 		"group_total": group_total,
 		"mult": mult,
-		"final_score": (base + group_total) * mult
+		"final_score": (base + group_total) * mult,
 	}
 
-func get_type_only_total(details: HandDetails) -> int:
+func get_type_only_total(details: HandDetails, scoring_context: HandScoringContext = null) -> int:
 	if details == null:
 		return 0
 	if not _rules.has_hand_type(details.type):
 		return 0
 
-	var scoring_values := _rules.get_scoring_values(details.type)
+	var scoring_values := _rules.get_scoring_values(details.type, scoring_context)
 	var base: int = int(scoring_values.get("base", 0))
 	var mult: int = int(scoring_values.get("mult", 0))
 	return base * mult

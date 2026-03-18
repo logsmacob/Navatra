@@ -3,10 +3,10 @@ extends Node
 ## Main gameplay controller script: coordinates this part of the game's behavior.
 class_name MainGameplayController
 
-var _hand: Node
-var _score_bar: VBoxContainer
+var _hand: Hand
+var _score_bar: ScoreBar
 
-func setup(hand: Node, score_bar: VBoxContainer) -> void:
+func setup(hand: Hand, score_bar: ScoreBar) -> void:
 	_hand = hand
 	_score_bar = score_bar
 
@@ -25,9 +25,7 @@ func handle_played_hand_ready(hand_data: DiceHand) -> void:
 
 	var play_result = _score_bar.play_previewed_hand()
 	var applied_score := int(play_result.get("applied_score", 0))
-	var material_currency_bonus := 0
-	if _hand.has_method("get_scoring_material_currency_bonus"):
-		material_currency_bonus = int(_hand.call("get_scoring_material_currency_bonus"))
+	var material_currency_bonus := _hand.get_scoring_material_currency_bonus()
 	if material_currency_bonus > 0:
 		GameState.add_currency(material_currency_bonus)
 	print("Played hand: %s | points=%d | material_bonus=%d" % [play_result.get("hand_name", "Unknown"), applied_score, material_currency_bonus])
@@ -39,9 +37,7 @@ func handle_played_hand_ready(hand_data: DiceHand) -> void:
 func refresh_hand_preview() -> void:
 	if _hand == null:
 		return
-	if not _hand.has_method("get_current_hand"):
-		return
-	var current_hand: DiceHand = _hand.call("get_current_hand")
+	var current_hand: DiceHand = _hand.get_current_hand()
 	_score_bar.preview_hand(current_hand)
 
 func handle_roll_all_dice_requested() -> void:

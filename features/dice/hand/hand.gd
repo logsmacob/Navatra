@@ -1,5 +1,6 @@
 extends Control
 ## Hand script: coordinates this part of the game's behavior.
+class_name Hand
 
 @onready var hand_container: Node = $HBoxContainer/Panel/HandContainer
 @onready var hand_animator: HandAnimator = $HandAnimator

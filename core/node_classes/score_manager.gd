@@ -11,9 +11,13 @@ var last_breakdown: Dictionary = {}
 var play_pending: bool = false
 var score_system := ScoreSystem.new()
 var hand_evaluator: HandEvaluatorService = HandEvaluatorService.new()
+var scoring_context: HandScoringContext = HandScoringContext.new()
 
 func configure(evaluator: HandEvaluatorService) -> void:
 	hand_evaluator = evaluator
+
+func set_scoring_context(context: HandScoringContext) -> void:
+	scoring_context = context if context != null else HandScoringContext.new()
 
 # NOTE: Handles preview hand.
 func preview_hand(hand: Array[int]) -> void:
@@ -26,9 +30,9 @@ func preview_hand(hand: Array[int]) -> void:
 		EventBus.score_calculated.emit(last_details, 0, {})
 		return
 
-	last_roll_score = score_system.calculate_score(last_details)
-	last_type_total = score_system.get_type_only_total(last_details)
-	last_breakdown = score_system.get_score_breakdown(last_details)
+	last_roll_score = score_system.calculate_score(last_details, scoring_context)
+	last_type_total = score_system.get_type_only_total(last_details, scoring_context)
+	last_breakdown = score_system.get_score_breakdown(last_details, scoring_context)
 	last_breakdown["type_total"] = last_type_total
 	last_breakdown["hand_name"] = HandEvaluatorService.HandType.keys()[last_details.type]
 
@@ -55,7 +59,7 @@ func commit_played_hand() -> int:
 	if not play_pending:
 		return 0
 
-	var applied_round_score := int(round(last_roll_score * GameState.round_score_multiplier))
+	var applied_round_score := int(round(last_roll_score * scoring_context.round_score_multiplier))
 	current_score += applied_round_score
 
 	EventBus.round_score_applied.emit(applied_round_score)
