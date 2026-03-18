@@ -3,13 +3,13 @@ extends Node
 ## Main round flow controller script: coordinates this part of the game's behavior.
 class_name MainRoundFlowController
 
-var _hand_type_upgrades: Control
+var _hand_type_upgrades: HandTypeUpgradesView
 var _hand_type_upgrade_service: HandTypeUpgradeService
 
 func _init() -> void:
 	_hand_type_upgrade_service = HandTypeUpgradeService.new()
 
-func setup(hand_type_upgrades: Control) -> void:
+func setup(hand_type_upgrades: HandTypeUpgradesView) -> void:
 	_hand_type_upgrades = hand_type_upgrades
 
 func handle_round_started(round_index: int, quota: int, hands: int, rerolls: int) -> void:

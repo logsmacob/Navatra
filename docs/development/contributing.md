@@ -8,6 +8,8 @@ This project is organized to keep UI code separate from gameplay logic.
 2. Keep scene scripts focused on presentation, input, and wiring signals.
 3. Prefer data transfer through models/resources (`DiceHand`, `HandDetailsData`, etc.).
 4. Use `EventBus` signals for cross-feature communication.
+5. Keep `core/services` deterministic; pass gameplay state in explicitly instead of reading autoloads.
+6. Treat scripts above ~150 lines as a review trigger to extract helpers or split responsibilities.
 
 ## Where to place changes
 
@@ -40,3 +42,10 @@ When adding a mechanic that affects round state, add behavior in managers first 
 3. Integrate with manager(s) for runtime state.
 4. Wire to scene/feature scripts.
 5. Update docs when behavior or architecture changes.
+
+## Anti-god-script guardrails
+
+- If a file changes for both UI rendering and domain-rule changes, split one of those concerns out.
+- If a signal has only one clear consumer, prefer a direct method call or scene-local signal.
+- Prefer typed scene/controller references over `Node`, `call()`, and `has_method()` in normal gameplay flow.
+- When `Dictionary` payloads start crossing multiple files, consider promoting them to a model/resource class.

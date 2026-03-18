@@ -1,5 +1,6 @@
 extends VBoxContainer
 ## Score bar script: coordinates this part of the game's behavior.
+class_name ScoreBar
 
 @onready var round_index_label: Label = $RoundIndex
 @onready var quota_label: Label = $Quota
@@ -17,11 +18,16 @@ func _ready() -> void:
 	score_manager = ScoreManager.new()
 	add_child(score_manager)
 
+func set_scoring_context(context: HandScoringContext) -> void:
+	if score_manager == null:
+		return
+	score_manager.set_scoring_context(context)
 
 func preview_hand(hand_data: DiceHand) -> void:
 	if hand_data == null or score_manager == null:
 		return
 
+	set_scoring_context(_build_scoring_context())
 	score_manager.preview_hand(hand_data.to_array())
 
 
@@ -83,3 +89,6 @@ func update_state(state: Dictionary = {}) -> void:
 func _get_played_hand_name() -> String:
 	var breakdown := score_manager.get_last_breakdown()
 	return str(breakdown.get("hand_name", "Unknown"))
+
+func _build_scoring_context() -> HandScoringContext:
+	return HandScoringContext.new(GameState.hand_type_upgrades, GameState.round_score_multiplier)

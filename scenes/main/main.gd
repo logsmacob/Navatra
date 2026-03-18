@@ -1,9 +1,9 @@
 extends Control
 ## Main script: coordinates this part of the game's behavior.
 
-@onready var hand: Node = $MarginContainer/Hand
-@onready var score_bar: VBoxContainer = $MarginContainer/ScoreBar
-@onready var hand_type_upgrades: Control = $HandTypeUpgrades
+@onready var hand: Hand = $MarginContainer/Hand
+@onready var score_bar: ScoreBar = $MarginContainer/ScoreBar
+@onready var hand_type_upgrades: HandTypeUpgradesView = $HandTypeUpgrades
 
 @onready var win_screen: Control = $WinScreen
 @onready var win_stats_label: Label = $WinScreen/CenterContainer/VBoxContainer/Stats

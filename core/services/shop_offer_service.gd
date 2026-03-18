@@ -1,0 +1,45 @@
+extends RefCounted
+
+class_name ShopOfferService
+
+func roll_weighted_offers(item_pool: Array[ItemData], current_round: int, target_count: int, avoid_duplicates: bool = true) -> Array[ItemData]:
+	if target_count <= 0:
+		return []
+
+	var rolled_offers: Array[ItemData] = []
+	var candidate_pool := get_available_items_for_round(item_pool, current_round)
+
+	while rolled_offers.size() < target_count and not candidate_pool.is_empty():
+		var picked_item := pick_weighted_item(candidate_pool)
+		if picked_item == null:
+			break
+		rolled_offers.append(picked_item)
+		if avoid_duplicates:
+			candidate_pool.erase(picked_item)
+
+	return rolled_offers
+
+func get_available_items_for_round(item_pool: Array[ItemData], current_round: int) -> Array[ItemData]:
+	var available_items: Array[ItemData] = []
+	for item: ItemData in item_pool:
+		if item == null:
+			continue
+		if item.is_available_for_round(current_round):
+			available_items.append(item)
+	return available_items
+
+func pick_weighted_item(pool: Array[ItemData]) -> ItemData:
+	var total_weight: float = 0.0
+	for item: ItemData in pool:
+		total_weight += max(item.weight, 0.0)
+	if total_weight <= 0.0:
+		return null
+
+	var roll: float = randf_range(0.0, total_weight)
+	var running_weight: float = 0.0
+	for item: ItemData in pool:
+		running_weight += max(item.weight, 0.0)
+		if roll <= running_weight:
+			return item
+
+	return pool.back() if not pool.is_empty() else null
