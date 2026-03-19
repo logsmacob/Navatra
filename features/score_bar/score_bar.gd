@@ -91,7 +91,7 @@ func update_state(state: Dictionary = {}) -> void:
 		int(breakdown.get("mult", 0)),
 		type_total,
 	]
-	hand_type_label.text = "Hand Type: %s" % hand_name
+	hand_type_label.text = "%s" % hand_name
 	hand_type_value_label.text = "Hand Type Value: %d" % type_total
 	general_modifiers_label.text = _build_general_modifier_text(GameState.get_general_modifiers())
 

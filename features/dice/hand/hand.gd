@@ -53,7 +53,7 @@ func _on_play_pressed() -> void:
 		push_error("HandAnimator node is missing or has incorrect script.")
 		is_hand_ready = true
 		return
-
+	hand_button_manager.disable_buttons()
 	await hand_animator.play_hand(hand_scoring_selector.get_scoring_dice(dice))
 	hand_dice_pool.clear_selection()
 	played_hand_ready.emit(hand_scoring_selector.build_dice_hand(dice))

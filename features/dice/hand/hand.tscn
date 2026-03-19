@@ -8,10 +8,8 @@
 [ext_resource type="Script" uid="uid://7exxejlvvrgq" path="res://features/dice/hand/hand_currency_bonus_service.gd" id="6_currency_bonus"]
 [ext_resource type="Script" uid="uid://do820f0ijjot7" path="res://features/dice/hand/hand_button_manager.gd" id="7_pyojo"]
 [ext_resource type="Texture2D" uid="uid://da6286dj3m538" path="res://assets/UI/Buttons/Texture/Light Button.png" id="8_ttxp3"]
-[ext_resource type="Texture2D" uid="uid://mccl0nftkdnb" path="res://assets/UI/Buttons/Texture/Light Button Hover.png" id="9_g5tl8"]
-[ext_resource type="Texture2D" uid="uid://c61jswpccqewt" path="res://assets/UI/Buttons/Texture/Dark Button Hover.png" id="9_oxaye"]
+[ext_resource type="FontFile" uid="uid://bfmc8ldjpblsv" path="res://assets/fonts/pixeloid-font/PixeloidSansBold-1jpBg.ttf" id="9_oxaye"]
 [ext_resource type="Texture2D" uid="uid://dsvnbe4nbpocq" path="res://assets/UI/Buttons/Texture/Dark Button.png" id="9_pyojo"]
-[ext_resource type="FontFile" uid="uid://c53kogtyjwsss" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="10_g5tl8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7n5xe"]
 
@@ -27,12 +25,12 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [sub_resource type="LabelSettings" id="LabelSettings_oxaye"]
-font = ExtResource("10_g5tl8")
+font = ExtResource("9_oxaye")
 font_size = 28
 font_color = Color(0.050980393, 0.050980393, 0.050980393, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_g5tl8"]
-font = ExtResource("10_g5tl8")
+font = ExtResource("9_oxaye")
 font_size = 28
 
 [node name="Hand" type="PanelContainer" unique_id=649644491]
@@ -91,7 +89,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("8_ttxp3")
 texture_pressed = ExtResource("8_ttxp3")
-texture_hover = ExtResource("9_g5tl8")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="HBoxContainer/ButtonContainer/play" unique_id=1429797095]
@@ -119,7 +116,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("9_pyojo")
 texture_pressed = ExtResource("9_pyojo")
-texture_hover = ExtResource("9_oxaye")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="HBoxContainer/ButtonContainer/roll" unique_id=907419954]

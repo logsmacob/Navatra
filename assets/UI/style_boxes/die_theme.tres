@@ -5,8 +5,10 @@
 [ext_resource type="StyleBox" uid="uid://cb1sijhlkgjq5" path="res://assets/UI/style_boxes/die_face_hover.tres" id="3_1gkr3"]
 [ext_resource type="StyleBox" uid="uid://pv3w8c3aemjf" path="res://assets/UI/style_boxes/die_face_normal.tres" id="4_f7juk"]
 [ext_resource type="StyleBox" uid="uid://bblhd1k16yxvt" path="res://assets/UI/style_boxes/die_face_pressed.tres" id="5_cjawd"]
+[ext_resource type="FontFile" uid="uid://cnci0773b7q4d" path="res://assets/fonts/pixeloid-font/PixeloidSans-lxa3y.ttf" id="6_fh73k"]
 
 [resource]
+default_font = ExtResource("6_fh73k")
 /colors/back = Color(1, 1, 1, 1)
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)

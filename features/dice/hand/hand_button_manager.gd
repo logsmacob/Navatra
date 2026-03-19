@@ -3,9 +3,9 @@ extends Node
 class_name HandButtonManager
 
 const DEFAULT_SCALE := Vector2.ONE
-const HOVER_SCALE := Vector2(1.08, 1.08)
-const HOVER_DURATION := 0.18
-const PRESS_DURATION := 0.16
+const HOVER_SCALE := Vector2(1.05, 1.05)
+const HOVER_DURATION := 0.1
+const PRESS_DURATION := 0.05
 
 @export var play_hand: TextureButton
 @export var re_roll: TextureButton
