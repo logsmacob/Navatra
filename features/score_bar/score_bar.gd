@@ -72,27 +72,30 @@ func update_state(state: Dictionary = {}) -> void:
 		state = GameState.get_round_state()
 
 	var breakdown := score_manager.get_last_breakdown()
-	var hand_name := str(breakdown.get("hand_name", "-"))
-	var type_total := int(breakdown.get("type_total", 0))
-	var final_score := int(breakdown.get("final_score", 0))
 
 	round_index_label.text = "Round %d/%d" % [int(state.get("round_index", 0)), GameState.MAX_ROUNDS]
 	quota_label.text = "%d" % int(state.get("quota_remaining", 0))
 	marble_label.text = "Marbles: %d" % int(state.get("currency", 0))
-	current_hand_points_label.text = "Current Hand Points: %d" % final_score
-	current_hand_points_label_math.text = "(Base %d + Dice %d) x Mult %d = %d" % [
-		int(breakdown.get("base", 0)),
-		int(breakdown.get("group_total", 0)),
-		int(breakdown.get("mult", 0)),
-		final_score,
-	]
-	hand_type_value_label_math.text = "Base %d x Mult %d = %d" % [
-		int(breakdown.get("base", 0)),
-		int(breakdown.get("mult", 0)),
-		type_total,
-	]
-	hand_type_label.text = "%s" % hand_name
-	hand_type_value_label.text = "Hand Type Value: %d" % type_total
+
+	if not breakdown.is_empty():
+		var hand_name := str(breakdown.get("hand_name", "-"))
+		var type_total := int(breakdown.get("type_total", 0))
+		var final_score := int(breakdown.get("final_score", 0))
+		current_hand_points_label.text = "Current Hand Points: %d" % final_score
+		current_hand_points_label_math.text = "(Base %d + Dice %d) x Mult %d = %d" % [
+			int(breakdown.get("base", 0)),
+			int(breakdown.get("group_total", 0)),
+			int(breakdown.get("mult", 0)),
+			final_score,
+		]
+		hand_type_value_label_math.text = "Base %d x Mult %d = %d" % [
+			int(breakdown.get("base", 0)),
+			int(breakdown.get("mult", 0)),
+			type_total,
+		]
+		hand_type_label.text = "%s" % hand_name
+		hand_type_value_label.text = "Hand Type Value: %d" % type_total
+
 	general_modifiers_label.text = _build_general_modifier_text(GameState.get_general_modifiers())
 
 func _get_played_hand_name() -> String:
