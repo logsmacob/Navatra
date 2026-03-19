@@ -17,12 +17,11 @@ const GENERAL_MODIFIER_ROWS := [
 
 @export var round_index_label: Label
 @export var quota_label: Label 
+@export var marble_label: Label
 @export var current_hand_points_label: Label 
 @export var hand_type_label: Label 
 @export var hand_type_value_label: Label 
 @export var hand_type_value_label_math: Label 
-@export var hands_left_leabel: Label 
-@export var rolls_left_label: Label 
 @export var current_hand_points_label_math: Label 
 @export var general_modifiers_label: Label 
 
@@ -78,7 +77,8 @@ func update_state(state: Dictionary = {}) -> void:
 	var final_score := int(breakdown.get("final_score", 0))
 
 	round_index_label.text = "Round %d/%d" % [int(state.get("round_index", 0)), GameState.MAX_ROUNDS]
-	quota_label.text = "Quota: %d | Marbles: %d" % [int(state.get("quota_remaining", 0)), int(state.get("currency", 0))]
+	quota_label.text = "%d" % int(state.get("quota_remaining", 0))
+	marble_label.text = "Marbles: %d" % int(state.get("currency", 0))
 	current_hand_points_label.text = "Current Hand Points: %d" % final_score
 	current_hand_points_label_math.text = "(Base %d + Dice %d) x Mult %d = %d" % [
 		int(breakdown.get("base", 0)),
@@ -93,8 +93,6 @@ func update_state(state: Dictionary = {}) -> void:
 	]
 	hand_type_label.text = "Hand Type: %s" % hand_name
 	hand_type_value_label.text = "Hand Type Value: %d" % type_total
-	hands_left_leabel.text = "Hands Left: %d" % int(state.get("hands_remaining", 0))
-	rolls_left_label.text = "Rolls Left: %d" % int(state.get("rerolls_remaining", 0))
 	general_modifiers_label.text = _build_general_modifier_text(GameState.get_general_modifiers())
 
 func _get_played_hand_name() -> String:

@@ -1,70 +1,102 @@
 [gd_scene format=3 uid="uid://bgl7d1v3bo6c4"]
 
 [ext_resource type="Script" uid="uid://faikfnryerbf" path="res://features/score_bar/score_bar.gd" id="1_vywcl"]
+[ext_resource type="FontFile" uid="uid://dbjl1e6kdxpl6" path="res://assets/fonts/PixelOperator8.ttf" id="2_l3q4t"]
+[ext_resource type="FontFile" uid="uid://c53kogtyjwsss" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_nwx5f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vywcl"]
+bg_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+expand_margin_top = 90.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_p1r1p"]
+font = ExtResource("2_l3q4t")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_l3q4t"]
+font = ExtResource("2_nwx5f")
+font_size = 54
 
 [sub_resource type="LabelSettings" id="LabelSettings_vywcl"]
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_nwx5f"]
 
-[node name="VBoxContainer" type="MarginContainer" unique_id=550459226 node_paths=PackedStringArray("round_index_label", "quota_label", "current_hand_points_label", "hand_type_label", "hand_type_value_label", "hand_type_value_label_math", "hands_left_leabel", "rolls_left_label", "current_hand_points_label_math", "general_modifiers_label")]
+[node name="VBoxContainer" type="MarginContainer" unique_id=550459226 node_paths=PackedStringArray("round_index_label", "quota_label", "marble_label", "current_hand_points_label", "hand_type_label", "hand_type_value_label", "hand_type_value_label_math", "current_hand_points_label_math", "general_modifiers_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 script = ExtResource("1_vywcl")
 round_index_label = NodePath("left column/RoundIndex")
-quota_label = NodePath("center/Quota")
-current_hand_points_label = NodePath("center/CurrentHandPoints")
+quota_label = NodePath("PanelContainer/center/Quota Value")
+marble_label = NodePath("left column/Marbles")
+current_hand_points_label = NodePath("left column/CurrentHandPoints")
 hand_type_label = NodePath("left column/HandType")
-hand_type_value_label = NodePath("center/HandTypeValue")
+hand_type_value_label = NodePath("left column/HandTypeValue")
 hand_type_value_label_math = NodePath("left column/HandTypeValueMath")
-hands_left_leabel = NodePath("left column/HandaLeft")
-rolls_left_label = NodePath("left column/RollsLeft")
-current_hand_points_label_math = NodePath("center/CurrentHandPointsMath")
+current_hand_points_label_math = NodePath("left column/CurrentHandPointsMath")
 general_modifiers_label = NodePath("left column/GeneralModifiers")
 
-[node name="center" type="VBoxContainer" parent="." unique_id=2012008888]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=49875857]
+custom_minimum_size = Vector2(600, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vywcl")
 
-[node name="Quota" type="Label" parent="center" unique_id=598673048]
+[node name="center" type="VBoxContainer" parent="PanelContainer" unique_id=2012008888]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="Quota title" type="Label" parent="PanelContainer/center" unique_id=1981677644]
 layout_mode = 2
 text = "Quota"
-label_settings = SubResource("LabelSettings_vywcl")
+label_settings = SubResource("LabelSettings_p1r1p")
+horizontal_alignment = 1
 
-[node name="CurrentHandPointsMath" type="Label" parent="center" unique_id=2033114964]
+[node name="Quota Value" type="Label" parent="PanelContainer/center" unique_id=598673048]
 layout_mode = 2
-text = "Current Hand Points"
-label_settings = SubResource("LabelSettings_vywcl")
-
-[node name="HandTypeValue" type="Label" parent="center" unique_id=1845529967]
-layout_mode = 2
-text = "Hand Type Value"
-label_settings = SubResource("LabelSettings_vywcl")
-
-[node name="CurrentHandPoints" type="Label" parent="center" unique_id=240174566]
-layout_mode = 2
-text = "Current Hand Points"
-label_settings = SubResource("LabelSettings_vywcl")
+text = "Quota"
+label_settings = SubResource("LabelSettings_l3q4t")
+horizontal_alignment = 1
 
 [node name="left column" type="VBoxContainer" parent="." unique_id=683305144]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="RoundIndex" type="Label" parent="left column" unique_id=850154121]
 layout_mode = 2
 text = "Round"
 label_settings = SubResource("LabelSettings_vywcl")
 
-[node name="HandTypeValueMath" type="Label" parent="left column" unique_id=100196331]
+[node name="Marbles" type="Label" parent="left column" unique_id=1651018917]
 layout_mode = 2
-text = "Hand Type Value"
+text = "Marbles"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="break" type="Label" parent="left column" unique_id=1568508805]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="CurrentHandPoints" type="Label" parent="left column" unique_id=240174566]
+layout_mode = 2
+text = "Current Hand Points"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="CurrentHandPointsMath" type="Label" parent="left column" unique_id=2033114964]
+layout_mode = 2
+text = "Current Hand Points"
 label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="HandType" type="Label" parent="left column" unique_id=301125834]
@@ -72,14 +104,14 @@ layout_mode = 2
 text = "Hand Type"
 label_settings = SubResource("LabelSettings_vywcl")
 
-[node name="HandaLeft" type="Label" parent="left column" unique_id=12555538]
+[node name="HandTypeValue" type="Label" parent="left column" unique_id=1845529967]
 layout_mode = 2
-text = "Hands Left"
+text = "Hand Type Value"
 label_settings = SubResource("LabelSettings_vywcl")
 
-[node name="RollsLeft" type="Label" parent="left column" unique_id=1256913341]
+[node name="HandTypeValueMath" type="Label" parent="left column" unique_id=100196331]
 layout_mode = 2
-text = "Rolls Left"
+text = "Hand Type Value"
 label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="GeneralModifiers" type="Label" parent="left column" unique_id=214748365]

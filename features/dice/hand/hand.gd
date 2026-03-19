@@ -7,6 +7,7 @@ class_name Hand
 @onready var hand_scoring_selector: HandScoringSelector = $HandScoringSelector
 @onready var hand_dice_pool: HandDicePool = $HandDicePool
 @onready var hand_currency_bonus_service: HandCurrencyBonusService = $HandCurrencyBonusService
+@onready var hand_button_manager: HandButtonManager = $"Button Manager"
 
 @export var die_ui_scene: PackedScene
 @export var dice_per_hand: int = 5
@@ -22,6 +23,7 @@ signal played_hand_ready(hand: DiceHand)
 signal played_hand_finished
 
 func _ready() -> void:
+	update_buttons()
 	hand_dice_pool.setup(die_ui_scene, dice_per_hand, hand_container)
 	setup_complete.emit()
 	is_hand_ready = true
@@ -36,18 +38,16 @@ func _on_roll_pressed() -> void:
 func roll_hand() -> void:
 	if hand_animator.is_roll_finished:
 		is_hand_ready = false
-		$HBoxContainer/ButtonContainer/play.disabled = true
-		$HBoxContainer/ButtonContainer/roll.disabled = true
+		hand_button_manager.disable_buttons()
 		await hand_animator.roll_hand()
-		$HBoxContainer/ButtonContainer/roll.disabled = false
-		$HBoxContainer/ButtonContainer/play.disabled = false
+		hand_button_manager.enable_buttons()
 		is_hand_ready = true
 		EventBus.roll_all_dice_requested.emit()
+		update_buttons()
 
 func _on_play_pressed() -> void:
 	if not is_hand_ready:
 		return
-
 	is_hand_ready = false
 	if hand_animator == null:
 		push_error("HandAnimator node is missing or has incorrect script.")
@@ -70,3 +70,6 @@ func _on_played_hand_finish() -> void:
 
 func _on_hand_reset_ready() -> void:
 	roll_hand()
+
+func update_buttons():
+	hand_button_manager.update_button_labels()

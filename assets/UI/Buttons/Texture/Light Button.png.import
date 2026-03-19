@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqanecxpnjd0j"
-path="res://.godot/imported/Die anime.png-20f17206b4b2936b44ae8958d0ad360d.ctex"
+uid="uid://da6286dj3m538"
+path="res://.godot/imported/Light Button.png-b8c5a5e7456f48639bda2b00f98f5ec3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Die anime.png"
-dest_files=["res://.godot/imported/Die anime.png-20f17206b4b2936b44ae8958d0ad360d.ctex"]
+source_file="res://assets/UI/Buttons/Texture/Light Button.png"
+dest_files=["res://.godot/imported/Light Button.png-b8c5a5e7456f48639bda2b00f98f5ec3.ctex"]
 
 [params]
 

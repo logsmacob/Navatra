@@ -3,14 +3,15 @@
 [ext_resource type="Script" uid="uid://chlhkvbcylr2v" path="res://features/dice/hand/hand.gd" id="1_2i24d"]
 [ext_resource type="PackedScene" uid="uid://biptkm4ujpe6i" path="res://features/dice/die/die.tscn" id="2_pxmyb"]
 [ext_resource type="Script" uid="uid://dqvho5iajwwdb" path="res://features/dice/hand/hand_animator.gd" id="3_7n5xe"]
-[ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="3_oslr0"]
 [ext_resource type="Script" uid="uid://bfnmm4nlmtgcs" path="res://features/dice/hand/hand_scoring_selector.gd" id="4_selector"]
 [ext_resource type="Script" uid="uid://dvigxkbucp2tm" path="res://features/dice/hand/hand_dice_pool.gd" id="5_dice_pool"]
 [ext_resource type="Script" uid="uid://7exxejlvvrgq" path="res://features/dice/hand/hand_currency_bonus_service.gd" id="6_currency_bonus"]
-[ext_resource type="StyleBox" uid="uid://bgk6mwns3t3qv" path="res://assets/UI/style_boxes/die_face_black_normal.tres" id="6_s8u3v"]
-[ext_resource type="StyleBox" uid="uid://dmbq6yypnrj4o" path="res://assets/UI/style_boxes/die_face_black_pressed.tres" id="7_ttxp3"]
-[ext_resource type="StyleBox" uid="uid://bfoqkt08gqufc" path="res://assets/UI/style_boxes/die_face_black_hover.tres" id="8_pyojo"]
-[ext_resource type="StyleBox" uid="uid://df578vcehkkaf" path="res://assets/UI/style_boxes/die_face_black_disabled.tres" id="11_oxaye"]
+[ext_resource type="Script" uid="uid://do820f0ijjot7" path="res://features/dice/hand/hand_button_manager.gd" id="7_pyojo"]
+[ext_resource type="Texture2D" uid="uid://da6286dj3m538" path="res://assets/UI/Buttons/Texture/Light Button.png" id="8_ttxp3"]
+[ext_resource type="Texture2D" uid="uid://mccl0nftkdnb" path="res://assets/UI/Buttons/Texture/Light Button Hover.png" id="9_g5tl8"]
+[ext_resource type="Texture2D" uid="uid://c61jswpccqewt" path="res://assets/UI/Buttons/Texture/Dark Button Hover.png" id="9_oxaye"]
+[ext_resource type="Texture2D" uid="uid://dsvnbe4nbpocq" path="res://assets/UI/Buttons/Texture/Dark Button.png" id="9_pyojo"]
+[ext_resource type="FontFile" uid="uid://c53kogtyjwsss" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="10_g5tl8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7n5xe"]
 
@@ -25,9 +26,18 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="LabelSettings" id="LabelSettings_oxaye"]
+font = ExtResource("10_g5tl8")
+font_size = 28
+font_color = Color(0.050980393, 0.050980393, 0.050980393, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g5tl8"]
+font = ExtResource("10_g5tl8")
+font_size = 28
+
 [node name="Hand" type="PanelContainer" unique_id=649644491]
-offset_right = 304.0
-offset_bottom = 100.0
+offset_right = 612.0
+offset_bottom = 148.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7n5xe")
@@ -46,8 +56,16 @@ script = ExtResource("5_dice_pool")
 [node name="HandCurrencyBonusService" type="Node" parent="." unique_id=194727312]
 script = ExtResource("6_currency_bonus")
 
+[node name="Button Manager" type="Node" parent="." unique_id=1485120218 node_paths=PackedStringArray("play_hand", "re_roll")]
+script = ExtResource("7_pyojo")
+play_hand = NodePath("../HBoxContainer/ButtonContainer/play")
+re_roll = NodePath("../HBoxContainer/ButtonContainer/roll")
+
 [node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=2047717781]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Panel" type="PanelContainer" parent="HBoxContainer" unique_id=419737567]
@@ -62,29 +80,64 @@ alignment = 1
 
 [node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=184635535]
 layout_mode = 2
+theme_override_constants/separation = 12
 alignment = 1
 
-[node name="play" type="Button" parent="HBoxContainer/ButtonContainer" unique_id=1941616311]
+[node name="play" type="TextureButton" parent="HBoxContainer/ButtonContainer" unique_id=1638032578]
+texture_filter = 1
 custom_minimum_size = Vector2(300, 120)
 layout_mode = 2
-theme = ExtResource("3_oslr0")
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.5019608)
-text = "Play Hand"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("8_ttxp3")
+texture_pressed = ExtResource("8_ttxp3")
+texture_hover = ExtResource("9_g5tl8")
+stretch_mode = 5
 
-[node name="roll" type="Button" parent="HBoxContainer/ButtonContainer" unique_id=702813512]
+[node name="Label" type="Label" parent="HBoxContainer/ButtonContainer/play" unique_id=1429797095]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play Hand"
+label_settings = SubResource("LabelSettings_oxaye")
+horizontal_alignment = 1
+
+[node name="roll" type="TextureButton" parent="HBoxContainer/ButtonContainer" unique_id=296519013]
+texture_filter = 1
 custom_minimum_size = Vector2(300, 120)
 layout_mode = 2
-theme = ExtResource("3_oslr0")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("6_s8u3v")
-theme_override_styles/pressed = ExtResource("7_ttxp3")
-theme_override_styles/hover = ExtResource("8_pyojo")
-theme_override_styles/disabled = ExtResource("11_oxaye")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("9_pyojo")
+texture_pressed = ExtResource("9_pyojo")
+texture_hover = ExtResource("9_oxaye")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer/ButtonContainer/roll" unique_id=907419954]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Re-Roll"
+label_settings = SubResource("LabelSettings_g5tl8")
+horizontal_alignment = 1
 
 [connection signal="played_hand_finished" from="." to="HandAnimator" method="_on_hand_played_hand_finished"]
 [connection signal="setup_complete" from="." to="HandAnimator" method="_on_hand_setup_complete"]

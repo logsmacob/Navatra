@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="1_os8ub"]
 [ext_resource type="Script" uid="uid://cynddjhf8ac5m" path="res://features/dice/die/die_animator.gd" id="2_b27w3"]
 [ext_resource type="Script" uid="uid://brrp8tdcnjjox" path="res://features/dice/die/die_logic.gd" id="3_logic"]
-[ext_resource type="Texture2D" uid="uid://cqanecxpnjd0j" path="res://assets/sprites/Die anime.png" id="5_0ek5x"]
+[ext_resource type="Texture2D" uid="uid://cqanecxpnjd0j" path="res://assets/UI/Buttons/Texture/Die anime.png" id="5_0ek5x"]
 [ext_resource type="Texture2D" uid="uid://ca5hsdmvgqcdn" path="res://assets/sprites/Face Values.png" id="5_7lnrr"]
 
 [sub_resource type="Animation" id="Animation_os8ub"]
