@@ -7,5 +7,5 @@ script = ExtResource("1")
 id = "lucky_marble"
 item_name = "Lucky Marble"
 cost = 4
-weight = 11.0
 luck = 1
+weight = 11.0

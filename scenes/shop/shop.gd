@@ -44,6 +44,7 @@ func _rebuild_offer_buttons() -> void:
 		button.set_title(offer.get_display_name())
 		button.set_discription(offer.get_display_discription())
 		button.set_price(offer.cost)
+		button.set_rarity(ItemData.ItemRarity.keys()[offer.rarity])
 		button.pressed.connect(_on_offer_button_pressed.bind(i))
 		offers_container.add_child(button)
 

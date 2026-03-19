@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://bgk6mwns3t3qv" path="res://assets/UI/style_boxes/die_face_black_normal.tres" id="6_s8u3v"]
 [ext_resource type="StyleBox" uid="uid://dmbq6yypnrj4o" path="res://assets/UI/style_boxes/die_face_black_pressed.tres" id="7_ttxp3"]
 [ext_resource type="StyleBox" uid="uid://bfoqkt08gqufc" path="res://assets/UI/style_boxes/die_face_black_hover.tres" id="8_pyojo"]
+[ext_resource type="StyleBox" uid="uid://df578vcehkkaf" path="res://assets/UI/style_boxes/die_face_black_disabled.tres" id="11_oxaye"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7n5xe"]
 
@@ -67,7 +68,8 @@ alignment = 1
 custom_minimum_size = Vector2(300, 120)
 layout_mode = 2
 theme = ExtResource("3_oslr0")
-text = "Play"
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.5019608)
+text = "Play Hand"
 
 [node name="roll" type="Button" parent="HBoxContainer/ButtonContainer" unique_id=702813512]
 custom_minimum_size = Vector2(300, 120)
@@ -81,7 +83,8 @@ theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("6_s8u3v")
 theme_override_styles/pressed = ExtResource("7_ttxp3")
 theme_override_styles/hover = ExtResource("8_pyojo")
-text = "Roll"
+theme_override_styles/disabled = ExtResource("11_oxaye")
+text = "Re-Roll"
 
 [connection signal="played_hand_finished" from="." to="HandAnimator" method="_on_hand_played_hand_finished"]
 [connection signal="setup_complete" from="." to="HandAnimator" method="_on_hand_setup_complete"]

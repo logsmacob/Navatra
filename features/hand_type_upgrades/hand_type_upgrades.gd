@@ -30,9 +30,11 @@ func show_upgrades(upgrades: Array[HandTypeUpgradeDefinition]) -> void:
 		button.visible = true
 		button.pressed.connect(_on_upgrade_pressed.bind(upgrade))
 
+	get_tree().paused = true
 	visible = true
 
 func _on_upgrade_pressed(upgrade: HandTypeUpgradeDefinition) -> void:
+	get_tree().paused = false
 	upgrade_selected.emit(upgrade)
 
 func _on_reroll_pressed() -> void:

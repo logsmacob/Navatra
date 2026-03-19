@@ -84,7 +84,7 @@ func get_display_discription() -> String:
 		effects.append("%s %s" % [GENERAL_MODIFIER_LABELS.get(key, key), _format_signed_modifier(value)])
 	if effects.is_empty():
 		return "No effect"
-	return "; ".join(effects)
+	return "\n".join(effects)
 
 func is_available_for_round(round_number: int) -> bool:
 	return round_number >= min_round and round_number <= max_round

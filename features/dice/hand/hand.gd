@@ -36,7 +36,11 @@ func _on_roll_pressed() -> void:
 func roll_hand() -> void:
 	if hand_animator.is_roll_finished:
 		is_hand_ready = false
+		$HBoxContainer/ButtonContainer/play.disabled = true
+		$HBoxContainer/ButtonContainer/roll.disabled = true
 		await hand_animator.roll_hand()
+		$HBoxContainer/ButtonContainer/roll.disabled = false
+		$HBoxContainer/ButtonContainer/play.disabled = false
 		is_hand_ready = true
 		EventBus.roll_all_dice_requested.emit()
 

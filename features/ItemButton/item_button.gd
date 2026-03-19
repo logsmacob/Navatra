@@ -1,10 +1,18 @@
 extends Button
 
+@export var title_label: Label
+@export var discription_label: Label
+@export var price_label: Label
+@export var rarity_label: Label
+
 func set_title(title: String):
-	$VBoxContainer/Header/Type.text = title
+	title_label.text = title
 
 func set_discription(discription: String):
-	$VBoxContainer/Discription.text = discription
+	discription_label.text = discription
 
 func set_price(price: int):
-	$VBoxContainer/Price.text = "$%d" % price
+	price_label.text = "$%d" % price
+
+func set_rarity(rarity: String):
+	rarity_label.text = rarity

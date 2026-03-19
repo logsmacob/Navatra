@@ -2,48 +2,69 @@
 
 [ext_resource type="Script" uid="uid://blwildeexofvg" path="res://features/ItemButton/item_button.gd" id="1_1351u"]
 [ext_resource type="Texture2D" uid="uid://b15xaclrmafje" path="res://assets/sprites/Navatra Icon.png" id="1_jgorn"]
+[ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="1_tt0ib"]
 
-[node name="ItemButton" type="Button" unique_id=311372442]
+[node name="ItemButton" type="Button" unique_id=311372442 node_paths=PackedStringArray("title_label", "discription_label", "price_label", "rarity_label")]
 custom_minimum_size = Vector2(250, 500)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 250.0
+offset_bottom = 500.0
 size_flags_horizontal = 3
+theme = ExtResource("1_tt0ib")
 script = ExtResource("1_1351u")
+title_label = NodePath("MarginContainer/VBoxContainer/Header/VBoxContainer/Name")
+discription_label = NodePath("MarginContainer/VBoxContainer/Discription")
+price_label = NodePath("MarginContainer/VBoxContainer/Price")
+rarity_label = NodePath("MarginContainer/VBoxContainer/Header/VBoxContainer/Rarity")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=509413603]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=23474182]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
-[node name="Header" type="HBoxContainer" parent="VBoxContainer" unique_id=328125826]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=509413603]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Header" unique_id=1414527585]
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=328125826]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Header" unique_id=1414527585]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 texture = ExtResource("1_jgorn")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Type" type="Label" parent="VBoxContainer/Header" unique_id=1832813450]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Header" unique_id=526382910]
 layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/Header/VBoxContainer" unique_id=1832813450]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "lakdhs f.hasld"
 
-[node name="Discription" type="Label" parent="VBoxContainer" unique_id=2064937368]
-custom_minimum_size = Vector2(250, 0)
+[node name="Rarity" type="Label" parent="MarginContainer/VBoxContainer/Header/VBoxContainer" unique_id=1773905766]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "lakdhs f.hasld"
+
+[node name="Discription" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2064937368]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "dimthgdgnfh,,b,mbn,mbn,mbn,mnb"
 autowrap_mode = 3
 
-[node name="Price" type="Label" parent="VBoxContainer" unique_id=2105910968]
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2105910968]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "58$"
 horizontal_alignment = 2
 vertical_alignment = 2

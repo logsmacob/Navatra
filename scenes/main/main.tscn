@@ -75,10 +75,10 @@ size_flags_vertical = 8
 
 [node name="ScoreBar" parent="MarginContainer" unique_id=1425863518 instance=ExtResource("4_tbgi4")]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
 
 [node name="HandTypeUpgrades" parent="." unique_id=1538264382 instance=ExtResource("4_qh0eg")]
+process_mode = 3
+auto_translate_mode = 1
 visible = false
 layout_mode = 1
 

@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Control
 ## Score bar script: coordinates this part of the game's behavior.
 class_name ScoreBar
 
@@ -15,16 +15,16 @@ const GENERAL_MODIFIER_ROWS := [
 	{"key": "base_6_value", "label": "Base 6 Value"},
 ]
 
-@onready var round_index_label: Label = $RoundIndex
-@onready var quota_label: Label = $Quota
-@onready var current_hand_points_label: Label = $CurrentHandPoints
-@onready var hand_type_label: Label = $HandType
-@onready var hand_type_value_label: Label = $HandTypeValue
-@onready var hand_type_value_label_math: Label = $HandTypeValueMath
-@onready var hands_left_leabel: Label = $HandaLeft
-@onready var rolls_left_label: Label = $RollsLeft
-@onready var current_hand_points_label_math: Label = $CurrentHandPointsMath
-@onready var general_modifiers_label: Label = $GeneralModifiers
+@export var round_index_label: Label
+@export var quota_label: Label 
+@export var current_hand_points_label: Label 
+@export var hand_type_label: Label 
+@export var hand_type_value_label: Label 
+@export var hand_type_value_label_math: Label 
+@export var hands_left_leabel: Label 
+@export var rolls_left_label: Label 
+@export var current_hand_points_label_math: Label 
+@export var general_modifiers_label: Label 
 
 var score_manager: ScoreManager
 

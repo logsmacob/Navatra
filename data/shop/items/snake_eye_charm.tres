@@ -7,6 +7,6 @@ script = ExtResource("1")
 id = "snake_eye_charm"
 item_name = "Snake Eye Charm"
 cost = 5
-weight = 9.0
 base_1_value = 2
 base_6_value = -1
+weight = 9.0
