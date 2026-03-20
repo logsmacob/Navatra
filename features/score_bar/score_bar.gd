@@ -21,9 +21,11 @@ const GENERAL_MODIFIER_ROWS := [
 @export var current_hand_points_label: Label 
 @export var hand_type_label: Label 
 @export var hand_type_value_label: Label 
-@export var hand_type_value_label_math: Label 
+@export var hand_type_base_label: Label 
+@export var hand_type_mult_label: Label 
 @export var current_hand_points_label_math: Label 
 @export var general_modifiers_label: Label 
+@export var end_value_label: Label
 
 var score_manager: ScoreManager
 
@@ -88,13 +90,11 @@ func update_state(state: Dictionary = {}) -> void:
 			int(breakdown.get("mult", 0)),
 			final_score,
 		]
-		hand_type_value_label_math.text = "Base %d x Mult %d = %d" % [
-			int(breakdown.get("base", 0)),
-			int(breakdown.get("mult", 0)),
-			type_total,
-		]
-		hand_type_label.text = "%s" % hand_name
-		hand_type_value_label.text = "Hand Type Value: %d" % type_total
+		hand_type_base_label.text = "Base %d" % [int(breakdown.get("base", 0))]
+		hand_type_mult_label.text = "Mult X %d" % [int(breakdown.get("mult", 0))]
+		hand_type_label.text = "%s:" % hand_name
+		hand_type_value_label.text = "= -%d" % type_total
+		end_value_label.text = str(int(state.get("quota_remaining", 0)) - type_total)
 
 	general_modifiers_label.text = _build_general_modifier_text(GameState.get_general_modifiers())
 

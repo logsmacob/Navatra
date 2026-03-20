@@ -24,7 +24,7 @@ func play_hand(target_dice: Array[DieUI]) -> void:
 	var tweens: Array[Tween] = []
 	for die: DieUI in target_dice:
 		var tween := create_tween()
-		tween.tween_property(die, "position:y", -die.size.y * 2, 0.2)
+		tween.tween_property(die, "position:y", -die.size.y * 2.15, 0.2)
 		tweens.append(tween)
 
 	for tween in tweens:
