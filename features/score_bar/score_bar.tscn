@@ -4,9 +4,9 @@
 [ext_resource type="FontFile" uid="uid://cnci0773b7q4d" path="res://assets/fonts/pixeloid-font/PixeloidSans-lxa3y.ttf" id="2_l3q4t"]
 [ext_resource type="FontFile" uid="uid://bfmc8ldjpblsv" path="res://assets/fonts/pixeloid-font/PixeloidSansBold-1jpBg.ttf" id="3_p1r1p"]
 [ext_resource type="StyleBox" uid="uid://5soqmitf5a1o" path="res://assets/UI/style_boxes/text_background.tres" id="4_p1r1p"]
-[ext_resource type="Script" path="res://features/score_bar/controllers/score_bar_meta_controller.gd" id="5_meta"]
-[ext_resource type="Script" path="res://features/score_bar/controllers/score_bar_math_controller.gd" id="6_math"]
-[ext_resource type="Script" path="res://features/score_bar/controllers/score_bar_score_controller.gd" id="7_score"]
+[ext_resource type="Script" uid="uid://dmwg53m5jnvb3" path="res://features/score_bar/controllers/score_bar_meta_controller.gd" id="5_meta"]
+[ext_resource type="Script" uid="uid://c6kbqbjptmmvg" path="res://features/score_bar/controllers/score_bar_math_controller.gd" id="6_math"]
+[ext_resource type="Script" uid="uid://c0mbv3ql0k10e" path="res://features/score_bar/controllers/score_bar_score_controller.gd" id="7_score"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1r1p"]
 
@@ -258,19 +258,19 @@ text = "General Modifiers"
 label_settings = SubResource("LabelSettings_nwx5f")
 autowrap_mode = 3
 
-[node name="MetaController" type="Node" parent="."]
+[node name="MetaController" type="Node" parent="." unique_id=35215329]
 script = ExtResource("5_meta")
 round_index_label = NodePath("../Corner Label/left column/RoundIndex")
 marble_label = NodePath("../Corner Label/left column/Marbles")
 quota_label = NodePath("../Math Label/center/Quota Value")
 general_modifiers_label = NodePath("../VBoxContainer/GeneralModifiers")
 
-[node name="MathController" type="Node" parent="."]
+[node name="MathController" type="Node" parent="." unique_id=1018902060]
 script = ExtResource("6_math")
 hand_type_label = NodePath("../Math Label/center/VBoxContainer/HandType")
 base_label = NodePath("../Math Label/center/HBoxContainer/Base/HandTypeBase")
 mult_label = NodePath("../Math Label/center/HBoxContainer/Mult/HandTypeMult")
 result_label = NodePath("../Math Label/center/HBoxContainer/Total/HandTypeValue")
 
-[node name="ScoreController" type="Node" parent="."]
+[node name="ScoreController" type="Node" parent="." unique_id=1566506535]
 script = ExtResource("7_score")

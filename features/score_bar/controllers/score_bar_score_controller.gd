@@ -1,7 +1,7 @@
 extends Node
 class_name ScoreBarScoreController
 
-@export var score_manager: ScoreManager
+var score_manager: ScoreManager
 
 func _ready() -> void:
 	_ensure_score_manager()
