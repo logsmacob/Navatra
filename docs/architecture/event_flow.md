@@ -16,6 +16,7 @@ Play button pressed
 -> Hand emits played_hand_finished
 -> HandAnimator resets dice positions
 -> Hand receives hand_reset_ready
+-> Score Bar Resets Base, Mult, Result to Zero
 -> Hand rolls non-held dice
 -> EventBus emits roll_all_dice_requested
 -> MainGameplayController refreshes preview/state
