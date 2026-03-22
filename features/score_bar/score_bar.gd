@@ -31,6 +31,7 @@ const CALCULATION_DELAY_SECONDS := 0.5
 var score_manager: ScoreManager
 var _preview_breakdown: Dictionary = {}
 var _show_preview_math: bool = false
+var _last_hands_remaining: int = 0
 
 func _ready() -> void:
 	score_manager = ScoreManager.new()
@@ -88,6 +89,7 @@ func update_state(state: Dictionary = {}) -> void:
 	general_modifiers_label.text = _build_general_modifier_text(GameState.get_general_modifiers())
 
 func _on_round_started(round_index: int, quota: int, hands: int, rerolls: int) -> void:
+	_last_hands_remaining = hands
 	_update_meta_labels({
 		"round_index": round_index,
 		"quota_remaining": quota,
@@ -97,6 +99,10 @@ func _on_round_started(round_index: int, quota: int, hands: int, rerolls: int) -
 	})
 
 func _on_round_state_changed(state: Dictionary) -> void:
+	var hands_remaining := int(state.get("hands_remaining", _last_hands_remaining))
+	if hands_remaining < _last_hands_remaining:
+		_reset_score_display()
+	_last_hands_remaining = hands_remaining
 	update_state(state)
 
 func _on_currency_changed(_amount: int) -> void:
