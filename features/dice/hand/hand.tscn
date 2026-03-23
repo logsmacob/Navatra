@@ -20,6 +20,8 @@ content_margin_bottom = 100.0
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_mh44k"]
 script = ExtResource("9_hnj3f")
+amplitude = 100.0
+frequency = 100.0
 metadata/_custom_type_script = "uid://b5v4u6ekodn8p"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oslr0"]
