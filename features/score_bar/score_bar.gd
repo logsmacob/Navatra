@@ -61,10 +61,7 @@ func _on_round_started(round_index: int, quota: int, hands: int, rerolls: int) -
 	})
 
 func _on_round_state_changed(state: Dictionary) -> void:
-	var hands_remaining := int(state.get("hands_remaining", _last_hands_remaining))
-	if hands_remaining < _last_hands_remaining:
-		math_controller.reset_display()
-	_last_hands_remaining = hands_remaining
+	_last_hands_remaining = int(state.get("hands_remaining", _last_hands_remaining))
 	update_state(state)
 
 func _on_currency_changed(_amount: int) -> void:
