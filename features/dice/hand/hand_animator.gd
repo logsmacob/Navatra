@@ -45,17 +45,18 @@ func animate_played_dice_score_colors(target_dice: Array[DieUI]) -> void:
 	hand.hand_type_label._show()
 	await get_tree().create_timer(SCORE_STEP_DURATION_SECONDS).timeout
 	set_hand_type_label_color(BASE_STEP_MODULATE)
-	_tween_dice_modulate(target_dice, BASE_STEP_MODULATE)
 	await get_tree().create_timer(SCORE_STEP_DURATION_SECONDS).timeout
 	set_hand_type_label_color(MULT_STEP_MODULATE)
-	_tween_dice_modulate(target_dice, MULT_STEP_MODULATE)
 	await get_tree().create_timer(SCORE_STEP_DURATION_SECONDS).timeout
-	hand.hand_type_label.hide()
 	set_hand_type_label_color_default()
 	_tween_dice_modulate(target_dice, BASE_STEP_MODULATE)
 	await get_tree().create_timer(SCORE_STEP_DURATION_SECONDS).timeout
 	set_hand_type_label_color_default()
 	_tween_dice_modulate(target_dice, DEFAULT_STEP_MODULATE)
+	await get_tree().create_timer(SCORE_STEP_DURATION_SECONDS).timeout
+	await get_tree().create_timer(SCORE_STEP_DURATION_SECONDS).timeout
+	await get_tree().create_timer(SCORE_STEP_DURATION_SECONDS).timeout
+	hand.hand_type_label._hide()
 
 func _tween_dice_modulate(target_dice: Array[DieUI], color: Color) -> void:
 	for die in target_dice:
