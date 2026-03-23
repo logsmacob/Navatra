@@ -73,6 +73,7 @@ play_hand = NodePath("../HBoxContainer/ButtonContainer/play")
 re_roll = NodePath("../HBoxContainer/ButtonContainer/roll")
 
 [node name="Hand Type" type="Label" parent="." unique_id=59646504]
+visible = false
 z_index = 1
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_pyojo")

@@ -136,6 +136,7 @@ func _on_play_hold_ended() -> void:
 func set_hand_type_label(value: String) -> void:
 	if hand_type_label == null:
 		return
+	hand_type_label.show()
 	hand_type_label.text = value
 
 func reset_hand_type_label() -> void:
