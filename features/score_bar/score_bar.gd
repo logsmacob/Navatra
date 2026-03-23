@@ -45,6 +45,11 @@ func play_previewed_hand() -> Dictionary:
 	await math_controller.animate_played_hand(get_tree(), breakdown)
 	return score_controller.commit_played_hand()
 
+func animate_quota_update(applied_score: int) -> void:
+	if math_controller == null:
+		return
+	await math_controller.animate_quota_update(get_tree(), GameState.quota_remaining - applied_score)
+
 func update_state(state: Dictionary = {}) -> void:
 	if state.is_empty():
 		state = GameState.get_round_state()
