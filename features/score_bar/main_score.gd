@@ -3,8 +3,6 @@ class_name MainScore
 
 const DEFAULT_HAND_TYPE_TITLE := "Hand Type:"
 const DEFAULT_HAND_TYPE_VALUE := "-"
-const BASE_HIGHLIGHT_COLOR := Color(0, 0.63333344, 1, 1)
-const MULT_HIGHLIGHT_COLOR := Color(1, 0, 0.916667, 1)
 const DEFAULT_TEXT_COLOR := Color(1, 1, 1, 0.49019608)
 
 @export var _quota_label: Label
@@ -24,10 +22,10 @@ func set_hand_type_highlight_default() -> void:
 	_set_hand_type_color(DEFAULT_TEXT_COLOR)
 
 func set_hand_type_highlight_base() -> void:
-	_set_hand_type_color(BASE_HIGHLIGHT_COLOR)
+	_set_hand_type_color(DEFAULT_TEXT_COLOR)
 
 func set_hand_type_highlight_mult() -> void:
-	_set_hand_type_color(MULT_HIGHLIGHT_COLOR)
+	_set_hand_type_color(DEFAULT_TEXT_COLOR)
 
 func set_base(value: int) -> void:
 	_base_label.text = str(value)
