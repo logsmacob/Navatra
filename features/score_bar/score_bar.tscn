@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://dmwg53m5jnvb3" path="res://features/score_bar/controllers/score_bar_meta_controller.gd" id="5_meta"]
 [ext_resource type="Script" uid="uid://c6kbqbjptmmvg" path="res://features/score_bar/controllers/score_bar_math_controller.gd" id="6_math"]
 [ext_resource type="Script" uid="uid://c0mbv3ql0k10e" path="res://features/score_bar/controllers/score_bar_score_controller.gd" id="7_score"]
+[ext_resource type="Script" uid="uid://b4mkwnyr0tw3f" path="res://features/score_bar/main_score.gd" id="8_main_score"]
+[ext_resource type="Script" uid="uid://cx5q6fyt77bc3" path="res://features/score_bar/corner_label.gd" id="9_corner_label"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1r1p"]
 
@@ -121,6 +123,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vywcl")
+script = ExtResource("8_main_score")
 
 [node name="center" type="VBoxContainer" parent="Math Label" unique_id=2012008888]
 layout_mode = 2
@@ -226,6 +229,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_l3q4t")
+script = ExtResource("9_corner_label")
 
 [node name="left column" type="VBoxContainer" parent="Corner Label" unique_id=683305144]
 layout_mode = 2
@@ -241,6 +245,20 @@ label_settings = SubResource("LabelSettings_vywcl")
 layout_mode = 2
 text = "Marbles"
 label_settings = SubResource("LabelSettings_vywcl")
+
+
+[node name="MetaController" type="Node" parent="." node_paths=PackedStringArray("corner_label", "main_score", "general_modifiers_label_path")]
+script = ExtResource("5_meta")
+corner_label = NodePath("../Corner Label")
+main_score = NodePath("../Math Label")
+general_modifiers_label_path = NodePath("../VBoxContainer/GeneralModifiers")
+
+[node name="MathController" type="Node" parent="." node_paths=PackedStringArray("main_score")]
+script = ExtResource("6_math")
+main_score = NodePath("../Math Label")
+
+[node name="ScoreController" type="Node" parent="."]
+script = ExtResource("7_score")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1499987703]
 layout_mode = 2
@@ -258,19 +276,3 @@ text = "General Modifiers"
 label_settings = SubResource("LabelSettings_nwx5f")
 autowrap_mode = 3
 
-[node name="MetaController" type="Node" parent="." unique_id=35215329]
-script = ExtResource("5_meta")
-round_index_label_path = NodePath("../Corner Label/left column/RoundIndex")
-marble_label_path = NodePath("../Corner Label/left column/Marbles")
-quota_label_path = NodePath("../Math Label/center/Quota Value")
-general_modifiers_label_path = NodePath("../VBoxContainer/GeneralModifiers")
-
-[node name="MathController" type="Node" parent="." unique_id=1018902060]
-script = ExtResource("6_math")
-hand_type_label_path = NodePath("../Math Label/center/VBoxContainer/HandType")
-base_label_path = NodePath("../Math Label/center/HBoxContainer/Base/HandTypeBase")
-mult_label_path = NodePath("../Math Label/center/HBoxContainer/Mult/HandTypeMult")
-result_label_path = NodePath("../Math Label/center/HBoxContainer/Total/HandTypeValue")
-
-[node name="ScoreController" type="Node" parent="." unique_id=1566506535]
-script = ExtResource("7_score")
