@@ -1,11 +1,11 @@
 extends PanelContainer
 class_name MainScore
 
-@onready var _quota_label: Label = get_node("center/Quota Value") as Label
-@onready var _hand_type_label: Label = get_node("center/VBoxContainer/HandType") as Label
-@onready var _base_label: Label = get_node("center/HBoxContainer/Base/HandTypeBase") as Label
-@onready var _mult_label: Label = get_node("center/HBoxContainer/Mult/HandTypeMult") as Label
-@onready var _result_label: Label = get_node("center/HBoxContainer/Total/HandTypeValue") as Label
+@export var _quota_label: Label
+@export var _hand_type_label: Label 
+@export var _base_label: Label 
+@export var _mult_label: Label 
+@export var _result_label: Label 
 
 func set_quota(value: int) -> void:
 	_quota_label.text = str(value)

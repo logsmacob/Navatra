@@ -16,7 +16,7 @@ const GENERAL_MODIFIER_ROWS := [
 
 @export var corner_label: CornerLabel
 @export var main_score: MainScore
-@export_node_path("Label") var general_modifiers_label_path: NodePath
+@export var general_modifiers_label_path: Node
 
 func update_state(state: Dictionary, general_modifiers: Dictionary) -> void:
 	if corner_label != null:
@@ -33,7 +33,7 @@ func _build_general_modifier_text(modifiers: Dictionary) -> String:
 	return "\n".join(lines)
 
 func _get_general_modifiers_label() -> Label:
-	return get_node_or_null(general_modifiers_label_path) as Label
+	return general_modifiers_label_path
 
 func _set_label_text(label: Label, value: String) -> void:
 	if label != null:
