@@ -40,9 +40,6 @@ func _ready() -> void:
 	GameState.reward_phase_started.connect(round_flow_controller.handle_reward_phase_started)
 	GameState.run_failed.connect(run_end_controller.handle_run_failed)
 	GameState.run_won.connect(run_end_controller.handle_run_won)
-	GameState.round_state_changed.connect(_on_round_state_changed)
-	GameState.currency_changed.connect(_on_currency_changed)
-	GameState.general_modifiers_changed.connect(_on_general_modifiers_changed)
 
 	# Cross-feature events.
 	EventBus.roll_all_dice_requested.connect(gameplay_controller.handle_roll_all_dice_requested)
@@ -60,17 +57,4 @@ func _on_round_started(round_index: int, quota: int, hands: int, rerolls: int) -
 	win_screen.visible = false
 	lose_screen.visible = false
 	gameplay_controller.refresh_hand_preview()
-	score_bar.update_state()
-
-## Keeps the score bar synchronized with round-state changes.
-func _on_round_state_changed(state: Dictionary) -> void:
-	print("State: ", state)
-	score_bar.update_state(state)
-
-## Refreshes currency-dependent score bar UI.
-func _on_currency_changed(_amount: int) -> void:
-	score_bar.update_state()
-
-## Refreshes modifier-dependent score bar UI.
-func _on_general_modifiers_changed(_modifiers: Dictionary) -> void:
 	score_bar.update_state()

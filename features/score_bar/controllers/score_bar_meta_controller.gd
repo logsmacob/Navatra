@@ -16,7 +16,7 @@ const GENERAL_MODIFIER_ROWS := [
 
 @export var corner_label: CornerLabel
 @export var main_score: MainScore
-@export var general_modifiers_label_path: Node
+@export var general_modifiers_label_path: Label
 
 func update_state(state: Dictionary, general_modifiers: Dictionary) -> void:
 	if corner_label != null:
