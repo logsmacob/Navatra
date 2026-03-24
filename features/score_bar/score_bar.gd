@@ -6,8 +6,6 @@ class_name ScoreBar
 @export var math_controller: ScoreBarMathController
 @export var score_controller: ScoreBarScoreController
 
-var _last_hands_remaining: int = 0
-
 func _ready() -> void:
 	GameState.round_started.connect(_on_round_started)
 	GameState.round_state_changed.connect(_on_round_state_changed)
@@ -56,7 +54,6 @@ func update_state(state: Dictionary = {}) -> void:
 	meta_controller.update_state(state, GameState.get_general_modifiers())
 
 func _on_round_started(round_index: int, quota: int, hands: int, rerolls: int) -> void:
-	_last_hands_remaining = hands
 	update_state({
 		"round_index": round_index,
 		"quota_remaining": quota,
@@ -66,7 +63,6 @@ func _on_round_started(round_index: int, quota: int, hands: int, rerolls: int) -
 	})
 
 func _on_round_state_changed(state: Dictionary) -> void:
-	_last_hands_remaining = int(state.get("hands_remaining", _last_hands_remaining))
 	update_state(state)
 
 func _on_currency_changed(_amount: int) -> void:
