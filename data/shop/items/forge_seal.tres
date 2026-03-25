@@ -8,6 +8,7 @@ id = "forge_seal"
 item_name = "Forge Seal"
 cost = 8
 base_4_value = 1
+mult_4_value = 2
 weight = 4.0
 rarity = 2
 min_round = 3

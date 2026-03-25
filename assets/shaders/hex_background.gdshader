@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
-uniform vec4 color_a : source_color = vec4(0.039, 0.055, 0.231, 1.0);
-uniform vec4 color_b : source_color = vec4(0.09, 0.137, 0.431, 1.0);
+uniform vec4 color_a : source_color = vec4(0.11, 0.161, 0.38, 1.0);
+uniform vec4 color_b : source_color = vec4(0.059, 0.071, 0.169, 1.0);
 uniform vec4 edge_color : source_color = vec4(0.5, 0.3, 0.9, 1.0);
 
 uniform float hexes_across : hint_range(5.0, 80.0) = 60.0;
