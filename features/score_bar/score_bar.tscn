@@ -2,106 +2,18 @@
 
 [ext_resource type="Script" uid="uid://faikfnryerbf" path="res://features/score_bar/score_bar.gd" id="1_vywcl"]
 [ext_resource type="FontFile" uid="uid://cnci0773b7q4d" path="res://assets/fonts/pixeloid-font/PixeloidSans-lxa3y.ttf" id="2_l3q4t"]
-[ext_resource type="FontFile" uid="uid://bfmc8ldjpblsv" path="res://assets/fonts/pixeloid-font/PixeloidSansBold-1jpBg.ttf" id="3_p1r1p"]
-[ext_resource type="StyleBox" uid="uid://5soqmitf5a1o" path="res://assets/UI/style_boxes/text_background.tres" id="4_p1r1p"]
+[ext_resource type="PackedScene" uid="uid://deu77cloriq2w" path="res://features/score_bar/main_score_label.tscn" id="5_bw8x2"]
 [ext_resource type="Script" uid="uid://dmwg53m5jnvb3" path="res://features/score_bar/controllers/score_bar_meta_controller.gd" id="5_meta"]
+[ext_resource type="PackedScene" uid="uid://bde80fe0ex30q" path="res://features/score_bar/corner_label.tscn" id="6_4rkmo"]
+[ext_resource type="StyleBox" uid="uid://btv01nysx3vum" path="res://assets/UI/style_boxes/header.tres" id="6_53ouq"]
 [ext_resource type="Script" uid="uid://c6kbqbjptmmvg" path="res://features/score_bar/controllers/score_bar_math_controller.gd" id="6_math"]
 [ext_resource type="Script" uid="uid://c0mbv3ql0k10e" path="res://features/score_bar/controllers/score_bar_score_controller.gd" id="7_score"]
-[ext_resource type="Script" uid="uid://dxfr0j3u44il2" path="res://features/score_bar/main_score.gd" id="8_main_score"]
-[ext_resource type="Script" uid="uid://cjamjyohmpqx6" path="res://features/score_bar/corner_label.gd" id="9_corner_label"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1r1p"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vywcl"]
-bg_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.5254902, 0.5254902, 0.5254902, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-corner_detail = 1
-expand_margin_left = 16.0
-expand_margin_top = 100.0
-expand_margin_right = 16.0
-expand_margin_bottom = 32.0
-shadow_color = Color(0, 0, 0, 0.5882353)
-shadow_size = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_p1r1p"]
-font = ExtResource("2_l3q4t")
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_l3q4t"]
-font = ExtResource("3_p1r1p")
-font_size = 52
 
 [sub_resource type="LabelSettings" id="LabelSettings_vywcl"]
 font = ExtResource("2_l3q4t")
 font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_swtl4"]
-font = ExtResource("3_p1r1p")
-font_size = 32
-font_color = Color(0, 0.63333344, 1, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_bw8x2"]
-font = ExtResource("3_p1r1p")
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_vt01p"]
-font = ExtResource("3_p1r1p")
-font_size = 32
-font_color = Color(1, 0, 0.916667, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_swtl4"]
-content_margin_left = 32.0
-content_margin_top = 16.0
-content_margin_right = 32.0
-bg_color = Color(0.1, 0, 0.08999997, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-corner_detail = 1
-expand_margin_bottom = 16.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1r1p"]
-content_margin_left = 32.0
-content_margin_top = 16.0
-content_margin_right = 32.0
-bg_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-corner_detail = 1
-expand_margin_bottom = 16.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3q4t"]
-bg_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.5254902, 0.5254902, 0.5254902, 1)
-corner_radius_bottom_right = 100
-corner_detail = 1
-expand_margin_left = 100.0
-expand_margin_top = 100.0
-expand_margin_right = 50.0
-expand_margin_bottom = 50.0
-shadow_color = Color(0, 0, 0, 0.6862745)
-shadow_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_nwx5f"]
 font = ExtResource("2_l3q4t")
@@ -126,160 +38,19 @@ corner_label = NodePath("../Corner Label")
 main_score = NodePath("../Main Score Label")
 general_modifiers_label_path = NodePath("../VBoxContainer/GeneralModifiers")
 
+[node name="ScoreController" type="Node" parent="." unique_id=1081461992]
+script = ExtResource("7_score")
+
 [node name="MathController" type="Node" parent="." unique_id=819144153 node_paths=PackedStringArray("main_score")]
 script = ExtResource("6_math")
 main_score = NodePath("../Main Score Label")
 
-[node name="ScoreController" type="Node" parent="." unique_id=1081461992]
-script = ExtResource("7_score")
-
-[node name="Main Score Label" type="PanelContainer" parent="." unique_id=49875857 node_paths=PackedStringArray("_quota_label", "_hand_type_label", "_hand_type_value_label", "_base_label", "_mult_label", "_result_label")]
+[node name="Main Score Label" parent="." unique_id=1805624413 instance=ExtResource("5_bw8x2")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_vywcl")
-script = ExtResource("8_main_score")
-_quota_label = NodePath("center/Quota Value")
-_hand_type_label = NodePath("center/VBoxContainer/HandTypeRow/HandType")
-_hand_type_value_label = NodePath("center/VBoxContainer/HandTypeRow/HandTypeValue")
-_base_label = NodePath("center/HBoxContainer/Base/HandTypeBase")
-_mult_label = NodePath("center/HBoxContainer/Mult/HandTypeMult")
-_result_label = NodePath("center/HBoxContainer/Total/HandTypeValue")
+theme_override_styles/panel = ExtResource("6_53ouq")
 
-[node name="center" type="VBoxContainer" parent="Main Score Label" unique_id=2012008888]
+[node name="Corner Label" parent="." unique_id=1148130841 instance=ExtResource("6_4rkmo")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="Quota title" type="Label" parent="Main Score Label/center" unique_id=1981677644]
-modulate = Color(1, 1, 1, 0.49019608)
-layout_mode = 2
-text = "Quota:"
-label_settings = SubResource("LabelSettings_p1r1p")
-horizontal_alignment = 1
-
-[node name="Quota Value" type="Label" parent="Main Score Label/center" unique_id=598673048]
-layout_mode = 2
-text = "Quota"
-label_settings = SubResource("LabelSettings_l3q4t")
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Score Label/center" unique_id=672250400]
-layout_mode = 2
-
-[node name="HandTypeRow" type="HBoxContainer" parent="Main Score Label/center/VBoxContainer" unique_id=179001001]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="HandType" type="Label" parent="Main Score Label/center/VBoxContainer/HandTypeRow" unique_id=301125834]
-modulate = Color(1, 1, 1, 0.49019608)
-layout_mode = 2
-text = "Hand Type:"
-label_settings = SubResource("LabelSettings_vywcl")
-horizontal_alignment = 1
-
-[node name="HandTypeValue" type="Label" parent="Main Score Label/center/VBoxContainer/HandTypeRow" unique_id=179001002]
-modulate = Color(1, 1, 1, 0.49019608)
-layout_mode = 2
-text = "-"
-label_settings = SubResource("LabelSettings_vywcl")
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Main Score Label/center" unique_id=1094779636]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="Base" type="VBoxContainer" parent="Main Score Label/center/HBoxContainer" unique_id=562162007]
-layout_mode = 2
-
-[node name="Base" type="Label" parent="Main Score Label/center/HBoxContainer/Base" unique_id=1246912044]
-layout_mode = 2
-text = "BASE"
-label_settings = SubResource("LabelSettings_swtl4")
-horizontal_alignment = 1
-
-[node name="HandTypeBase" type="Label" parent="Main Score Label/center/HBoxContainer/Base" unique_id=100196331]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("4_p1r1p")
-text = "Hand Type Base"
-label_settings = SubResource("LabelSettings_swtl4")
-horizontal_alignment = 1
-
-[node name="X" type="Label" parent="Main Score Label/center/HBoxContainer" unique_id=265610456]
-layout_mode = 2
-size_flags_vertical = 8
-text = "X"
-label_settings = SubResource("LabelSettings_bw8x2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Mult" type="VBoxContainer" parent="Main Score Label/center/HBoxContainer" unique_id=193614913]
-layout_mode = 2
-
-[node name="Mult" type="Label" parent="Main Score Label/center/HBoxContainer/Mult" unique_id=872422517]
-layout_mode = 2
-text = "Mult"
-label_settings = SubResource("LabelSettings_vt01p")
-horizontal_alignment = 1
-
-[node name="HandTypeMult" type="Label" parent="Main Score Label/center/HBoxContainer/Mult" unique_id=1416433062]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_swtl4")
-text = "Hand Type Mult"
-label_settings = SubResource("LabelSettings_vt01p")
-horizontal_alignment = 1
-
-[node name="=" type="Label" parent="Main Score Label/center/HBoxContainer" unique_id=1529105603]
-layout_mode = 2
-size_flags_vertical = 8
-text = "="
-label_settings = SubResource("LabelSettings_bw8x2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Total" type="VBoxContainer" parent="Main Score Label/center/HBoxContainer" unique_id=716555270]
-layout_mode = 2
-
-[node name="Total" type="Label" parent="Main Score Label/center/HBoxContainer/Total" unique_id=1877683715]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Total"
-label_settings = SubResource("LabelSettings_bw8x2")
-horizontal_alignment = 1
-
-[node name="HandTypeValue" type="Label" parent="Main Score Label/center/HBoxContainer/Total" unique_id=1845529967]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_styles/normal = SubResource("StyleBoxFlat_p1r1p")
-text = "Value"
-label_settings = SubResource("LabelSettings_bw8x2")
-horizontal_alignment = 1
-
-[node name="Corner Label" type="PanelContainer" parent="." unique_id=2111127552 node_paths=PackedStringArray("_round_index_label", "_marble_label")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_l3q4t")
-script = ExtResource("9_corner_label")
-_round_index_label = NodePath("left column/RoundIndex")
-_marble_label = NodePath("left column/Marbles")
-
-[node name="left column" type="VBoxContainer" parent="Corner Label" unique_id=683305144]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="RoundIndex" type="Label" parent="Corner Label/left column" unique_id=850154121]
-layout_mode = 2
-text = "Round"
-label_settings = SubResource("LabelSettings_vywcl")
-
-[node name="Marbles" type="Label" parent="Corner Label/left column" unique_id=1651018917]
-layout_mode = 2
-text = "Marbles"
-label_settings = SubResource("LabelSettings_vywcl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1499987703]
 layout_mode = 2

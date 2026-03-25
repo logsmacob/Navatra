@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://bde80fe0ex30q"]
+
+[ext_resource type="Script" uid="uid://cjamjyohmpqx6" path="res://features/score_bar/corner_label.gd" id="1_pfwmk"]
+[ext_resource type="FontFile" uid="uid://cnci0773b7q4d" path="res://assets/fonts/pixeloid-font/PixeloidSans-lxa3y.ttf" id="2_2kn31"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="3_xvos1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3q4t"]
+bg_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.5254902, 0.5254902, 0.5254902, 1)
+corner_radius_bottom_right = 100
+corner_detail = 1
+expand_margin_left = 100.0
+expand_margin_top = 100.0
+expand_margin_right = 50.0
+expand_margin_bottom = 50.0
+shadow_color = Color(0, 0, 0, 0.6862745)
+shadow_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_vywcl"]
+font = ExtResource("2_2kn31")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_hpvcl"]
+font = ExtResource("2_2kn31")
+font_size = 42
+
+[node name="Corner Label" type="PanelContainer" unique_id=1148130841 node_paths=PackedStringArray("_round_index_label", "_marble_label")]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l3q4t")
+script = ExtResource("1_pfwmk")
+_round_index_label = NodePath("left column/RoundIndex")
+_marble_label = NodePath("left column/HBoxContainer/Marbles")
+
+[node name="left column" type="VBoxContainer" parent="." unique_id=1510692475]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="RoundIndex" type="Label" parent="left column" unique_id=163433501]
+layout_mode = 2
+text = "Round"
+label_settings = SubResource("LabelSettings_vywcl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="left column" unique_id=280024497]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="left column/HBoxContainer" unique_id=2094823143]
+clip_contents = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 4
+stretch_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="left column/HBoxContainer/TextureRect" unique_id=881675774]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("3_xvos1")
+offset = Vector2(8, 8)
+hframes = 6
+vframes = 2
+frame = 6
+
+[node name="Marbles" type="Label" parent="left column/HBoxContainer" unique_id=807006724]
+layout_mode = 2
+text = " 12"
+label_settings = SubResource("LabelSettings_hpvcl")

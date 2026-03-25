@@ -5,10 +5,10 @@
 [ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="1_tt0ib"]
 
 [node name="ItemButton" type="Button" unique_id=311372442 node_paths=PackedStringArray("title_label", "discription_label", "price_label", "rarity_label")]
-custom_minimum_size = Vector2(250, 500)
-offset_right = 250.0
-offset_bottom = 500.0
-size_flags_horizontal = 3
+custom_minimum_size = Vector2(300, 400)
+offset_right = 300.0
+offset_bottom = 400.0
+size_flags_horizontal = 0
 theme = ExtResource("1_tt0ib")
 script = ExtResource("1_1351u")
 title_label = NodePath("MarginContainer/VBoxContainer/Header/VBoxContainer/Name")
@@ -47,12 +47,12 @@ layout_mode = 2
 [node name="Name" type="Label" parent="MarginContainer/VBoxContainer/Header/VBoxContainer" unique_id=1832813450]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "lakdhs f.hasld"
+text = "Name"
 
 [node name="Rarity" type="Label" parent="MarginContainer/VBoxContainer/Header/VBoxContainer" unique_id=1773905766]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "lakdhs f.hasld"
+text = "Common"
 
 [node name="Discription" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2064937368]
 custom_minimum_size = Vector2(10, 0)

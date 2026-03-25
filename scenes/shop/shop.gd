@@ -1,7 +1,7 @@
 extends Control
 ## Shop script: coordinates this part of the game's behavior.
 
-@export var currency_label: Label
+@export var currency_label: CornerLabel
 @export var inventory_label: Label
 @export var offers_container: HBoxContainer
 @export var reroll_button: Button
@@ -9,7 +9,7 @@ extends Control
 @export var item_button: PackedScene
 
 @export var item_pool: Array[ItemData] = []
-@export_range(1, 12, 1) var offer_count: int = 6
+@export_range(1, 12, 1) var offer_count: int = 4
 
 const REROLL_COST: int = 3
 
@@ -81,9 +81,9 @@ func _on_general_modifiers_changed(_modifiers: Dictionary) -> void:
 
 func _refresh_view() -> void:
 	if currency_label:
-		currency_label.text = "Marbles: %d" % GameState.currency
+		currency_label.set_marbles(GameState.currency)
 	if reroll_button:
-		reroll_button.text = "Reroll trinkets (%d marbles)" % REROLL_COST
+		reroll_button.text = "Reroll\ntrinkets\n(%d marbles)" % REROLL_COST
 	var item_counts: Dictionary = GameState.get_shop_item_counts()
 	var lines: Array[String] = ["Owned trinkets:"]
 	for key in item_counts.keys():

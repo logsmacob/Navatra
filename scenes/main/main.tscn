@@ -17,7 +17,7 @@ shader_parameter/color_a = Color(0.11, 0.161, 0.38, 1)
 shader_parameter/color_b = Color(0.059, 0.071, 0.169, 1)
 shader_parameter/edge_color = Color(0, 0, 0, 1)
 shader_parameter/hexes_across = 60.0000026125
-shader_parameter/speed = 0.90400003968012
+shader_parameter/speed = 1.00000004424012
 shader_parameter/ripple_frequency = 0.5
 shader_parameter/randomness = 0.0
 shader_parameter/edge_thickness = 0.10000000475
@@ -82,9 +82,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 45
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="Hand" parent="MarginContainer" unique_id=703883539 instance=ExtResource("2_0wfyh")]
 layout_mode = 2

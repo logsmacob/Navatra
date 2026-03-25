@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://deu77cloriq2w"]
+
+[ext_resource type="Script" uid="uid://dxfr0j3u44il2" path="res://features/score_bar/main_score.gd" id="1_88coe"]
+[ext_resource type="FontFile" uid="uid://cnci0773b7q4d" path="res://assets/fonts/pixeloid-font/PixeloidSans-lxa3y.ttf" id="2_qb2wf"]
+[ext_resource type="FontFile" uid="uid://bfmc8ldjpblsv" path="res://assets/fonts/pixeloid-font/PixeloidSansBold-1jpBg.ttf" id="3_7doa5"]
+[ext_resource type="StyleBox" uid="uid://5soqmitf5a1o" path="res://assets/UI/style_boxes/text_background.tres" id="4_bvbje"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vywcl"]
+bg_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.5254902, 0.5254902, 0.5254902, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 1
+expand_margin_left = 16.0
+expand_margin_top = 100.0
+expand_margin_right = 16.0
+expand_margin_bottom = 32.0
+shadow_color = Color(0, 0, 0, 0.5882353)
+shadow_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_p1r1p"]
+font = ExtResource("2_qb2wf")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_l3q4t"]
+font = ExtResource("3_7doa5")
+font_size = 52
+
+[sub_resource type="LabelSettings" id="LabelSettings_vywcl"]
+font = ExtResource("2_qb2wf")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_swtl4"]
+font = ExtResource("3_7doa5")
+font_size = 32
+font_color = Color(0, 0.63333344, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bw8x2"]
+font = ExtResource("3_7doa5")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_vt01p"]
+font = ExtResource("3_7doa5")
+font_size = 32
+font_color = Color(1, 0, 0.916667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_swtl4"]
+content_margin_left = 32.0
+content_margin_top = 16.0
+content_margin_right = 32.0
+bg_color = Color(0.1, 0, 0.08999997, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 1
+expand_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1r1p"]
+content_margin_left = 32.0
+content_margin_top = 16.0
+content_margin_right = 32.0
+bg_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 1
+expand_margin_bottom = 16.0
+
+[node name="Main Score Label" type="PanelContainer" unique_id=1805624413 node_paths=PackedStringArray("_quota_label", "_hand_type_label", "_hand_type_value_label", "_base_label", "_mult_label", "_result_label")]
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vywcl")
+script = ExtResource("1_88coe")
+_quota_label = NodePath("center/Quota Value")
+_hand_type_label = NodePath("center/VBoxContainer/HandTypeRow/HandType")
+_hand_type_value_label = NodePath("center/VBoxContainer/HandTypeRow/HandTypeValue")
+_base_label = NodePath("center/HBoxContainer/Base/HandTypeBase")
+_mult_label = NodePath("center/HBoxContainer/Mult/HandTypeMult")
+_result_label = NodePath("center/HBoxContainer/Total/HandTypeValue")
+
+[node name="center" type="VBoxContainer" parent="." unique_id=1822334178]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Quota title" type="Label" parent="center" unique_id=2092045936]
+modulate = Color(1, 1, 1, 0.49019608)
+layout_mode = 2
+text = "Quota:"
+label_settings = SubResource("LabelSettings_p1r1p")
+horizontal_alignment = 1
+
+[node name="Quota Value" type="Label" parent="center" unique_id=953719791]
+layout_mode = 2
+text = "Quota"
+label_settings = SubResource("LabelSettings_l3q4t")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="center" unique_id=192100732]
+layout_mode = 2
+
+[node name="HandTypeRow" type="HBoxContainer" parent="center/VBoxContainer" unique_id=720740452]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="HandType" type="Label" parent="center/VBoxContainer/HandTypeRow" unique_id=2099476259]
+modulate = Color(1, 1, 1, 0.49019608)
+layout_mode = 2
+text = "Hand Type:"
+label_settings = SubResource("LabelSettings_vywcl")
+horizontal_alignment = 1
+
+[node name="HandTypeValue" type="Label" parent="center/VBoxContainer/HandTypeRow" unique_id=1496182288]
+modulate = Color(1, 1, 1, 0.49019608)
+layout_mode = 2
+text = "-"
+label_settings = SubResource("LabelSettings_vywcl")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="center" unique_id=1892373600]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Base" type="VBoxContainer" parent="center/HBoxContainer" unique_id=1641444953]
+layout_mode = 2
+
+[node name="Base" type="Label" parent="center/HBoxContainer/Base" unique_id=1681057867]
+layout_mode = 2
+text = "BASE"
+label_settings = SubResource("LabelSettings_swtl4")
+horizontal_alignment = 1
+
+[node name="HandTypeBase" type="Label" parent="center/HBoxContainer/Base" unique_id=1751537140]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_bvbje")
+text = "Hand Type Base"
+label_settings = SubResource("LabelSettings_swtl4")
+horizontal_alignment = 1
+
+[node name="X" type="Label" parent="center/HBoxContainer" unique_id=55999713]
+layout_mode = 2
+size_flags_vertical = 8
+text = "X"
+label_settings = SubResource("LabelSettings_bw8x2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mult" type="VBoxContainer" parent="center/HBoxContainer" unique_id=1022957627]
+layout_mode = 2
+
+[node name="Mult" type="Label" parent="center/HBoxContainer/Mult" unique_id=487773689]
+layout_mode = 2
+text = "Mult"
+label_settings = SubResource("LabelSettings_vt01p")
+horizontal_alignment = 1
+
+[node name="HandTypeMult" type="Label" parent="center/HBoxContainer/Mult" unique_id=375917442]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_swtl4")
+text = "Hand Type Mult"
+label_settings = SubResource("LabelSettings_vt01p")
+horizontal_alignment = 1
+
+[node name="=" type="Label" parent="center/HBoxContainer" unique_id=563275536]
+layout_mode = 2
+size_flags_vertical = 8
+text = "="
+label_settings = SubResource("LabelSettings_bw8x2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Total" type="VBoxContainer" parent="center/HBoxContainer" unique_id=342700450]
+layout_mode = 2
+
+[node name="Total" type="Label" parent="center/HBoxContainer/Total" unique_id=269836286]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Total"
+label_settings = SubResource("LabelSettings_bw8x2")
+horizontal_alignment = 1
+
+[node name="HandTypeValue" type="Label" parent="center/HBoxContainer/Total" unique_id=1216713336]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_p1r1p")
+text = "Value"
+label_settings = SubResource("LabelSettings_bw8x2")
+horizontal_alignment = 1

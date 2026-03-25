@@ -7,7 +7,7 @@ uniform vec4 edge_color : source_color = vec4(0.5, 0.3, 0.9, 1.0);
 uniform float hexes_across : hint_range(5.0, 80.0) = 60.0;
 uniform float speed : hint_range(0.1, 5.0) = 0.9;
 
-uniform float ripple_frequency : hint_range(0.5, 5.0) = 1.8;
+uniform float ripple_frequency : hint_range(0.5, 10.0) = 1.8;
 uniform float randomness : hint_range(0.0, 1.0) = 0.35;
 
 uniform float edge_thickness : hint_range(0.0, 0.2) = 0.05;
