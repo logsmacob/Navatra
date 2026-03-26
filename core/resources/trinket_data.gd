@@ -1,7 +1,7 @@
-class_name ItemData
+class_name TrinketData
 extends Resource
 
-enum ItemRarity {
+enum TrinketRarity {
 	COMMON,
 	UNCOMMON,
 	RARE,
@@ -10,10 +10,10 @@ enum ItemRarity {
 
 # Rarity Colors
 const RARITY_COLORS := {
-	ItemRarity.COMMON: Color(0.8, 0.8, 0.8),      # Gray
-	ItemRarity.UNCOMMON: Color(0.2, 0.8, 0.2),    # Green
-	ItemRarity.RARE: Color(0.2, 0.4, 1.0),        # Blue
-	ItemRarity.EPIC: Color(0.7, 0.3, 1.0),        # Purple
+	TrinketRarity.COMMON: Color(0.8, 0.8, 0.8),      # Gray
+	TrinketRarity.UNCOMMON: Color(0.2, 0.8, 0.2),    # Green
+	TrinketRarity.RARE: Color(0.2, 0.4, 1.0),        # Blue
+	TrinketRarity.EPIC: Color(0.7, 0.3, 1.0),        # Purple
 }
 
 const GENERAL_MODIFIER_LABELS := {
@@ -64,7 +64,7 @@ const GENERAL_MODIFIER_LABELS := {
 @export var mult_6_value: int = 0
 
 @export_range(0.0, 999.0, 0.1) var weight: float = 1.0
-@export var rarity: ItemRarity = ItemRarity.COMMON
+@export var rarity: TrinketRarity = TrinketRarity.COMMON
 @export_range(1, 999, 1) var min_round: int = 1
 @export_range(1, 999, 1) var max_round: int = 999
 

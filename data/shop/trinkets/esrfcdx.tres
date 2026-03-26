@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bin0jhnb1nxrb"]
 
-[ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/item_data.gd" id="1_bpagm"]
+[ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/trinket_data.gd" id="1_bpagm"]
 [ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="2_qnsjj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_12m81"]

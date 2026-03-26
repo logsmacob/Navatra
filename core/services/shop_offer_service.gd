@@ -2,11 +2,11 @@ extends RefCounted
 
 class_name ShopOfferService
 
-func roll_weighted_offers(item_pool: Array[ItemData], current_round: int, target_count: int, avoid_duplicates: bool = true) -> Array[ItemData]:
+func roll_weighted_offers(item_pool: Array[TrinketData], current_round: int, target_count: int, avoid_duplicates: bool = true) -> Array[TrinketData]:
 	if target_count <= 0:
 		return []
 
-	var rolled_offers: Array[ItemData] = []
+	var rolled_offers: Array[TrinketData] = []
 	var candidate_pool := get_available_items_for_round(item_pool, current_round)
 
 	while rolled_offers.size() < target_count and not candidate_pool.is_empty():
@@ -19,25 +19,25 @@ func roll_weighted_offers(item_pool: Array[ItemData], current_round: int, target
 
 	return rolled_offers
 
-func get_available_items_for_round(item_pool: Array[ItemData], current_round: int) -> Array[ItemData]:
-	var available_items: Array[ItemData] = []
-	for item: ItemData in item_pool:
+func get_available_items_for_round(item_pool: Array[TrinketData], current_round: int) -> Array[TrinketData]:
+	var available_items: Array[TrinketData] = []
+	for item: TrinketData in item_pool:
 		if item == null:
 			continue
 		if item.is_available_for_round(current_round):
 			available_items.append(item)
 	return available_items
 
-func pick_weighted_item(pool: Array[ItemData]) -> ItemData:
+func pick_weighted_item(pool: Array[TrinketData]) -> TrinketData:
 	var total_weight: float = 0.0
-	for item: ItemData in pool:
+	for item: TrinketData in pool:
 		total_weight += max(item.weight, 0.0)
 	if total_weight <= 0.0:
 		return null
 
 	var roll: float = randf_range(0.0, total_weight)
 	var running_weight: float = 0.0
-	for item: ItemData in pool:
+	for item: TrinketData in pool:
 		running_weight += max(item.weight, 0.0)
 		if roll <= running_weight:
 			return item

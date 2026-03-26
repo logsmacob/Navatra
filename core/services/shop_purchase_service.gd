@@ -5,7 +5,7 @@ class_name ShopPurchaseService
 func can_afford_purchase(currency: int, cost: int) -> bool:
 	return cost >= 0 and currency >= cost
 
-func apply_purchase(game_state: Node, offer: ItemData) -> bool:
+func apply_purchase(game_state: Node, offer: TrinketData) -> bool:
 	if game_state == null or offer == null:
 		return false
 	if not game_state.has_method("spend_currency"):

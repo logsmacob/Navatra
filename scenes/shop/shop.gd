@@ -9,12 +9,12 @@ extends Control
 @export var continue_button: Button
 @export var item_button: PackedScene
 
-@export var item_pool: Array[ItemData] = []
+@export var item_pool: Array[TrinketData] = []
 @export_range(1, 12, 1) var offer_count: int = 4
 
 const REROLL_COST: int = 3
 
-var _offers: Array[ItemData] = []
+var _offers: Array[TrinketData] = []
 var _offer_service: ShopOfferService = ShopOfferService.new()
 var _purchase_service: ShopPurchaseService = ShopPurchaseService.new()
 
@@ -40,12 +40,12 @@ func _rebuild_offer_buttons() -> void:
 		child.queue_free()
 
 	for i in range(_offers.size()):
-		var offer: ItemData = _offers[i]
+		var offer: TrinketData = _offers[i]
 		var button := item_button.instantiate()
 		button.set_title(offer.get_display_name())
 		button.set_discription(offer.get_display_discription())
 		button.set_price(offer.cost)
-		button.set_rarity(ItemData.ItemRarity.keys()[offer.rarity])
+		button.set_rarity(TrinketData.TrinketRarity.keys()[offer.rarity])
 		button.set_texture(offer._get_texture())
 		button.set_border_color(offer.get_rarity_color())
 		button.pressed.connect(_on_offer_button_pressed.bind(i))
@@ -59,7 +59,7 @@ func _try_buy_offer(index: int) -> void:
 	if index < 0 or index >= _offers.size():
 		return
 
-	var offer: ItemData = _offers[index]
+	var offer: TrinketData = _offers[index]
 	if not _purchase_service.apply_purchase(GameState, offer):
 		return
 
