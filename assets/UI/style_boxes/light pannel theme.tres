@@ -1,0 +1,31 @@
+[gd_resource type="Theme" format=3 uid="uid://crwvosv3l8ktn"]
+
+[ext_resource type="StyleBox" uid="uid://b7h1k73psdiwa" path="res://assets/UI/style_boxes/die_face_disabled.tres" id="1_a32e2"]
+[ext_resource type="StyleBox" uid="uid://xclnd7i7fqsy" path="res://assets/UI/style_boxes/die_face_focus.tres" id="2_vo3c6"]
+[ext_resource type="StyleBox" uid="uid://cb1sijhlkgjq5" path="res://assets/UI/style_boxes/die_face_hover.tres" id="3_rw8wb"]
+[ext_resource type="StyleBox" uid="uid://pv3w8c3aemjf" path="res://assets/UI/style_boxes/die_face_normal.tres" id="4_84ki6"]
+[ext_resource type="StyleBox" uid="uid://bblhd1k16yxvt" path="res://assets/UI/style_boxes/die_face_pressed.tres" id="5_15uem"]
+[ext_resource type="FontFile" uid="uid://cnci0773b7q4d" path="res://assets/fonts/pixeloid-font/PixeloidSans-lxa3y.ttf" id="6_wbsro"]
+
+[resource]
+default_font = ExtResource("6_wbsro")
+/colors/back = Color(1, 1, 1, 1)
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 42
+Button/styles/disabled = ExtResource("1_a32e2")
+Button/styles/focus = ExtResource("2_vo3c6")
+Button/styles/hover = ExtResource("3_rw8wb")
+Button/styles/hover_pressed = ExtResource("3_rw8wb")
+Button/styles/normal = ExtResource("4_84ki6")
+Button/styles/pressed = ExtResource("4_84ki6")
+CheckButton/font_sizes/font_size = 16
+CheckButton/styles/disabled = ExtResource("1_a32e2")
+CheckButton/styles/focus = ExtResource("2_vo3c6")
+CheckButton/styles/hover = ExtResource("3_rw8wb")
+CheckButton/styles/hover_pressed = ExtResource("5_15uem")
+CheckButton/styles/normal = ExtResource("4_84ki6")
+CheckButton/styles/pressed = ExtResource("5_15uem")

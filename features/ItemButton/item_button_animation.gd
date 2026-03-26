@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 		_target_hover_offset = Vector2.ZERO
 
 	var speed := tilt_lerp_speed if _is_hovered else return_lerp_speed
-	var t := clamp(speed * delta, 0.0, 1.0)
+	var t = clamp(speed * delta, 0.0, 1.0)
 
 	_current_rotation_degrees = lerpf(_current_rotation_degrees, _target_rotation_degrees, t)
 	_current_scale = _current_scale.lerp(_target_scale, t)

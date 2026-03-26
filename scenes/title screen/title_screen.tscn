@@ -4,6 +4,8 @@
 [ext_resource type="Shader" uid="uid://64giuyue21qd" path="res://assets/shaders/hex_background.gdshader" id="1_sa3yf"]
 [ext_resource type="Texture2D" uid="uid://b15xaclrmafje" path="res://assets/sprites/Navatra Icon.png" id="2_s4lrb"]
 [ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="3_s4lrb"]
+[ext_resource type="Theme" uid="uid://crwvosv3l8ktn" path="res://assets/UI/style_boxes/light pannel theme.tres" id="4_iw6vl"]
+[ext_resource type="StyleBox" uid="uid://c2x181447gmxa" path="res://assets/UI/style_boxes/light pannel.tres" id="5_isuq1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgrm8"]
 shader = ExtResource("1_sa3yf")
@@ -72,11 +74,11 @@ theme_override_constants/margin_top = 75
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1208704647]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 64
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1908743137]
 layout_mode = 2
-theme_override_constants/margin_bottom = 128
+theme_override_constants/margin_bottom = 64
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1164578214]
 layout_mode = 2
@@ -101,16 +103,23 @@ label_settings = SubResource("LabelSettings_dc4i4")
 custom_minimum_size = Vector2(500, 128)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("3_s4lrb")
+theme = ExtResource("4_iw6vl")
 theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = ExtResource("5_isuq1")
 text = "Play"
 
 [node name="Discord" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2051456430]
 custom_minimum_size = Vector2(500, 128)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("3_s4lrb")
+theme = ExtResource("4_iw6vl")
 theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = ExtResource("5_isuq1")
+theme_override_styles/pressed = ExtResource("5_isuq1")
+theme_override_styles/hover = ExtResource("5_isuq1")
+theme_override_styles/hover_pressed = ExtResource("5_isuq1")
+theme_override_styles/disabled = ExtResource("5_isuq1")
+theme_override_styles/focus = ExtResource("5_isuq1")
 text = "Discord"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=324282020]
@@ -119,4 +128,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_s4lrb")
 theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = ExtResource("5_isuq1")
+theme_override_styles/pressed = ExtResource("5_isuq1")
+theme_override_styles/hover = ExtResource("5_isuq1")
+theme_override_styles/hover_pressed = ExtResource("5_isuq1")
+theme_override_styles/disabled = ExtResource("5_isuq1")
+theme_override_styles/focus = ExtResource("5_isuq1")
 text = "Quit"
