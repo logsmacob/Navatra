@@ -1,19 +1,38 @@
 [gd_scene format=3 uid="uid://mejnjhlwumme"]
 
 [ext_resource type="Script" uid="uid://blwildeexofvg" path="res://features/ItemButton/item_button.gd" id="1_1351u"]
-[ext_resource type="Texture2D" uid="uid://b15xaclrmafje" path="res://assets/sprites/Navatra Icon.png" id="1_jgorn"]
-[ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="1_tt0ib"]
+[ext_resource type="StyleBox" uid="uid://dmxqifk746d81" path="res://assets/UI/style_boxes/dark pannel.tres" id="1_l2xpd"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="2_tt0ib"]
+[ext_resource type="FontFile" uid="uid://dd40cf6yss1mq" path="res://assets/fonts/pixeloid-font/PixeloidMono-nAOpP.ttf" id="3_l2xpd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nntar"]
+atlas = ExtResource("2_tt0ib")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lwftv"]
+font = ExtResource("3_l2xpd")
+
+[sub_resource type="LabelSettings" id="LabelSettings_xudpr"]
+font = ExtResource("3_l2xpd")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l82o7"]
+atlas = ExtResource("2_tt0ib")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_28cvv"]
+font = ExtResource("3_l2xpd")
+font_size = 32
 
 [node name="ItemButton" type="Button" unique_id=311372442 node_paths=PackedStringArray("title_label", "discription_label", "price_label", "rarity_label")]
 custom_minimum_size = Vector2(300, 400)
 offset_right = 300.0
 offset_bottom = 400.0
 size_flags_horizontal = 0
-theme = ExtResource("1_tt0ib")
+theme_override_styles/normal = ExtResource("1_l2xpd")
 script = ExtResource("1_1351u")
 title_label = NodePath("MarginContainer/VBoxContainer/Header/VBoxContainer/Name")
 discription_label = NodePath("MarginContainer/VBoxContainer/Discription")
-price_label = NodePath("MarginContainer/VBoxContainer/Price")
+price_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Price")
 rarity_label = NodePath("MarginContainer/VBoxContainer/Header/VBoxContainer/Rarity")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=23474182]
@@ -35,9 +54,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Header" unique_id=1414527585]
+texture_filter = 1
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-texture = ExtResource("1_jgorn")
+texture = SubResource("AtlasTexture_nntar")
 expand_mode = 5
 stretch_mode = 4
 
@@ -48,11 +68,13 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Name"
+label_settings = SubResource("LabelSettings_lwftv")
 
 [node name="Rarity" type="Label" parent="MarginContainer/VBoxContainer/Header/VBoxContainer" unique_id=1773905766]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Common"
+label_settings = SubResource("LabelSettings_lwftv")
 
 [node name="Discription" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2064937368]
 custom_minimum_size = Vector2(10, 0)
@@ -60,11 +82,24 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "dimthgdgnfh,,b,mbn,mbn,mbn,mnb"
+label_settings = SubResource("LabelSettings_xudpr")
 autowrap_mode = 3
 
-[node name="Price" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2105910968]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=736322688]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1837919354]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_l82o7")
+expand_mode = 3
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2105910968]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "58$"
+text = "123"
+label_settings = SubResource("LabelSettings_28cvv")
 horizontal_alignment = 2
 vertical_alignment = 2
