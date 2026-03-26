@@ -7,9 +7,9 @@ class_name CardTiltAnimation
 @export_range(0.0, 50.0, 0.5) var idle_max_offset_pixels := 10.0
 
 @export_range(0.0, 30.0, 0.1) var hover_max_rotation_degrees := 8.0
-@export_range(0.0, 1.0, 0.01) var hover_max_skew := 0.15
 @export_range(0.0, 0.5, 0.01) var hover_max_shift_ratio := 0.08
 @export_range(1.0, 1.5, 0.01) var hover_scale := 1.03
+@export_range(0.0, 0.5, 0.01) var hover_perspective_strength := 0.08
 
 @export_range(1.0, 30.0, 0.1) var tilt_lerp_speed := 12.0
 @export_range(1.0, 30.0, 0.1) var return_lerp_speed := 10.0
@@ -20,15 +20,13 @@ var _rng := RandomNumberGenerator.new()
 
 var _base_rotation_degrees := 0.0
 var _base_position := Vector2.ZERO
+var _base_scale := Vector2.ONE
 
 var _idle_rotation_degrees := 0.0
 var _idle_offset := Vector2.ZERO
 
 var _current_rotation_degrees := 0.0
 var _target_rotation_degrees := 0.0
-
-var _current_skew := 0.0
-var _target_skew := 0.0
 
 var _current_scale := Vector2.ONE
 var _target_scale := Vector2.ONE
@@ -46,6 +44,7 @@ func _ready() -> void:
 
 	_base_rotation_degrees = _target.rotation_degrees
 	_base_position = _target.position
+	_base_scale = _target.scale
 	_target.pivot_offset = _target.size * 0.5
 
 	_rng.randomize()
@@ -57,10 +56,8 @@ func _ready() -> void:
 
 	_current_rotation_degrees = _base_rotation_degrees + _idle_rotation_degrees
 	_target_rotation_degrees = _current_rotation_degrees
-	_current_skew = _target.skew
-	_target_skew = _current_skew
-	_current_scale = _target.scale
-	_target_scale = _current_scale
+	_current_scale = _base_scale
+	_target_scale = _base_scale
 
 	_apply_transform()
 	set_process(true)
@@ -74,15 +71,13 @@ func _process(delta: float) -> void:
 		_update_hover_targets()
 	else:
 		_target_rotation_degrees = _base_rotation_degrees + _idle_rotation_degrees
-		_target_skew = 0.0
-		_target_scale = Vector2.ONE
+		_target_scale = _base_scale
 		_target_hover_offset = Vector2.ZERO
 
 	var speed := tilt_lerp_speed if _is_hovered else return_lerp_speed
 	var t := clamp(speed * delta, 0.0, 1.0)
 
 	_current_rotation_degrees = lerpf(_current_rotation_degrees, _target_rotation_degrees, t)
-	_current_skew = lerpf(_current_skew, _target_skew, t)
 	_current_scale = _current_scale.lerp(_target_scale, t)
 	_current_hover_offset = _current_hover_offset.lerp(_target_hover_offset, t)
 
@@ -113,8 +108,12 @@ func _update_hover_targets() -> void:
 	var normalized_y := clampf((local_mouse.y / size.y) * 2.0 - 1.0, -1.0, 1.0)
 
 	_target_rotation_degrees = _base_rotation_degrees + _idle_rotation_degrees + normalized_x * hover_max_rotation_degrees
-	_target_skew = normalized_y * hover_max_skew
-	_target_scale = Vector2.ONE * hover_scale
+
+	var perspective_x := 1.0 + abs(normalized_y) * hover_perspective_strength
+	var perspective_y := 1.0 - abs(normalized_y) * hover_perspective_strength
+	var side_squash := 1.0 - abs(normalized_x) * hover_perspective_strength * 0.5
+	var hover_scale_vector := Vector2(perspective_x * side_squash, perspective_y) * hover_scale
+	_target_scale = Vector2(_base_scale.x * hover_scale_vector.x, _base_scale.y * hover_scale_vector.y)
 
 	var max_shift = size * hover_max_shift_ratio
 	_target_hover_offset = Vector2(normalized_x * max_shift.x, normalized_y * max_shift.y)
@@ -122,6 +121,5 @@ func _update_hover_targets() -> void:
 
 func _apply_transform() -> void:
 	_target.rotation_degrees = _current_rotation_degrees
-	_target.skew = _current_skew
 	_target.scale = _current_scale
 	_target.position = _base_position + _idle_offset + _current_hover_offset
