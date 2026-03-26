@@ -21,12 +21,12 @@ const GENERAL_MODIFIER_LABELS := {
 	"base_marbles_per_round": "Base Marbles per Round",
 	"shop_rerolls": "Re-Rolls",
 	"shop_playable_hands": "Playable Hands",
-	"face_1_to": "Face [1] Result",
-	"face_2_to": "Face [2] Result",
-	"face_3_to": "Face [3] Result",
-	"face_4_to": "Face [4] Result",
-	"face_5_to": "Face [5] Result",
-	"face_6_to": "Face [6] Result",
+	"face_1_to": "Face [1]",
+	"face_2_to": "Face [2]",
+	"face_3_to": "Face [3]",
+	"face_4_to": "Face [4]",
+	"face_5_to": "Face [5]",
+	"face_6_to": "Face [6]",
 	"base_1_value": "Face Value [1]",
 	"base_2_value": "Face Value [2]",
 	"base_3_value": "Face Value [3]",
@@ -81,23 +81,23 @@ const GENERAL_MODIFIER_LABELS := {
 @export_range(1, 999, 1) var max_round: int = 999
 
 
-# 🎨 Get rarity color
+# Get rarity color
 func get_rarity_color() -> Color:
 	return RARITY_COLORS.get(rarity, Color.WHITE)
 
 
-# 🏷 Display name
+# Display name
 func get_display_name() -> String:
 	return item_name if not item_name.is_empty() else id
 
 
-# 🎨 Colored name (for RichTextLabel)
+# Colored name (for RichTextLabel)
 func get_colored_name() -> String:
 	var color := get_rarity_color().to_html()
 	return "[color=%s]%s[/color]" % [color, get_display_name()]
 
 
-# 📊 Modifier dictionary
+# Modifier dictionary
 func get_general_modifier_changes() -> Dictionary:
 	return {
 		"luck": luck,
@@ -125,18 +125,20 @@ func get_general_modifier_changes() -> Dictionary:
 	}
 
 
-# ➕ Format + / -
+# Format + / -
 func _format_signed_modifier(value: int) -> String:
 	if value > 0:
 		return "+%d" % value
 	return "%d" % value
 
+func _format_face_modifier(value: int) -> String:
+	return "[%d]" % value
 
 func _get_texture():
 	return texture
 
 
-# 📝 Description
+# Description
 func get_display_discription() -> String:
 	var effects: Array[String] = []
 
@@ -162,17 +164,17 @@ func _get_modifier_effect_text(key: String, value: int) -> String:
 		return "%s %s Mult" % [GENERAL_MODIFIER_LABELS.get(key, key), signed_value]
 
 	if key.begins_with("face_") and key.ends_with("_to"):
-		return "%s %s" % [GENERAL_MODIFIER_LABELS.get(key, key), signed_value]
+		return "%s into %s" % [GENERAL_MODIFIER_LABELS.get(key, key), _format_face_modifier(value)]
 
 	return "%s %s" % [GENERAL_MODIFIER_LABELS.get(key, key), signed_value]
 
 
-# 🎯 Availability
+# Availability
 func is_available_for_round(round_number: int) -> bool:
 	return round_number >= min_round and round_number <= max_round
 
 
-# 📦 Full effect text
+# Full effect text
 func get_effect_text() -> String:
 	return "%s | Cost %d | %s" % [
 		get_display_name(),
