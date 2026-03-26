@@ -8,6 +8,7 @@ signal reroll_requested
 @onready var upgrades_container: VBoxContainer = $VBoxContainer/UpgradeList
 @onready var reroll_button: Button = $VBoxContainer/RerollButton
 
+@export var cost: Label
 @export var buttons: Array[Button]
 
 func _ready() -> void:
@@ -34,7 +35,7 @@ func show_upgrades(upgrades: Array[HandTypeUpgradeDefinition]) -> void:
 	visible = true
 
 func set_reroll_price(price: int, can_afford: bool) -> void:
-	reroll_button.text = "Reroll (%d)" % max(price, 0)
+	cost.text = "%d" % max(price, 0)
 	reroll_button.disabled = not can_afford
 
 func _on_upgrade_pressed(upgrade: HandTypeUpgradeDefinition) -> void:

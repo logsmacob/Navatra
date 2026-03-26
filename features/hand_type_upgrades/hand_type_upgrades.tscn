@@ -3,15 +3,28 @@
 [ext_resource type="Script" uid="uid://b15ejutmd7ef5" path="res://features/hand_type_upgrades/hand_type_upgrades.gd" id="1_8k6x7"]
 [ext_resource type="Shader" uid="uid://batbn873bu8tu" path="res://features/hand_type_upgrades/blur.gdshader" id="2_r1jep"]
 [ext_resource type="Theme" uid="uid://uigveapmlifl" path="res://assets/UI/style_boxes/die_theme.tres" id="3_dq6nr"]
-[ext_resource type="StyleBox" uid="uid://bgk6mwns3t3qv" path="res://assets/UI/style_boxes/die_face_black_normal.tres" id="4_iq1i7"]
-[ext_resource type="StyleBox" uid="uid://dmbq6yypnrj4o" path="res://assets/UI/style_boxes/die_face_black_pressed.tres" id="5_76v63"]
-[ext_resource type="StyleBox" uid="uid://bfoqkt08gqufc" path="res://assets/UI/style_boxes/die_face_black_hover.tres" id="6_qhpsc"]
+[ext_resource type="StyleBox" uid="uid://dmxqifk746d81" path="res://assets/UI/style_boxes/dark pannel.tres" id="4_iq1i7"]
+[ext_resource type="FontFile" uid="uid://bfmc8ldjpblsv" path="res://assets/fonts/pixeloid-font/PixeloidSansBold-1jpBg.ttf" id="5_76v63"]
+[ext_resource type="PackedScene" uid="uid://cwj2re802kfqb" path="res://features/hover_animation.tscn" id="5_qhpsc"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="6_qhpsc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qb506"]
 shader = ExtResource("2_r1jep")
 shader_parameter/radius = 100.0
 
-[node name="HandTypeUpgrades" type="Control" unique_id=980821348 node_paths=PackedStringArray("buttons")]
+[sub_resource type="LabelSettings" id="LabelSettings_1ebqe"]
+font = ExtResource("5_76v63")
+font_size = 32
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8pj3"]
+atlas = ExtResource("6_qhpsc")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c2mmn"]
+font = ExtResource("5_76v63")
+font_size = 46
+
+[node name="HandTypeUpgrades" type="Control" unique_id=980821348 node_paths=PackedStringArray("cost", "buttons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +32,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8k6x7")
+cost = NodePath("VBoxContainer/RerollButton/HBoxContainer/Cost")
 buttons = [NodePath("VBoxContainer/UpgradeList/Button"), NodePath("VBoxContainer/UpgradeList/Button2"), NodePath("VBoxContainer/UpgradeList/Button3"), NodePath("VBoxContainer/UpgradeList/Button4")]
 
 [node name="Panel" type="Panel" parent="." unique_id=568504620]
@@ -39,7 +53,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 52
 
 [node name="UpgradeList" type="VBoxContainer" parent="VBoxContainer" unique_id=1056658818]
 custom_minimum_size = Vector2(500, 250)
@@ -83,6 +97,42 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("4_iq1i7")
-theme_override_styles/pressed = ExtResource("5_76v63")
-theme_override_styles/hover = ExtResource("6_qhpsc")
-text = "Reroll"
+theme_override_styles/pressed = ExtResource("4_iq1i7")
+theme_override_styles/hover = ExtResource("4_iq1i7")
+theme_override_styles/hover_pressed = ExtResource("4_iq1i7")
+theme_override_styles/disabled = ExtResource("4_iq1i7")
+theme_override_styles/focus = ExtResource("4_iq1i7")
+text = " "
+
+[node name="Hover animation" parent="VBoxContainer/RerollButton" unique_id=251388993 instance=ExtResource("5_qhpsc")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/RerollButton" unique_id=1020760660]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/RerollButton/HBoxContainer" unique_id=211090582]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Re-Roll "
+label_settings = SubResource("LabelSettings_1ebqe")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/RerollButton/HBoxContainer" unique_id=1254783867]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+texture = SubResource("AtlasTexture_s8pj3")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Cost" type="Label" parent="VBoxContainer/RerollButton/HBoxContainer" unique_id=213265426]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "x3"
+label_settings = SubResource("LabelSettings_c2mmn")
+horizontal_alignment = 1
