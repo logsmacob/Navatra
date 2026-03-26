@@ -1,9 +1,9 @@
 extends Control
 ## Title screen script: coordinates this part of the game's behavior.
 
-@export var play: Button
-@export var discord: Button
-@export var quit: Button
+@export var play: TextureButton
+@export var discord: TextureButton
+@export var quit: TextureButton
 
 func _ready() -> void:
 	play.pressed.connect(play_pressed)
@@ -16,7 +16,7 @@ func play_pressed():
 
 func discord_pressed():
 	# open discord invite in browser
-	OS.shell_open("https://discord.gg/8aeDzcgH")
+	OS.shell_open("https://discord.gg/azzAAPUrRB")
 
 func quit_pressed():
 	get_tree().quit()
