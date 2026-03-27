@@ -4,9 +4,9 @@ extends RefCounted
 class_name GameStatePlayerManager
 
 const DIE_MATERIAL_STANDARD := PlayerHandService.DIE_MATERIAL_STANDARD
-const DIE_MATERIAL_GOLDEN := PlayerHandService.DIE_MATERIAL_GOLDEN
-const DIE_MATERIAL_STEEL := PlayerHandService.DIE_MATERIAL_STEEL
 const DIE_MATERIAL_MARBLE := PlayerHandService.DIE_MATERIAL_MARBLE
+const DIE_MATERIAL_BLUE := PlayerHandService.DIE_MATERIAL_BLUE
+const DIE_MATERIAL_PINK := PlayerHandService.DIE_MATERIAL_PINK
 const MATERIAL_CURRENCY_BONUS := PlayerHandService.MATERIAL_CURRENCY_BONUS
 
 const DEFAULT_GENERAL_MODIFIERS := ModifierSchema.DEFAULT_GENERAL_MODIFIERS
@@ -63,10 +63,24 @@ func get_shop_item_counts() -> Dictionary:
 func add_owned_trinket(trinket: TrinketData) -> void:
 	if trinket == null:
 		return
+	_remove_replaced_die_material_trinkets(trinket)
 	owned_trinkets.append(trinket)
 
 func get_owned_trinkets() -> Array[TrinketData]:
 	return owned_trinkets.duplicate()
+
+func _remove_replaced_die_material_trinkets(new_trinket: TrinketData) -> void:
+	var new_material_trinket := new_trinket as DieMaterialTrinketData
+	if new_material_trinket == null:
+		return
+	var target_die_index := max(new_material_trinket.selected_die_index, 0)
+	for index in range(owned_trinkets.size() - 1, -1, -1):
+		var existing_material_trinket := owned_trinkets[index] as DieMaterialTrinketData
+		if existing_material_trinket == null:
+			continue
+		if max(existing_material_trinket.selected_die_index, 0) != target_die_index:
+			continue
+		owned_trinkets.remove_at(index)
 
 func reset_general_modifiers() -> void:
 	general_modifiers = DEFAULT_GENERAL_MODIFIERS.duplicate(true)

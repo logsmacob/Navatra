@@ -4,15 +4,15 @@ extends RefCounted
 class_name PlayerHandService
 
 const DIE_MATERIAL_STANDARD := "standard"
-const DIE_MATERIAL_GOLDEN := "golden"
-const DIE_MATERIAL_STEEL := "steel"
 const DIE_MATERIAL_MARBLE := "marble"
+const DIE_MATERIAL_BLUE := "blue"
+const DIE_MATERIAL_PINK := "pink"
 
 const MATERIAL_CURRENCY_BONUS := {
 	DIE_MATERIAL_STANDARD: 0,
-	DIE_MATERIAL_GOLDEN: 2,
-	DIE_MATERIAL_STEEL: 1,
 	DIE_MATERIAL_MARBLE: 0,
+	DIE_MATERIAL_BLUE: 0,
+	DIE_MATERIAL_PINK: 0,
 }
 
 var _player_hand: Array[Dictionary] = []
