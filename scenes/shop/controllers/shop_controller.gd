@@ -4,6 +4,7 @@ class_name ShopController
 
 const MAIN_SCENE_PATH := "res://scenes/main/main.tscn"
 const REROLL_COST: int = 3
+const TRINKET_DATA_ROOT := "res://data/shop/trinkets"
 
 @export var shop_view: ShopView
 @export var trinket_pool: Array[TrinketData] = []
@@ -18,6 +19,7 @@ func _ready() -> void:
 	if shop_view == null:
 		return
 
+	_populate_trinket_pool_from_data()
 	_transaction_port = GameStateShopTransactionPort.new(GameState)
 	shop_view.offer_purchase_requested.connect(_on_offer_purchase_requested)
 	shop_view.reroll_requested.connect(_on_reroll_requested)
@@ -79,6 +81,63 @@ func _refresh_view() -> void:
 	shop_view.set_reroll_enabled(_purchase_service.can_afford_purchase(GameState.currency, REROLL_COST))
 	shop_view.refresh_offer_affordability(GameState.currency)
 	shop_view.set_inventory_lines(_build_inventory_lines(GameState.get_owned_trinkets()))
+
+func _populate_trinket_pool_from_data() -> void:
+	var discovered_trinkets := _load_trinkets_recursive(TRINKET_DATA_ROOT)
+	if discovered_trinkets.is_empty():
+		return
+
+	var merged_pool: Array[TrinketData] = []
+	var seen_keys: Dictionary = {}
+	for trinket: TrinketData in trinket_pool:
+		if trinket == null:
+			continue
+		var key := trinket.get_shop_tracking_key()
+		if seen_keys.has(key):
+			continue
+		seen_keys[key] = true
+		merged_pool.append(trinket)
+
+	for trinket: TrinketData in discovered_trinkets:
+		if trinket == null:
+			continue
+		var key := trinket.get_shop_tracking_key()
+		if seen_keys.has(key):
+			continue
+		seen_keys[key] = true
+		merged_pool.append(trinket)
+
+	trinket_pool = merged_pool
+
+func _load_trinkets_recursive(root_path: String) -> Array[TrinketData]:
+	var loaded: Array[TrinketData] = []
+	var directory := DirAccess.open(root_path)
+	if directory == null:
+		return loaded
+
+	directory.list_dir_begin()
+	while true:
+		var entry := directory.get_next()
+		if entry.is_empty():
+			break
+		if entry.begins_with("."):
+			continue
+
+		var full_path := "%s/%s" % [root_path, entry]
+		if directory.current_is_dir():
+			loaded.append_array(_load_trinkets_recursive(full_path))
+			continue
+		if not entry.ends_with(".tres"):
+			continue
+
+		var resource := load(full_path)
+		var trinket := resource as TrinketData
+		if trinket == null:
+			continue
+		loaded.append(trinket)
+
+	directory.list_dir_end()
+	return loaded
 
 func _build_inventory_lines(owned_trinkets: Array[TrinketData]) -> Array[String]:
 	var trinket_counts: Dictionary = {}
