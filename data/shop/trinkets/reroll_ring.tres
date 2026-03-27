@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="TrinketData" format=3]
+[gd_resource type="Resource" script_class="TrinketData" format=3 uid="uid://sq5bk0myqla1"]
 
-[ext_resource type="Script" path="res://core/resources/trinket_data.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/dice icons.png" id="2_icons"]
+[ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/trinket_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="2_icons"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_icon"]
 atlas = ExtResource("2_icons")
@@ -15,7 +15,5 @@ item_name = "Reroll Ring"
 cost = 5
 weight = 6.0
 rarity = 1
-shop_rerolls = 1
 base_marbles_per_round = 1
-min_round = 1
-max_round = 999
+shop_rerolls = 1
