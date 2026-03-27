@@ -12,5 +12,5 @@ script = ExtResource("1_m0uk4")
 texture = SubResource("AtlasTexture_icon")
 id = "four_more"
 item_name = "Four More"
-cost = 2
+cost = 1
 base_4_value = 1

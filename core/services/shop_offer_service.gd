@@ -89,8 +89,8 @@ func _build_pool_for_rarity(pool: Array[TrinketData], rarity: TrinketData.Trinke
 	var ordered_pool: Array[TrinketData] = []
 	var sorted_by_distance := pool.duplicate()
 	sorted_by_distance.sort_custom(func(a: TrinketData, b: TrinketData) -> bool:
-		var distance_a := abs(int(a.rarity) - int(rarity))
-		var distance_b := abs(int(b.rarity) - int(rarity))
+		var distance_a = abs(int(a.rarity) - int(rarity))
+		var distance_b = abs(int(b.rarity) - int(rarity))
 		if distance_a == distance_b:
 			return int(a.rarity) < int(b.rarity)
 		return distance_a < distance_b
