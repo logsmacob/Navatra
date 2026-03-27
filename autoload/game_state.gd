@@ -188,6 +188,11 @@ func consume_reroll() -> bool:
 	_emit_round_state()
 	return true
 
+func add_current_round_rerolls(amount: int) -> void:
+	if not _run_manager.add_current_round_rerolls(amount):
+		return
+	_emit_round_state()
+
 func process_played_hand(score: int) -> void:
 	var result := _run_manager.process_played_hand(score)
 	_emit_round_state()
