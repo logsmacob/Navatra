@@ -51,10 +51,10 @@ func get_rarity_bonuses() -> Dictionary:
 
 ## Returns normalized rarity roll weights that always sum to 1.0.
 func get_normalized_rarity_roll_weights() -> Dictionary:
-	var common := max(common_chance, 0.0)
-	var rare := max(rare_chance, 0.0)
-	var epic := max(epic_chance, 0.0)
-	var total := common + rare + epic
+	var common = max(common_chance, 0.0)
+	var rare = max(rare_chance, 0.0)
+	var epic = max(epic_chance, 0.0)
+	var total = common + rare + epic
 	if total <= 0.0:
 		return {
 			HandTypeUpgradeDefinition.UpgradeRarity.COMMON: 0.6,

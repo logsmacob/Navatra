@@ -17,9 +17,9 @@ extends Resource
 
 ## Calculates total marble reward when a round is completed.
 func calculate_round_reward(overflow_points: int, hands_remaining: int, rerolls_remaining: int, round_index: int) -> int:
-	var safe_overflow_points := max(overflow_points, 0)
+	var safe_overflow_points = max(overflow_points, 0)
 	var overflow_currency := int(floor(float(safe_overflow_points) / overflow_points_per_marble))
-	var hands_bonus := max(hands_remaining, 0) * marbles_per_hand_remaining
-	var rerolls_bonus := max(rerolls_remaining, 0) * marbles_per_reroll_remaining
+	var hands_bonus = max(hands_remaining, 0) * marbles_per_hand_remaining
+	var rerolls_bonus = max(rerolls_remaining, 0) * marbles_per_reroll_remaining
 	var progression_bonus := progression_base_bonus + int(float(max(round_index - 1, 0)) / float(progression_rounds_per_bonus_step))
 	return maxi(overflow_currency + hands_bonus + rerolls_bonus + progression_bonus, minimum_round_reward)
