@@ -7,7 +7,7 @@ extends TrinketData
 
 @export_group("Die Material Variant")
 @export var selected_die_index: int = 0
-@export var target_material: String = "marble"
+@export_enum("standard", "marble", "blue", "pink") var target_material: String = "marble"
 @export_range(0, 999, 1) var marbles_per_matching_die: int = 1
 @export var grant_only_when_material_scored: bool = true
 
