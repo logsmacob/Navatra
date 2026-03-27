@@ -21,12 +21,6 @@ const GENERAL_MODIFIER_LABELS := {
 	"base_marbles_per_round": "Base Marbles per Round",
 	"shop_rerolls": "Re-Rolls",
 	"shop_playable_hands": "Playable Hands",
-	"face_1_to": "Face [1]",
-	"face_2_to": "Face [2]",
-	"face_3_to": "Face [3]",
-	"face_4_to": "Face [4]",
-	"face_5_to": "Face [5]",
-	"face_6_to": "Face [6]",
 	"base_1_value": "Face Value [1]",
 	"base_2_value": "Face Value [2]",
 	"base_3_value": "Face Value [3]",
@@ -52,22 +46,13 @@ const GENERAL_MODIFIER_LABELS := {
 @export var rarity: TrinketRarity = TrinketRarity.COMMON
 
 @export_group("Scoring")
-@export var base: int = 0
-@export var mult: int = 0
+@export var base_mult: Vector2i = Vector2i.ZERO
 
 @export_subgroup("Run Modifiers")
 @export var luck: int = 0
 @export var base_marbles_per_round: int = 0
 @export var shop_rerolls: int = 0
 @export var shop_playable_hands: int = 0
-
-@export_subgroup("Face Mapping")
-@export var face_1_to: int = 0
-@export var face_2_to: int = 0
-@export var face_3_to: int = 0
-@export var face_4_to: int = 0
-@export var face_5_to: int = 0
-@export var face_6_to: int = 0
 
 @export_subgroup("Face Base Bonuses")
 @export var base_1_value: int = 0
@@ -113,12 +98,6 @@ func get_general_modifier_changes() -> Dictionary:
 		"base_marbles_per_round": base_marbles_per_round,
 		"shop_rerolls": shop_rerolls,
 		"shop_playable_hands": shop_playable_hands,
-		"face_1_to": face_1_to,
-		"face_2_to": face_2_to,
-		"face_3_to": face_3_to,
-		"face_4_to": face_4_to,
-		"face_5_to": face_5_to,
-		"face_6_to": face_6_to,
 		"base_1_value": base_1_value,
 		"base_2_value": base_2_value,
 		"base_3_value": base_3_value,
@@ -135,8 +114,8 @@ func get_general_modifier_changes() -> Dictionary:
 
 func get_runtime_scoring_bonus(_play_context: Dictionary) -> Dictionary:
 	return {
-		"base": base,
-		"mult": mult,
+		"base": base_mult.x,
+		"mult": base_mult.y,
 		"currency": 0,
 	}
 
@@ -153,9 +132,6 @@ func _format_signed_modifier(value: int) -> String:
 		return "+%d" % value
 	return "%d" % value
 
-func _format_face_modifier(value: int) -> String:
-	return "[%d]" % value
-
 func _get_texture():
 	return texture
 
@@ -163,10 +139,10 @@ func _get_texture():
 # Description
 func get_display_discription() -> String:
 	var effects: Array[String] = []
-	if base != 0:
-		effects.append("Triggered Base %+d" % base)
-	if mult != 0:
-		effects.append("Triggered Mult %+d" % mult)
+	if base_mult.x != 0:
+		effects.append("Triggered Base %+d" % base_mult.x)
+	if base_mult.y != 0:
+		effects.append("Triggered Mult %+d" % base_mult.y)
 
 	for key in get_general_modifier_changes().keys():
 		var value := int(get_general_modifier_changes()[key])
@@ -188,9 +164,6 @@ func _get_modifier_effect_text(key: String, value: int) -> String:
 
 	if key.begins_with("mult_") and key.ends_with("_value"):
 		return "%s %s Mult" % [GENERAL_MODIFIER_LABELS.get(key, key), signed_value]
-
-	if key.begins_with("face_") and key.ends_with("_to"):
-		return "%s into %s" % [GENERAL_MODIFIER_LABELS.get(key, key), _format_face_modifier(value)]
 
 	return "%s %s" % [GENERAL_MODIFIER_LABELS.get(key, key), signed_value]
 
