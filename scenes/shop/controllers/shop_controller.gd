@@ -8,6 +8,7 @@ const DEFAULT_BALANCE_CONFIG := preload("res://data/config/balance/shop_balance.
 
 @export var shop_view: ShopView
 @export var trinket_pool: Array[TrinketData] = []
+## Tunable shop economy and rarity settings.
 @export var balance_config: ShopBalanceConfig = DEFAULT_BALANCE_CONFIG
 
 var _offers: Array[TrinketData] = []

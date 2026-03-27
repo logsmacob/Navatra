@@ -24,6 +24,7 @@ var _next_round_quota_reduction: int = 0
 var _next_round_score_multiplier_bonus: float = 0.0
 
 var _round_progression_service: RoundProgressionService = RoundProgressionService.new()
+## Centralized round-clear marble reward tuning.
 var _run_reward_balance_config: RunRewardBalanceConfig = DEFAULT_RUN_REWARD_BALANCE_CONFIG
 
 func reset_run() -> void:

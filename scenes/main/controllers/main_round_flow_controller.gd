@@ -7,6 +7,7 @@ signal shop_requested
 
 const DEFAULT_BALANCE_CONFIG := preload("res://data/config/balance/hand_upgrade_balance.tres")
 
+## Tunable hand-upgrade option count, reroll cost, and rarity values.
 @export var balance_config: HandUpgradeBalanceConfig = DEFAULT_BALANCE_CONFIG
 
 var _hand_type_upgrades: HandTypeUpgradesView
