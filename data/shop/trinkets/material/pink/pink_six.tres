@@ -10,12 +10,12 @@ region = Rect2(32, 16, 16, 16)
 [resource]
 script = ExtResource("1_4ffco")
 mult = 3
-selected_die_index = 4
+selected_die_index = 5
 target_material = "pink"
 marbles_per_matching_die = 0
 texture = SubResource("AtlasTexture_gimpn")
-id = "pink_die_five"
-item_name = "Pink Die Five"
+id = "pink_die_six"
+item_name = "Pink Die Six"
 cost = 10
 rarity = 2
 metadata/_custom_type_script = "uid://d36f2lse5qsv"

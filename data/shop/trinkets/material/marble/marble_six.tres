@@ -9,11 +9,12 @@ region = Rect2(16, 16, 16, 16)
 
 [resource]
 script = ExtResource("1_pgawh")
-selected_die_index = 4
+selected_die_index = 5
 marbles_per_matching_die = 2
 texture = SubResource("AtlasTexture_gimpn")
-id = "marble_die_five"
-item_name = "Marble Die Five"
+id = "marble_die_six"
+item_name = "Marble Die Six"
 cost = 10
 rarity = 2
+max_quantity = 1
 metadata/_custom_type_script = "uid://d36f2lse5qsv"

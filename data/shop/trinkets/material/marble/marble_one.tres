@@ -15,4 +15,5 @@ id = "marble_die_one"
 item_name = "Marble Die One"
 cost = 10
 rarity = 2
+max_quantity = 1
 metadata/_custom_type_script = "uid://d36f2lse5qsv"

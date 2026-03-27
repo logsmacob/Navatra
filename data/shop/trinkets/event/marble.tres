@@ -1,7 +1,22 @@
 [gd_resource type="Resource" script_class="ChanceTrinketData" format=3 uid="uid://c5bxpb41kbbnc"]
 
 [ext_resource type="Script" uid="uid://5q71o1b2d1kb" path="res://core/resources/trinkets/chance_trinket_data.gd" id="1_s8w1d"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="2_qqauy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3ar0"]
+atlas = ExtResource("2_qqauy")
+region = Rect2(0, 16, 16, 16)
 
 [resource]
 script = ExtResource("1_s8w1d")
+marbles = 5
+activation_chance_percent = 15.0
+use_hand_type_condition = false
+use_face_condition = true
+texture = SubResource("AtlasTexture_r3ar0")
+id = "magic_balls"
+item_name = "Magic Balls"
+cost = 6
+rarity = 1
+max_quantity = 6
 metadata/_custom_type_script = "uid://5q71o1b2d1kb"
