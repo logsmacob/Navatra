@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="ShopBalanceConfig" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ShopBalanceConfig" format=3 uid="uid://8hucovqojmkn"]
 
-[ext_resource type="Script" path="res://core/config/shop_balance_config.gd" id="1_shop_balance"]
+[ext_resource type="Script" uid="uid://7iwoncesphm6" path="res://core/config/shop_balance_config.gd" id="1_shop_balance"]
 
 [resource]
 script = ExtResource("1_shop_balance")
+round_cost_multiplier_step = 1.0
+reroll_escalation_step = 1
