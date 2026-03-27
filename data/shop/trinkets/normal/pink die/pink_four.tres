@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TrinketData" format=3 uid="uid://cg2qsrxogu1o8"]
+
+[ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/trinket_data.gd" id="1_uwlxi"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="2_ljoac"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icon"]
+atlas = ExtResource("2_ljoac")
+region = Rect2(16, 48, 16, 16)
+
+[resource]
+script = ExtResource("1_uwlxi")
+texture = SubResource("AtlasTexture_icon")
+id = "pink_four"
+item_name = "Pink Four"
+cost = 8
+rarity = 2
+base_4_value = -6
+mult_4_value = 1

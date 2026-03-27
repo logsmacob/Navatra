@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TrinketData" format=3 uid="uid://bf8acu5hr28hc"]
+
+[ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/trinket_data.gd" id="1_7r3qh"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="2_4eunk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icon"]
+atlas = ExtResource("2_4eunk")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+script = ExtResource("1_7r3qh")
+texture = SubResource("AtlasTexture_icon")
+id = "blue_two"
+item_name = "Blue Two"
+cost = 4
+rarity = 1
+base_1_value = -1
+base_2_value = 6
+base_3_value = -1

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DieMaterialTrinketData" format=3 uid="uid://otq2p6xqcvdt"]
+
+[ext_resource type="Script" uid="uid://d36f2lse5qsv" path="res://core/resources/trinkets/die_material_trinket_data.gd" id="1_5m448"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="2_xkbra"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gimpn"]
+atlas = ExtResource("2_xkbra")
+region = Rect2(32, 16, 16, 16)
+
+[resource]
+script = ExtResource("1_5m448")
+mult = 3
+target_material = "pink"
+marbles_per_matching_die = 0
+texture = SubResource("AtlasTexture_gimpn")
+id = "pink_die_one"
+item_name = "Pink Die One"
+cost = 10
+rarity = 2
+metadata/_custom_type_script = "uid://d36f2lse5qsv"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TrinketData" format=3 uid="uid://d0pic6eu62f6n"]
+
+[ext_resource type="Script" uid="uid://1aoacss5301g" path="res://core/resources/trinket_data.gd" id="1_c6snm"]
+[ext_resource type="Texture2D" uid="uid://071vllrujpst" path="res://assets/sprites/dice icons.png" id="2_4c38e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icon"]
+atlas = ExtResource("2_4c38e")
+region = Rect2(32, 48, 16, 16)
+
+[resource]
+script = ExtResource("1_c6snm")
+texture = SubResource("AtlasTexture_icon")
+id = "blue_five"
+item_name = "Blue Five"
+cost = 4
+rarity = 1
+base_4_value = -1
+base_5_value = 6
+base_6_value = -1
