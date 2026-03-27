@@ -100,7 +100,7 @@ func get_general_modifier_changes() -> Dictionary:
 	}
 
 func get_runtime_scoring_bonus(_play_context: Dictionary) -> Dictionary:
-	return {"base": 0, "mult": 0, "currency": 0}
+	return {"base": 0, "mult": 0, "currency": 0, "temp_rerolls_for_round": 0}
 
 func apply_purchase_effects(game_state: Node) -> void:
 	# Child classes can override this for one-time side-effects.

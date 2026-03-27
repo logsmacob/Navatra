@@ -42,11 +42,14 @@ func handle_played_hand_ready(hand_data: DiceHand) -> void:
 	if not _can_continue_resolution():
 		return
 	var material_currency_bonus := _hand.get_scoring_material_currency_bonus() + int(trinket_bonus.get("currency", 0))
+	var round_reroll_bonus := int(trinket_bonus.get("temp_rerolls_for_round", 0))
 	if material_currency_bonus > 0:
 		GameState.add_currency(material_currency_bonus)
+	if round_reroll_bonus > 0:
+		GameState.add_current_round_rerolls(round_reroll_bonus)
 	print(
-		"Played hand: %s | points=%d | material_bonus=%d"
-		% [play_result.get("hand_name", "Unknown"), applied_score, material_currency_bonus]
+		"Played hand: %s | points=%d | material_bonus=%d | reroll_bonus=%d"
+		% [play_result.get("hand_name", "Unknown"), applied_score, material_currency_bonus, round_reroll_bonus]
 	)
 	GameState.process_played_hand(applied_score)
 
@@ -95,7 +98,7 @@ func handle_reset_roll_finished() -> void:
 
 func _apply_runtime_trinket_bonuses(hand_data: DiceHand) -> Dictionary:
 	if _hand == null or hand_data == null or hand_data.is_empty():
-		return {"base": 0, "mult": 0, "currency": 0}
+		return {"base": 0, "mult": 0, "currency": 0, "temp_rerolls_for_round": 0}
 
 	var hand_type := HandEvaluatorService.new().evaluate_hand(hand_data.to_array())
 	var play_context := {
@@ -104,7 +107,7 @@ func _apply_runtime_trinket_bonuses(hand_data: DiceHand) -> Dictionary:
 		"scoring_die_materials": _hand.get_scoring_die_materials(),
 	}
 
-	var total := {"base": 0, "mult": 0, "currency": 0}
+	var total := {"base": 0, "mult": 0, "currency": 0, "temp_rerolls_for_round": 0}
 	for trinket: TrinketData in GameState.get_owned_trinkets():
 		if trinket == null:
 			continue
@@ -112,5 +115,6 @@ func _apply_runtime_trinket_bonuses(hand_data: DiceHand) -> Dictionary:
 		total["base"] = int(total.get("base", 0)) + int(bonus.get("base", 0))
 		total["mult"] = int(total.get("mult", 0)) + int(bonus.get("mult", 0))
 		total["currency"] = int(total.get("currency", 0)) + int(bonus.get("currency", 0))
+		total["temp_rerolls_for_round"] = int(total.get("temp_rerolls_for_round", 0)) + int(bonus.get("temp_rerolls_for_round", 0))
 
 	return total

@@ -74,6 +74,12 @@ func consume_reroll() -> bool:
 	total_rerolls_used += 1
 	return true
 
+func add_current_round_rerolls(amount: int) -> bool:
+	if amount <= 0:
+		return false
+	rerolls_remaining += amount
+	return true
+
 func process_played_hand(score: int) -> Dictionary:
 	var safe_score: int = maxi(score, 0)
 	var quota_before := quota_remaining

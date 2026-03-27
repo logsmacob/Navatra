@@ -20,7 +20,7 @@ func apply_purchase_effects(game_state: Node) -> void:
 func get_runtime_scoring_bonus(play_context: Dictionary) -> Dictionary:
 	var materials: Array = play_context.get("scoring_die_materials", [])
 	if materials.is_empty():
-		return {"base": base, "mult": mult, "currency": 0}
+		return {"base": base, "mult": mult, "currency": 0, "temp_rerolls_for_round": 0}
 
 	var matching_count := 0
 	for material in materials:
@@ -28,12 +28,13 @@ func get_runtime_scoring_bonus(play_context: Dictionary) -> Dictionary:
 			matching_count += 1
 
 	if grant_only_when_material_scored and matching_count <= 0:
-		return {"base": 0, "mult": 0, "currency": 0}
+		return {"base": 0, "mult": 0, "currency": 0, "temp_rerolls_for_round": 0}
 
 	return {
 		"base": base,
 		"mult": mult,
 		"currency": matching_count * marbles_per_matching_die,
+		"temp_rerolls_for_round": 0,
 	}
 
 func get_display_description() -> String:

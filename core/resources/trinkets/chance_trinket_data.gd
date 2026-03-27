@@ -4,6 +4,8 @@ extends TrinketData
 @export_group("Triggered Scoring")
 @export var base: int = 0
 @export var mult: int = 0
+@export var marbles: int = 0
+@export var temp_rerolls_for_round: int = 0
 
 @export_group("Chance Variant")
 @export_range(0.0, 100.0, 0.1) var activation_chance_percent: float = 100.0
@@ -28,6 +30,10 @@ func get_display_description() -> String:
 		effects.append("Triggered Base %+d" % base)
 	if mult != 0:
 		effects.append("Triggered Mult %+d" % mult)
+	if marbles != 0:
+		effects.append("Triggered Marbles %+d" % marbles)
+	if temp_rerolls_for_round != 0:
+		effects.append("Triggered Temp Re-Rolls %+d" % temp_rerolls_for_round)
 
 	var modifiers := get_general_modifier_changes()
 	for key in ModifierSchema.get_general_modifier_keys():
@@ -49,10 +55,15 @@ func get_display_discription() -> String:
 
 func get_runtime_scoring_bonus(play_context: Dictionary) -> Dictionary:
 	if not _matches_context(play_context):
-		return {"base": 0, "mult": 0, "currency": 0}
+		return {"base": 0, "mult": 0, "currency": 0, "temp_rerolls_for_round": 0}
 	if not _roll_activation_chance():
-		return {"base": 0, "mult": 0, "currency": 0}
-	return {"base": base, "mult": mult, "currency": 0}
+		return {"base": 0, "mult": 0, "currency": 0, "temp_rerolls_for_round": 0}
+	return {
+		"base": base,
+		"mult": mult,
+		"currency": marbles,
+		"temp_rerolls_for_round": temp_rerolls_for_round,
+	}
 
 func _matches_context(play_context: Dictionary) -> bool:
 	if use_hand_type_condition:
