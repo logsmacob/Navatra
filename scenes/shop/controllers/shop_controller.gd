@@ -3,7 +3,9 @@ extends Node
 class_name ShopController
 
 const MAIN_SCENE_PATH := "res://scenes/main/main.tscn"
-const REROLL_COST: int = 3
+const REROLL_BASE_COST: int = 3
+const ROUND_COST_MULTIPLIER_STEP: float = 0.2
+const SHOP_REROLL_ESCALATION_STEP: int = 1
 const TRINKET_DATA_ROOT := "res://data/shop/trinkets"
 
 @export var shop_view: ShopView
@@ -14,12 +16,14 @@ var _offers: Array[TrinketData] = []
 var _offer_service: ShopOfferService = ShopOfferService.new()
 var _purchase_service: ShopPurchaseService = ShopPurchaseService.new()
 var _transaction_port: ShopTransactionPort
+var _shop_rerolls_purchased: int = 0
 
 func _ready() -> void:
 	if shop_view == null:
 		return
 
 	_populate_trinket_pool_from_data()
+	_shop_rerolls_purchased = 0
 	_transaction_port = GameStateShopTransactionPort.new(GameState)
 	shop_view.offer_purchase_requested.connect(_on_offer_purchase_requested)
 	shop_view.reroll_requested.connect(_on_reroll_requested)
@@ -27,7 +31,7 @@ func _ready() -> void:
 	GameState.currency_changed.connect(_on_currency_changed)
 	GameState.general_modifiers_changed.connect(_on_general_modifiers_changed)
 
-	shop_view.set_roll_cost(REROLL_COST)
+	shop_view.set_roll_cost(_get_scaled_shop_reroll_cost())
 	_roll_offers()
 	_refresh_view()
 
@@ -44,11 +48,13 @@ func _on_offer_purchase_requested(index: int) -> void:
 	_refresh_view()
 
 func _on_reroll_requested() -> void:
-	if not _purchase_service.can_afford_purchase(GameState.currency, REROLL_COST):
+	var reroll_cost := _get_scaled_shop_reroll_cost()
+	if not _purchase_service.can_afford_purchase(GameState.currency, reroll_cost):
 		return
-	if not GameState.spend_currency(REROLL_COST):
+	if not GameState.spend_currency(reroll_cost):
 		return
 
+	_shop_rerolls_purchased += 1
 	_roll_offers()
 	_refresh_view()
 
@@ -65,22 +71,46 @@ func _on_general_modifiers_changed(_modifiers: Dictionary) -> void:
 	_refresh_view()
 
 func _roll_offers() -> void:
-	_offers = _offer_service.roll_weighted_offers(
+	var rolled_offers := _offer_service.roll_weighted_offers(
 		trinket_pool,
 		max(GameState.round_index, 1),
 		offer_count,
 		true,
 		GameState.get_shop_item_counts()
 	)
+	_offers.clear()
+	for offer: TrinketData in rolled_offers:
+		if offer == null:
+			continue
+		_offers.append(_build_round_scaled_offer(offer))
 	shop_view.set_offers(_offers, GameState.currency)
 
 func _refresh_view() -> void:
 	if shop_view == null:
 		return
+	var reroll_cost := _get_scaled_shop_reroll_cost()
 	shop_view.set_currency_display(GameState.currency)
-	shop_view.set_reroll_enabled(_purchase_service.can_afford_purchase(GameState.currency, REROLL_COST))
+	shop_view.set_roll_cost(reroll_cost)
+	shop_view.set_reroll_enabled(_purchase_service.can_afford_purchase(GameState.currency, reroll_cost))
 	shop_view.refresh_offer_affordability(GameState.currency)
 	shop_view.set_inventory_lines(_build_inventory_lines(GameState.get_owned_trinkets()))
+
+func _build_round_scaled_offer(source_offer: TrinketData) -> TrinketData:
+	var priced_offer := source_offer.duplicate(true) as TrinketData
+	if priced_offer == null:
+		return source_offer
+	priced_offer.cost = _get_scaled_cost(source_offer.cost)
+	return priced_offer
+
+func _get_scaled_shop_reroll_cost() -> int:
+	return _get_scaled_cost(REROLL_BASE_COST) + (_shop_rerolls_purchased * SHOP_REROLL_ESCALATION_STEP)
+
+func _get_scaled_cost(base_cost: int) -> int:
+	if base_cost <= 0:
+		return 0
+	var current_round := max(GameState.round_index, 1)
+	var round_multiplier := 1.0 + (float(current_round - 1) * ROUND_COST_MULTIPLIER_STEP)
+	return maxi(int(ceil(float(base_cost) * round_multiplier)), 1)
 
 func _populate_trinket_pool_from_data() -> void:
 	var discovered_trinkets := _load_trinkets_recursive(TRINKET_DATA_ROOT)
