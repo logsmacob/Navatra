@@ -23,7 +23,6 @@ const RARITY_COLORS := {
 
 @export_group("Economy")
 @export var cost: int = 0
-@export_range(0.0, 999.0, 0.1) var weight: float = 1.0
 @export var rarity: TrinketRarity = TrinketRarity.COMMON
 
 @export_subgroup("Run Modifiers")
@@ -76,6 +75,12 @@ func get_shop_tracking_key() -> String:
 	if not resource_path.is_empty():
 		return resource_path
 	return get_display_name()
+
+
+func get_shop_weight() -> float:
+	# Lower rarity index means more common shop appearance.
+	# COMMON (0) = 4, UNCOMMON (1) = 3, RARE (2) = 2, EPIC (3) = 1.
+	return max(1.0, float(TrinketRarity.size() - rarity))
 
 
 # Modifier dictionary
