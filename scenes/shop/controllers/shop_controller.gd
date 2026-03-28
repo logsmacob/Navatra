@@ -61,12 +61,20 @@ func _on_reroll_requested() -> void:
 
 func _on_continue_requested() -> void:
 	GameState.start_next_round()
-	if main_scene == null:
-		push_warning("ShopController: main_scene is not assigned.")
+	var target_scene := _resolve_main_scene()
+	if target_scene == null:
+		push_warning("ShopController: main_scene is not assigned or invalid.")
 		return
 	var scene_tree := get_tree()
 	if scene_tree != null:
-		scene_tree.change_scene_to_packed(main_scene)
+		scene_tree.change_scene_to_packed(target_scene)
+
+func _resolve_main_scene() -> PackedScene:
+	if main_scene != null and main_scene.can_instantiate():
+		return main_scene
+	if DEFAULT_MAIN_SCENE != null and DEFAULT_MAIN_SCENE.can_instantiate():
+		return DEFAULT_MAIN_SCENE
+	return null
 
 func _on_currency_changed(_amount: int) -> void:
 	_refresh_view()
