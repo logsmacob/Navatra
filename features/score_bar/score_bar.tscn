@@ -28,7 +28,7 @@ score_controller = NodePath("ScoreController")
 script = ExtResource("5_meta")
 corner_label = NodePath("../Corner Label")
 main_score = NodePath("../Main Score Label")
-general_modifiers_label_path = NodePath("../InfoScreen/GeneralModifiers")
+general_modifiers_label_path = NodePath("")
 
 [node name="ScoreController" type="Node" parent="." unique_id=1081461992]
 script = ExtResource("7_score")
