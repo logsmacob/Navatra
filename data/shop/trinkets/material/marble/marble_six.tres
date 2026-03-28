@@ -16,6 +16,6 @@ id = "marble_die_six"
 item_name = "Marble Die Six"
 cost = 12
 rarity = 3
+min_round = 4
 max_quantity = 1
 metadata/_custom_type_script = "uid://d36f2lse5qsv"
-min_round = 4

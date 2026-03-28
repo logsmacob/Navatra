@@ -17,6 +17,6 @@ id = "blue_die_one"
 item_name = "Blue Die One"
 cost = 11
 rarity = 2
+min_round = 3
 max_quantity = 1
 metadata/_custom_type_script = "uid://d36f2lse5qsv"
-min_round = 3

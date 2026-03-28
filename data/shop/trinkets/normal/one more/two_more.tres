@@ -14,5 +14,4 @@ id = "two_more"
 item_name = "Two More"
 cost = 3
 base_2_value = 1
-rarity = 0
 max_quantity = 1

@@ -21,6 +21,6 @@ texture = SubResource("AtlasTexture_r3ar0")
 id = "luck_charm"
 item_name = "Luck Charm"
 cost = 7
+rarity = 2
 max_quantity = 3
 metadata/_custom_type_script = "uid://5q71o1b2d1kb"
-rarity = 2
