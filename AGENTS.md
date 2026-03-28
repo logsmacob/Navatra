@@ -73,3 +73,18 @@ $HUD/QuotaLabel.text = str(GameState.run.quota_remaining)
 EventBus.emit_signal("hand_submitted", dice_values)
 # HUD/score bar listen to EventBus/GameState signals and refresh themselves.
 ```
+
+---
+
+## Agent Change Checklist
+
+When making project changes, review and apply guidance from:
+
+- `docs/development/godot_large_project_best_practices.md`
+
+Priority focus while implementing changes:
+
+- Keep UI scripts presentation-only and signal-emitting
+- Route gameplay updates through controllers/services/model layers
+- Favor signal/event-driven communication over direct cross-system calls
+- Preserve loose coupling and modular feature boundaries
