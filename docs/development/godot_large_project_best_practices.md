@@ -16,17 +16,17 @@ Prefer organizing by feature rather than by file type.
 
 ```text
 /features/
-    inventory/
-        inventory_ui.tscn
-        inventory_logic.gd
-    dialogue/
-    combat/
+	inventory/
+		inventory_ui.tscn
+		inventory_logic.gd
+	dialogue/
+	combat/
 /core/
-    game_manager.gd
-    event_bus.gd
+	game_manager.gd
+	event_bus.gd
 /ui/
-    theme/
-    shared/
+	theme/
+	shared/
 ```
 
 Why:
@@ -57,7 +57,7 @@ Bad:
 ```gdscript
 # inventory_ui.gd
 func _on_button_pressed():
-    player.add_item(item)
+	player.add_item(item)
 ```
 
 Good:
@@ -67,11 +67,11 @@ Good:
 signal item_clicked(item_id)
 
 func _on_button_pressed():
-    item_clicked.emit(item_id)
+	item_clicked.emit(item_id)
 
 # inventory_controller.gd
 func _on_ui_item_clicked(item_id):
-    inventory.add(item_id)
+	inventory.add(item_id)
 ```
 
 ### Use signals for system communication
@@ -203,7 +203,7 @@ Avoid hardcoded scene paths where possible.
 
 ```gdscript
 if not inventory_scene:
-    inventory_scene = preload("res://...").instantiate()
+	inventory_scene = preload("res://...").instantiate()
 ```
 
 ## 6) Performance (UI-heavy projects)
@@ -253,7 +253,7 @@ Example:
 
 ```text
 BaseScreen (MarginContainer)
-    ↓
+	↓
 InventoryScreen
 SettingsScreen
 ```
