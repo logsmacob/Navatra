@@ -1,4 +1,4 @@
-extends Control
+extends TextureButton
 ## Visual/controller wrapper for a single [DieInstance].
 class_name DieUI
 
@@ -8,7 +8,6 @@ signal die_selected(selected: bool)
 
 @onready var die_logic: DieLogic = $DieLogic
 @onready var die_visuals: DieVisuals = $DieVisuals
-@onready var input_button: Button = $Button
 
 var die: DieInstance:
 	get:
@@ -23,6 +22,10 @@ var is_selected: bool:
 		die_logic.set_selected(value)
 
 var is_interaction_enabled: bool = true
+
+func _ready() -> void:
+	if not pressed.is_connected(_on_pressed):
+		pressed.connect(_on_pressed)
 
 func set_die(new_die: DieInstance) -> void:
 	die_logic.set_die(new_die)
@@ -51,5 +54,4 @@ func _on_die_visuals_anim_roll_finished(_die: DieUI) -> void:
 
 func set_interaction_enabled(enabled: bool) -> void:
 	is_interaction_enabled = enabled
-	if input_button != null:
-		input_button.disabled = not enabled
+	self.disabled = not enabled
