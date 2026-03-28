@@ -74,10 +74,10 @@ Best-practices target: shared/cross-feature communication through signal buses (
 
 2. **Promote gameplay transitions to explicit events**
    - Define and document event payloads for key transitions:
-     - hand submitted / resolved
-     - reroll consumed
-     - reward phase entered
-     - round completed
+	 - hand submitted / resolved
+	 - reroll consumed
+	 - reward phase entered
+	 - round completed
 
 3. **Document event ownership per feature**
    - Extend `docs/architecture/event_flow.md` with a producer/consumer table.
