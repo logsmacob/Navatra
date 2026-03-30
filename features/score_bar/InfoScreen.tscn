@@ -11,9 +11,30 @@ bg_color = Color(0, 0, 0, 0.75686276)
 shader = ExtResource("2_w8cbo")
 shader_parameter/radius = 28.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7303h"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 1
+
 [sub_resource type="LabelSettings" id="LabelSettings_nwx5f"]
 font = ExtResource("1_fck6u")
-font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_kt82y"]
+font = ExtResource("1_fck6u")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bf31"]
+font = ExtResource("1_fck6u")
 
 [node name="InfoScreen" type="PanelContainer" unique_id=451834390 node_paths=PackedStringArray("general_modifiers_label", "hand_types_label", "face_label")]
 self_modulate = Color(0, 0, 0, 1)
@@ -27,26 +48,44 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_w8cbo")
 script = ExtResource("2_info")
-general_modifiers_label = NodePath("GeneralModifiers")
-hand_types_label = NodePath("HandType")
-face_label = NodePath("Face")
+general_modifiers_label = NodePath("PanelContainer/HBoxContainer/GeneralModifiers")
+hand_types_label = NodePath("PanelContainer/HBoxContainer/HandType")
+face_label = NodePath("PanelContainer/HBoxContainer/Face")
 
 [node name="Blur2" type="ColorRect" parent="." unique_id=2083620260]
 material = SubResource("ShaderMaterial_w8cbo")
 layout_mode = 2
 color = Color(1, 1, 1, 0.15)
 
-[node name="GeneralModifiers" type="Label" parent="." unique_id=186246805]
-custom_minimum_size = Vector2(520, 0)
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1643494845]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7303h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=978528270]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="GeneralModifiers" type="Label" parent="PanelContainer/HBoxContainer" unique_id=186246805]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
-text = "Stats"
+text = "Test tes tes
+test test test
+testtesttest"
 label_settings = SubResource("LabelSettings_nwx5f")
-autowrap_mode = 3
 
-[node name="HandType" type="Label" parent="." unique_id=261608672]
+[node name="HandType" type="Label" parent="PanelContainer/HBoxContainer" unique_id=261608672]
 layout_mode = 2
+text = "Test tes tes
+test test test
+testtesttest"
+label_settings = SubResource("LabelSettings_kt82y")
 
-[node name="Face" type="Label" parent="." unique_id=826505449]
+[node name="Face" type="Label" parent="PanelContainer/HBoxContainer" unique_id=826505449]
 layout_mode = 2
+text = "Test tes tes
+test test test
+testtesttest"
+label_settings = SubResource("LabelSettings_3bf31")

@@ -56,7 +56,7 @@ func _build_face_values_text(modifiers: Dictionary) -> String:
 	for face_value in FACE_VALUES:
 		var base_value := int(modifiers.get("base_%d_value" % face_value, face_value))
 		var mult_value := int(modifiers.get("mult_%d_value" % face_value, 0))
-		lines.append("- Face %d: Base %d | Mult %s" % [face_value, base_value, _format_signed_modifier(mult_value)])
+		lines.append("- Face %d: \n   > [Base %d]  [Mult %s]" % [face_value, base_value, _format_signed_modifier(mult_value)])
 	return "\n".join(lines)
 
 func _build_hand_types_text() -> String:
@@ -67,8 +67,8 @@ func _build_hand_types_text() -> String:
 		var base_value := int(values.get("base", 0))
 		var mult_value := int(values.get("mult", 0))
 		lines.append(
-			"- %s: Base %d | Mult %d | Recipe: %s"
-			% [str(row.label), base_value, mult_value, str(row.recipe)]
+			"- %s: %s\n   > [Base %d]  [Mult %d]"
+			% [str(row.label), str(row.recipe), base_value, mult_value]
 		)
 	return "\n".join(lines)
 
