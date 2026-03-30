@@ -3,6 +3,9 @@ class_name StatsScreen
 
 const GENERAL_MODIFIER_ROWS := ModifierSchema.GENERAL_MODIFIER_ROWS
 const FACE_VALUES := [1, 2, 3, 4, 5, 6]
+const TITLE_SIZE := 26
+const BODY_SIZE := 18
+const SUBTEXT_SIZE := 14
 const HAND_TYPE_ROWS := [
 	{"type": HandEvaluatorService.HandType.HIGH_DIE, "label": "High Die", "recipe": "Highest single die only"},
 	{"type": HandEvaluatorService.HandType.ONE_PAIR, "label": "One Pair", "recipe": "Two dice with the same value"},
@@ -43,44 +46,60 @@ func _on_general_modifiers_changed(modifiers: Dictionary) -> void:
 	update_general_modifiers(modifiers)
 
 func _build_general_modifier_text(modifiers: Dictionary) -> String:
-	var lines: Array[String] = ["General Modifiers"]
+	var lines: Array[String] = [_format_title_bbcode("General Modifiers")]
 	for row in GENERAL_MODIFIER_ROWS:
 		if str(row.key).begins_with("base_") or str(row.key).begins_with("mult_"):
 			continue
 		var value := int(modifiers.get(row.key, 0))
-		lines.append("- %s" % _format_general_modifier_line(str(row.key), str(row.label), value))
+		lines.append(_format_body_bbcode("• %s" % _format_general_modifier_line(str(row.key), str(row.label), value)))
 	return "\n".join(lines)
 
 func _build_face_values_text(modifiers: Dictionary) -> String:
-	var lines: Array[String] = ["Face Values"]
+	var lines: Array[String] = [_format_title_bbcode("Face Values")]
 	for face_value in FACE_VALUES:
 		var base_value := int(modifiers.get("base_%d_value" % face_value, face_value))
 		var mult_value := int(modifiers.get("mult_%d_value" % face_value, 0))
 		lines.append(
-			"- Face %d: \n   > %s  %s"
-			% [face_value, _format_base_bbcode(base_value), _format_mult_bbcode(_format_signed_modifier(mult_value))]
+			"%s\n%s"
+			% [
+				_format_body_bbcode("• [b]Face %d[/b]" % face_value),
+				_format_subtext_bbcode("%s  %s" % [_format_base_bbcode(base_value), _format_mult_bbcode(_format_signed_modifier(mult_value))]),
+			]
 		)
 	return "\n".join(lines)
 
 func _build_hand_types_text() -> String:
-	var lines: Array[String] = ["Hand Types"]
+	var lines: Array[String] = [_format_title_bbcode("Hand Types")]
 	for row in HAND_TYPE_ROWS:
 		var hand_type := int(row.type)
 		var values := _score_rules.get_scoring_values(hand_type)
 		var base_value := int(values.get("base", 0))
 		var mult_value := int(values.get("mult", 0))
 		lines.append(
-			"- %s: %s\n   > %s  %s"
-			% [str(row.label), str(row.recipe), _format_base_bbcode(base_value), _format_mult_bbcode(str(mult_value))]
+			"%s\n%s\n%s"
+			% [
+				_format_body_bbcode("• [b]%s[/b]" % str(row.label)),
+				_format_subtext_bbcode(str(row.recipe)),
+				_format_subtext_bbcode("%s  %s" % [_format_base_bbcode(base_value), _format_mult_bbcode(str(mult_value))]),
+			]
 		)
 	return "\n".join(lines)
 
+func _format_title_bbcode(text: String) -> String:
+	return "[b][font_size=%d]%s[/font_size][/b]" % [TITLE_SIZE, text]
+
+func _format_body_bbcode(text: String) -> String:
+	return "[font_size=%d]%s[/font_size]" % [BODY_SIZE, text]
+
+func _format_subtext_bbcode(text: String) -> String:
+	return "[font_size=%d]%s[/font_size]" % [SUBTEXT_SIZE, text]
+
 
 func _format_base_bbcode(value: Variant) -> String:
-	return "[color=#62A8FF][Base %s][/color]" % str(value)
+	return "[b][color=#62A8FF]Base %s[/color][/b]" % str(value)
 
 func _format_mult_bbcode(value: Variant) -> String:
-	return "[color=#FF7AD9][Mult %s][/color]" % str(value)
+	return "[b][color=#FF7AD9]Mult %s[/color][/b]" % str(value)
 
 func _format_signed_modifier(value: int) -> String:
 	if value > 0:
