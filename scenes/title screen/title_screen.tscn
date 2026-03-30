@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://b15xaclrmafje" path="res://assets/sprites/Navatra Icon.png" id="2_s4lrb"]
 [ext_resource type="Theme" uid="uid://crwvosv3l8ktn" path="res://assets/UI/style_boxes/light pannel theme.tres" id="4_iw6vl"]
 [ext_resource type="Texture2D" uid="uid://cqanecxpnjd0j" path="res://assets/UI/Buttons/Texture/Die anime.png" id="5_tpjfi"]
-[ext_resource type="FontFile" uid="uid://bfmc8ldjpblsv" path="res://assets/fonts/pixeloid-font/PixeloidSansBold-1jpBg.ttf" id="6_iw6vl"]
-[ext_resource type="Script" path="res://core/node_classes/hover_effect.gd" id="7_isuq1"]
+[ext_resource type="Script" uid="uid://bnyerfbxpaluc" path="res://core/node_classes/hover_effect.gd" id="7_isuq1"]
+[ext_resource type="Texture2D" uid="uid://6wo7bjvmef61" path="res://assets/sprites/link icons.png" id="7_tpjfi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgrm8"]
 shader = ExtResource("1_sa3yf")
@@ -40,24 +40,34 @@ corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
-expand_margin_left = 32.0
-expand_margin_top = 32.0
-expand_margin_right = 32.0
-expand_margin_bottom = 32.0
+expand_margin_left = 16.0
+expand_margin_top = 16.0
+expand_margin_right = 16.0
+expand_margin_bottom = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lf2sl"]
 atlas = ExtResource("5_tpjfi")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="LabelSettings" id="LabelSettings_isuq1"]
-font = ExtResource("6_iw6vl")
-font_size = 64
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvwck"]
+atlas = ExtResource("7_tpjfi")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="LabelSettings" id="LabelSettings_tpjfi"]
-font = ExtResource("6_iw6vl")
-font_size = 46
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_anget"]
+atlas = ExtResource("7_tpjfi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx84t"]
+atlas = ExtResource("7_tpjfi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukfea"]
+atlas = ExtResource("7_tpjfi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1ekx"]
+atlas = ExtResource("7_tpjfi")
+region = Rect2(128, 0, 32, 32)
 
 [node name="Title Screen" type="Control" unique_id=888533972 node_paths=PackedStringArray("play", "discord", "quit")]
 layout_mode = 3
@@ -104,7 +114,7 @@ theme_override_constants/separation = 64
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1908743137]
 layout_mode = 2
-theme_override_constants/margin_bottom = 256
+theme_override_constants/margin_bottom = 425
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1164578214]
 layout_mode = 2
@@ -128,85 +138,114 @@ label_settings = SubResource("LabelSettings_dc4i4")
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1281875799]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_isuq1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=751199345]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 64
+theme_override_constants/separation = 32
 
 [node name="Play" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=745539709]
 texture_filter = 1
-custom_minimum_size = Vector2(256, 256)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_iw6vl")
 texture_normal = SubResource("AtlasTexture_lf2sl")
 stretch_mode = 4
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Play" unique_id=871606168]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Play"
-label_settings = SubResource("LabelSettings_isuq1")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="HoverEffect" type="Node" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Play" unique_id=1696385669]
 script = ExtResource("7_isuq1")
 metadata/_custom_type_script = "uid://bnyerfbxpaluc"
 
-[node name="Discord" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=593208449]
-texture_filter = 1
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("4_iw6vl")
-texture_normal = SubResource("AtlasTexture_lf2sl")
-stretch_mode = 4
-
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Discord" unique_id=1855379821]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Play" unique_id=802684220]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Discord"
-label_settings = SubResource("LabelSettings_tpjfi")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_trim_flags = 0
+texture = SubResource("AtlasTexture_mvwck")
+
+[node name="Setting" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1254912492]
+modulate = Color(0.3953672, 0.39536718, 0.39536715, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_iw6vl")
+texture_normal = SubResource("AtlasTexture_lf2sl")
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Setting" unique_id=310778888]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_anget")
+
+[node name="Achivments" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1176357440]
+modulate = Color(0.46618086, 0.4661808, 0.4661808, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_iw6vl")
+texture_normal = SubResource("AtlasTexture_lf2sl")
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Achivments" unique_id=295578488]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_vx84t")
+
+[node name="Discord" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=593208449]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_iw6vl")
+texture_normal = SubResource("AtlasTexture_lf2sl")
+stretch_mode = 4
 
 [node name="HoverEffect2" type="Node" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Discord" unique_id=1701143208]
 script = ExtResource("7_isuq1")
 metadata/_custom_type_script = "uid://bnyerfbxpaluc"
 
-[node name="Quit" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1121443149]
-texture_filter = 1
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("4_iw6vl")
-texture_normal = SubResource("AtlasTexture_lf2sl")
-stretch_mode = 4
-
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Quit" unique_id=1953263887]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Discord" unique_id=2059853701]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Quit"
-label_settings = SubResource("LabelSettings_isuq1")
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = SubResource("AtlasTexture_ukfea")
+
+[node name="Quit" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1121443149]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_iw6vl")
+texture_normal = SubResource("AtlasTexture_lf2sl")
+stretch_mode = 4
 
 [node name="HoverEffect3" type="Node" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Quit" unique_id=951841896]
 script = ExtResource("7_isuq1")
 metadata/_custom_type_script = "uid://bnyerfbxpaluc"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Quit" unique_id=1817103537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_o1ekx")

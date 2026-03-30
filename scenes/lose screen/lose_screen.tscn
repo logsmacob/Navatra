@@ -1,14 +1,35 @@
 [gd_scene format=3 uid="uid://d3y3lp5ch2l3q"]
 
+[ext_resource type="Shader" uid="uid://64giuyue21qd" path="res://assets/shaders/hex_background.gdshader" id="1_eghmi"]
 [ext_resource type="Shader" uid="uid://batbn873bu8tu" path="res://features/hand_type_upgrades/blur.gdshader" id="1_vlboq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_umvse"]
+shader = ExtResource("1_eghmi")
+shader_parameter/color_a = Color(0.44, 0, 0, 1)
+shader_parameter/color_b = Color(0.20456833, 1.8650665e-07, 4.813075e-08, 1)
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/hexes_across = 60.0000026125
+shader_parameter/speed = 1.00000004424012
+shader_parameter/ripple_frequency = 0.5
+shader_parameter/randomness = 0.0
+shader_parameter/edge_thickness = 0.10000000475
+shader_parameter/edge_softness = 0.10000000149012
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lose_blur"]
 shader = ExtResource("1_vlboq")
 shader_parameter/radius = 28.0
 
 [node name="LoseScreen" type="Control" unique_id=124824288]
-visible = false
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HexBackground2" type="ColorRect" parent="." unique_id=982645452]
+material = SubResource("ShaderMaterial_umvse")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
