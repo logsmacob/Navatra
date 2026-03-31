@@ -6,9 +6,8 @@ const DEFAULT_SCALE := Vector2.ONE
 const HOVER_SCALE := Vector2(1.05, 1.05)
 const HOVER_DURATION := 0.1
 const PRESS_DURATION := 0.05
-const PLAY_HOLD_DELAY_SECONDS := 0.5
 
-## Play button reference used for click and hold interactions.
+## Play button reference used for click and hover-preview interactions.
 @export var play_hand: TextureButton
 ## Reroll button reference used for reroll interactions.
 @export var re_roll: TextureButton
@@ -18,12 +17,11 @@ const PLAY_HOLD_DELAY_SECONDS := 0.5
 @export var reroll_label: Label
 
 var _button_tweens: Dictionary = {}
-var _play_hold_timer: SceneTreeTimer
-var _play_hold_active: bool = false
+var _play_hover_active: bool = false
 
-## Emitted when the play button has been held long enough to show preview math.
+## Emitted when the play button hover should show preview math.
 signal play_hold_started
-## Emitted when the held preview should be dismissed.
+## Emitted when the preview should be dismissed.
 signal play_hold_ended
 
 ## Connects visual/input handlers for the exported buttons.
@@ -61,36 +59,37 @@ func _on_button_hovered(button: TextureButton) -> void:
 	if button.disabled:
 		return
 	_animate_button_scale(button, HOVER_SCALE, HOVER_DURATION)
+	if button == play_hand:
+		_start_play_hover_preview()
 
 func _on_button_unhovered(button: TextureButton) -> void:
 	_animate_button_scale(button, DEFAULT_SCALE, HOVER_DURATION)
+	if button == play_hand:
+		_stop_play_hover_preview()
 
-## Starts hold tracking for the play button while still applying the press animation.
+## Applies the pressed scale animation while pointer/button input is active.
 func _on_button_pressed(button: TextureButton) -> void:
 	_animate_button_scale(button, DEFAULT_SCALE, PRESS_DURATION)
-	if button == play_hand:
-		_start_play_hold_tracking()
 
-## Ends hold tracking when the play button is released.
 func _on_button_released(button: TextureButton) -> void:
-	if button == play_hand:
-		_stop_play_hold_tracking()
+	if button.disabled:
+		return
+	if button.get_rect().has_point(button.get_local_mouse_position()):
+		_animate_button_scale(button, HOVER_SCALE, HOVER_DURATION)
+	else:
+		_animate_button_scale(button, DEFAULT_SCALE, HOVER_DURATION)
 
-## Waits for the hold threshold and emits [signal play_hold_started] if the button is still held.
-func _start_play_hold_tracking() -> void:
-	_play_hold_active = false
-	_play_hold_timer = get_tree().create_timer(PLAY_HOLD_DELAY_SECONDS)
-	await _play_hold_timer.timeout
-	if play_hand != null and play_hand.button_pressed and not play_hand.disabled:
-		_play_hold_active = true
-		play_hold_started.emit()
+func _start_play_hover_preview() -> void:
+	if _play_hover_active:
+		return
+	_play_hover_active = true
+	play_hold_started.emit()
 
-## Emits [signal play_hold_ended] when an active hold preview should stop.
-func _stop_play_hold_tracking() -> void:
-	if _play_hold_active:
-		play_hold_ended.emit()
-	_play_hold_active = false
-	_play_hold_timer = null
+func _stop_play_hover_preview() -> void:
+	if not _play_hover_active:
+		return
+	_play_hover_active = false
+	play_hold_ended.emit()
 
 func _animate_button_scale(button: TextureButton, target_scale: Vector2, duration: float) -> void:
 	var existing_tween: Tween = _button_tweens.get(button)
@@ -103,13 +102,13 @@ func _animate_button_scale(button: TextureButton, target_scale: Vector2, duratio
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(button, "scale", target_scale, duration)
 
-## Disables hand buttons during roll/play resolution and clears hold-preview state.
+## Disables hand buttons during roll/play resolution and clears play-preview hover state.
 func disable_buttons() -> void:
 	if play_hand == null or re_roll == null:
 		return
 	play_hand.disabled = true
 	re_roll.disabled = true
-	_stop_play_hold_tracking()
+	_stop_play_hover_preview()
 	_animate_button_scale(play_hand, DEFAULT_SCALE, PRESS_DURATION)
 	_animate_button_scale(re_roll, DEFAULT_SCALE, PRESS_DURATION)
 	play_hand.modulate = Color(1, 1, 1, 0.5)

@@ -33,9 +33,9 @@ signal played_hand_ready(hand: DiceHand)
 signal played_hand_finished
 ## Emitted when the post-play reset phase begins so UI can clear transient played-hand math before rerolling.
 signal play_reset_started
-## Emitted when the play button has been held long enough to show score preview math.
+## Emitted when the play button is hovered to show score preview math.
 signal play_hold_started
-## Emitted when the play-button hold preview should be dismissed.
+## Emitted when the play-button hover preview should be dismissed.
 signal play_hold_ended
 ## Emitted after the post-play reset roll finishes and UI can clear preview state.
 signal reset_roll_finished
