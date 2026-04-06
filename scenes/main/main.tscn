@@ -13,6 +13,9 @@
 [ext_resource type="Theme" uid="uid://crwvosv3l8ktn" path="res://assets/UI/style_boxes/light pannel theme.tres" id="8_th5th"]
 [ext_resource type="Script" uid="uid://dokibm2mllewt" path="res://scenes/main/button.gd" id="9_7smn1"]
 [ext_resource type="PackedScene" uid="uid://ckwbd81dafevx" path="res://features/score_bar/InfoScreen.tscn" id="11_ouso4"]
+[ext_resource type="Texture2D" uid="uid://d3yt4s6o26qdu" path="res://assets/sprites/Die.png" id="13_raeie"]
+[ext_resource type="FontFile" uid="uid://bfmc8ldjpblsv" path="res://assets/fonts/pixeloid-font/PixeloidSansBold-1jpBg.ttf" id="15_hxu8e"]
+[ext_resource type="PackedScene" uid="uid://cwj2re802kfqb" path="res://features/hover_animation.tscn" id="16_hxu8e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
 shader = ExtResource("2_sugp2")
@@ -50,6 +53,11 @@ shader_parameter/edge_softness = 0.10000000149012
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_win_blur"]
 shader = ExtResource("5_blur")
 shader_parameter/radius = 28.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_nvumn"]
+font = ExtResource("15_hxu8e")
+font_size = 28
+font_color = Color(0, 0, 0, 1)
 
 [node name="main" type="Control" unique_id=161434293]
 layout_mode = 3
@@ -180,7 +188,8 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[node name="Button" type="Button" parent="." unique_id=2117591815]
+[node name="Button" type="TextureButton" parent="." unique_id=1560545682]
+texture_filter = 1
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_left = 30.0
@@ -190,7 +199,26 @@ offset_bottom = 1050.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme = ExtResource("8_th5th")
-text = "Info"
+texture_normal = ExtResource("13_raeie")
+stretch_mode = 0
 script = ExtResource("9_7smn1")
+
+[node name="Label" type="Label" parent="Button" unique_id=174271308]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -10.0
+offset_right = 20.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Stats"
+label_settings = SubResource("LabelSettings_nvumn")
+
+[node name="Hover animation" parent="Button" unique_id=251388993 instance=ExtResource("16_hxu8e")]
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

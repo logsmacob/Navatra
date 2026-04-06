@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 
 @onready var _node : Control = $"../InfoScreen"
 

@@ -9,7 +9,6 @@ region = Rect2(32, 16, 16, 16)
 
 [resource]
 script = ExtResource("1_vv4ts")
-base = 1
 mult = 3
 selected_die_index = 1
 target_material = "pink"

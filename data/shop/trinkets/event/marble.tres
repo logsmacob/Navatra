@@ -17,6 +17,5 @@ texture = SubResource("AtlasTexture_r3ar0")
 id = "magic_balls"
 item_name = "Magic Balls"
 cost = 7
-rarity = 2
 max_quantity = 3
 metadata/_custom_type_script = "uid://5q71o1b2d1kb"
