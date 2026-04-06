@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://64giuyue21qd" path="res://assets/shaders/hex_background.gdshader" id="1_sa3yf"]
 [ext_resource type="Texture2D" uid="uid://b15xaclrmafje" path="res://assets/sprites/Navatra Icon.png" id="2_s4lrb"]
 [ext_resource type="Theme" uid="uid://crwvosv3l8ktn" path="res://assets/UI/style_boxes/light pannel theme.tres" id="4_iw6vl"]
+[ext_resource type="FontFile" uid="uid://cnci0773b7q4d" path="res://assets/fonts/pixeloid-font/PixeloidSans-lxa3y.ttf" id="4_tpjfi"]
 [ext_resource type="Texture2D" uid="uid://cqanecxpnjd0j" path="res://assets/UI/Buttons/Texture/Die anime.png" id="5_tpjfi"]
 [ext_resource type="Script" uid="uid://bnyerfbxpaluc" path="res://core/node_classes/hover_effect.gd" id="7_isuq1"]
 [ext_resource type="Texture2D" uid="uid://6wo7bjvmef61" path="res://assets/sprites/link icons.png" id="7_tpjfi"]
@@ -68,6 +69,10 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1ekx"]
 atlas = ExtResource("7_tpjfi")
 region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lf2sl"]
+font = ExtResource("4_tpjfi")
+font_size = 64
 
 [node name="Title Screen" type="Control" unique_id=888533972 node_paths=PackedStringArray("play", "discord", "quit")]
 layout_mode = 3
@@ -249,3 +254,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_o1ekx")
+
+[node name="Label" type="Label" parent="." unique_id=2617906]
+layout_mode = 0
+offset_left = 1296.0
+offset_top = 303.0
+offset_right = 1545.0
+offset_bottom = 382.0
+text = "ALPHA"
+label_settings = SubResource("LabelSettings_lf2sl")
