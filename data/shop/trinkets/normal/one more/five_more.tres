@@ -13,6 +13,5 @@ texture = SubResource("AtlasTexture_icon")
 id = "five_more"
 item_name = "Five More"
 cost = 2
-rarity = 0
 base_5_value = 1
 max_quantity = 1

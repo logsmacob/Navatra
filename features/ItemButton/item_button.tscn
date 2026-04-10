@@ -113,5 +113,15 @@ label_settings = SubResource("LabelSettings_28cvv")
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="Lock" type="CheckButton" parent="." unique_id=1146728606]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_bottom = 24.0
+grow_horizontal = 0
+text = "Lock"
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
