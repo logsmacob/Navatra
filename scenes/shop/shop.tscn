@@ -130,7 +130,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1")
 currency_label = NodePath("Margin/VBox/Header/Corner Label")
-inventory_container = NodePath("Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/Inventory")
+inventory_container = NodePath("Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/ScrollContainer/Inventory")
 offers_container = NodePath("Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer/Offers")
 reroll_button = NodePath("Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer/RerollButton")
 roll_price = NodePath("Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer/RerollButton/HBoxContainer/Label")
@@ -277,10 +277,15 @@ layout_mode = 2
 size_flags_horizontal = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1472387693]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0272k")
 
-[node name="Inventory" type="VBoxContainer" parent="Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=1031834765]
+[node name="ScrollContainer" type="ScrollContainer" parent="Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=894287644]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Inventory" type="VBoxContainer" parent="Margin/VBox/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/ScrollContainer" unique_id=1031834765]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
